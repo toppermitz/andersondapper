@@ -5,7 +5,7 @@ import Image from 'next/image'
 
 function GravatarAsFavicon(size) {
   let hashedEmail = md5('topper.mitz@gmail.com');
-  return "http://www.gravatar.com/avatar/" + hashedEmail + "?s="+size;
+  return "https://www.gravatar.com/avatar/" + hashedEmail + "?s="+size;
 }
 export default function Layout({ children }) {
   return (
