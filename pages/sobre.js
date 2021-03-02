@@ -8,7 +8,8 @@ export default function Portifolio({lastUpdate}) {
       <div>
         <h1 className={styles.description}>Sobre</h1>
         <div>
-          <p>Texto</p>
+          <p>Sou programador Delphi desde 2001.</p>
+          <p>Atualmente sou desenvolvedor sênior na <Link href="https://www.serverinfo.com.br"><a>Server Softwares para Varejo</a></Link> em Novo Hamburgo/RS</p>
         </div>
         <Link href="/">
           <a>Voltar</a>
