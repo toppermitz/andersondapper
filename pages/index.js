@@ -16,7 +16,7 @@ export default function Home({lastUpdate}) {
   )
 }
 export async function getStaticProps(context) {
-  const dataString = moment(new Date()).format('DD/MM/YYYY HH:mm:ss')
+  const dataString = moment(new Date()).utcOffset('-03:00').format('DD/MM/YYYY HH:mm:ss')
   return {
     props: {
       lastUpdate : dataString

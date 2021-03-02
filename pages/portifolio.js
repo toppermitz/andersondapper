@@ -17,8 +17,7 @@ export default function Portifolio({lastUpdate}) {
     </Layout>
 )}
 export async function getStaticProps(context) {
-  const data = new Date()
-  const dataString = data.toLocaleString()
+  const dataString = moment(new Date()).utcOffset('-03:00').format('DD/MM/YYYY HH:mm:ss')
   return {
     props: {
       lastUpdate : dataString
