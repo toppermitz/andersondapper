@@ -19,6 +19,7 @@ export default function Layout({ children,
     <Head>
         <title>Anderson Dapper - Delphi Developer</title>
         <link rel="icon" href={GravatarAsFavicon(16)}/>
+        <meta name="theme-color" content="#c0c0c0" />
       </Head>
 
       <NextSeo
