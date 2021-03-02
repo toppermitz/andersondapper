@@ -17,18 +17,18 @@ export default function Layout({ children,
   return (
     <Container fluid>
     <Head>
-        <title>Anderson Dapper - Delphi Developer</title>
+        <title>Anderson Dapper - Delphi Developer - {title}</title>
         <link rel="icon" href={GravatarAsFavicon(16)}/>
         <meta name="theme-color" content="#c0c0c0" />
       </Head>
 
       <NextSeo
-        title="Anderson Dapper - Delphi Developer"
+        title={'Anderson Dapper - Delphi Developer' - title}
         description="Desenvolvimento em Delphi"
         canonical="https://www.andersondapper.com.br/"
         openGraph={{
           url: 'https://www.andersondapper.com.br/',
-          title: 'Anderson Dapper - Delphi Developer',
+          title: 'Anderson Dapper - Delphi Developer - ' + title,
           description: 'Desenvolvimento em Delphi',
           images: [
             {
@@ -41,7 +41,7 @@ export default function Layout({ children,
         }}
       />
       <Row className={'pt-2 pb-2 bg-light'}>
-        <Col xs={4} md={2}>
+        <Col xs={4} md={2} className={'text-right'}>
             <Image src={GravatarAsFavicon(100)} alt={'Foto de Anderson Dapper'} roundedCircle/>
         </Col>
         <Col xs={8}>
