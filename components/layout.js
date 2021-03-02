@@ -2,18 +2,42 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import md5 from 'md5'
 import Image from 'next/image'
+import Footer from '../components/footer'
+import { NextSeo } from 'next-seo'
 
 function GravatarAsFavicon(size) {
   let hashedEmail = md5('topper.mitz@gmail.com');
   return "https://www.gravatar.com/avatar/" + hashedEmail + "?s="+size;
 }
-export default function Layout({ children }) {
+export default function Layout({ children,
+                                 dataString, 
+                                 title= '' }) {
   return (
     <div className={styles.container}>
       <Head>
         <title>Anderson Dapper - Delphi Developer</title>
         <link rel="icon" href={GravatarAsFavicon(16)}/>
       </Head>
+
+      <NextSeo
+        title="Anderson Dapper - Delphi Developer"
+        description="Desenvolvimento em Delphi"
+        canonical="https://www.andersondapper.com.br/"
+        openGraph={{
+          url: 'https://www.andersondapper.com.br/',
+          title: 'Anderson Dapper - Delphi Developer',
+          description: 'Desenvolvimento em Delphi',
+          images: [
+            {
+              url: GravatarAsFavicon(256),
+              width: 256,
+              height: 256,
+              alt: 'Foto de Anderson Dapper',
+            }
+          ],
+        }}
+      />
+
 
       <main className={styles.main}>
         <div className="App">
@@ -30,18 +54,8 @@ export default function Layout({ children }) {
         </div>
 
       </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-        <p>{new Date().toLocaleString}</p>
-      </footer>
+      <Footer dateString={dataString}/>
+      
     </div>
   )
 }

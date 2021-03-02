@@ -2,9 +2,9 @@ import Link from 'next/link'
 import Layout from '../components/layout'
 import styles from '../styles/Home.module.css'
 
-export default function Home() {
+export default function Home({lastUpdate}) {
   return (
-    <Layout>
+    <Layout dataString={lastUpdate}>
       <Link href="/portifolio">
         <a className={styles.card}>
           <h3>Portifolio &rarr;</h3>
@@ -19,5 +19,14 @@ export default function Home() {
       </Link>
     </Layout>
   )
+}
+export async function getStaticProps(context) {
+  const data = new Date()
+  const dataString = data.toLocaleString()
+  return {
+    props: {
+      lastUpdate : dataString
+    }, // will be passed to the page component as props
+  }
 }
 
