@@ -2,16 +2,25 @@ import Link from 'next/link'
 import Layout from '../components/layout'
 import styles from '../styles/Home.module.css'
 import moment from 'moment'
+import { Card, Container, Row, Col, CardDeck } from 'react-bootstrap'
 
 export default function Home({lastUpdate}) {
   return (
     <Layout dataString={lastUpdate}>
-      <Link href="/sobre">
-        <a className={styles.card}>
-          <h3>Sobre &rarr;</h3>
-          <p>Conheça um pouco mais sobre meu trabalho.</p>
-        </a>
-      </Link>
+      <CardDeck>
+        <Card >
+          <Card.Title>
+            <Link href="/sobre">
+              <a className={styles.card}>
+                <h5>Sobre &rarr;</h5>
+              </a>
+            </Link>
+          </Card.Title>
+          <Card.Body>
+            <p>Conheça um pouco mais sobre meu trabalho.</p>
+          </Card.Body>
+        </Card>
+      </CardDeck>
     </Layout>
   )
 }
