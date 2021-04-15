@@ -1,11 +1,9 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import md5 from 'md5'
+import Image from 'next/image'
 import Footer from '../components/footer'
 import { NextSeo } from 'next-seo'
-import Link from 'next/link'
-
-import { Container, Row, Col, Image, Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap'
 
 function GravatarAsFavicon(size) {
   let hashedEmail = md5('topper.mitz@gmail.com');
@@ -15,20 +13,19 @@ export default function Layout({ children,
                                  dataString, 
                                  title= '' }) {
   return (
-    <Container fluid>
-    <Head>
-        <title>Anderson Dapper - Delphi Developer - {title}</title>
+    <div className={styles.container}>
+      <Head>
+        <title>Anderson Dapper - Delphi Developer</title>
         <link rel="icon" href={GravatarAsFavicon(16)}/>
-        <meta name="theme-color" content="#c0c0c0" />
       </Head>
 
       <NextSeo
-        title={'Anderson Dapper - Delphi Developer' - title}
+        title="Anderson Dapper - Delphi Developer"
         description="Desenvolvimento em Delphi"
         canonical="https://www.andersondapper.com.br/"
         openGraph={{
           url: 'https://www.andersondapper.com.br/',
-          title: 'Anderson Dapper - Delphi Developer - ' + title,
+          title: 'Anderson Dapper - Delphi Developer',
           description: 'Desenvolvimento em Delphi',
           images: [
             {
@@ -40,26 +37,25 @@ export default function Layout({ children,
           ],
         }}
       />
-      <Row className={'pt-2 pb-2 bg-light'}>
-        <Col xs={4} md={2} className={'text-right'}>
-            <Image src={GravatarAsFavicon(100)} alt={'Foto de Anderson Dapper'} roundedCircle/>
-        </Col>
-        <Col xs={8}>
-          <Row><h1></h1></Row>
-          <Row><h1></h1></Row>
-          <Row><h1></h1></Row>
-          <Row><h4>Anderson Dapper</h4></Row>
-          <Row><h6>Delphi Developer</h6></Row>
-        </Col>
-      </Row>
-      <Row className={'pt-3'}>
-        <Col>{children}</Col>
-      </Row>
-      <Row className={'pt-3'}>
-        <Col>
-          <Footer dateString={dataString}/>
-        </Col>
-      </Row>
-    </Container>
+
+
+      <main className={styles.main}>
+        <div className="App">
+          <Image src={GravatarAsFavicon(128)} width={128} height={128} className={styles.borderCircle}/>
+        </div>
+        <h1 className={styles.title}>
+          Anderson Dapper
+        </h1>
+        <h2 className={styles.h2}>
+          Delphi Developer
+        </h2>
+        <div className={styles.grid}>
+          {children}
+        </div>
+
+      </main>
+      <Footer dateString={dataString}/>
+      
+    </div>
   )
 }
