@@ -6,12 +6,7 @@ import moment from 'moment'
 export default function Home({lastUpdate}) {
   return (
     <Layout dataString={lastUpdate}>
-      <Link href="/sobre">
-        <a className={styles.card}>
-          <h3>Sobre &rarr;</h3>
-          <p>Conheça um pouco mais sobre meu trabalho.</p>
-        </a>
-      </Link>
+      <div className={styles.card}><p>Desenvolvedor Sênior na <a href="https://serverinfo.com.br/">Server Softwares para Varejo</a>.</p></div>
     </Layout>
   )
 }
