@@ -16,7 +16,7 @@ export default function Layout({ children,
     <div className={styles.container}>
       <Head>
         <title>Anderson Dapper - Delphi Developer</title>
-        <link rel="icon" href={GravatarAsFavicon(16)}/>
+        <link rel="icon" href='/profile_300.jpg'/>
       </Head>
 
       <NextSeo
@@ -29,7 +29,7 @@ export default function Layout({ children,
           description: 'Desenvolvimento em Delphi',
           images: [
             {
-              url: GravatarAsFavicon(256),
+              url: '/profile_300.jpg',
               width: 256,
               height: 256,
               alt: 'Foto de Anderson Dapper',
@@ -41,7 +41,7 @@ export default function Layout({ children,
 
       <main className={styles.main}>
         <div className="App">
-          <Image src={GravatarAsFavicon(128)} width={128} height={128} className={styles.borderCircle}/>
+          <Image src='/profile_300.jpg' width={256} height={256} className={styles.borderCircle}/>
         </div>
         <h1 className={styles.title}>
           Anderson Dapper
