@@ -42,7 +42,7 @@ export default function Layout({ children,
       <main className={styles.main}>
         <div className={styles.Quadro}></div>
         <div className={styles.App}>
-          <Image src='/profile_300.jpg' width={256} height={256} className={styles.borderCircle}/>
+          <Image src='/profile_300.jpg' alt={'Foto de Andeson Dapper'} width={256} height={256} className={styles.borderCircle}/>
         </div>
         <h1 className={styles.title}>
           Anderson Dapper
