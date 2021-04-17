@@ -40,15 +40,17 @@ export default function Layout({ children,
 
 
       <main className={styles.main}>
-        <div className="App">
+        <div className={styles.Quadro}></div>
+        <div className={styles.App}>
           <Image src='/profile_300.jpg' width={256} height={256} className={styles.borderCircle}/>
         </div>
         <h1 className={styles.title}>
           Anderson Dapper
         </h1>
-        <h2 className={styles.h2}>
+        <div className={styles.h2}>
           Delphi Developer
-        </h2>
+        </div>
+        
         <div className={styles.grid}>
           {children}
         </div>

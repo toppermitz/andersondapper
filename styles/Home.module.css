@@ -5,20 +5,21 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  overflow: auto;
 }
 
 .main {
-  padding: 2rem 0;
+  /*padding: 2rem 0;*/
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 }
 
 .footer {
   width: 100%;
-  /*height: 45px;*/
+  margin-top: 10px;
   border-top: 1px solid #eaeaea;
   display: inline-grid;
   justify-content: center;
@@ -87,7 +88,7 @@
 .card {
   /*margin: 1rem;
   flex-basis: 45%;*/
-  padding: 1.5rem;
+  padding: 0.5rem;
   text-align: left;
   color: inherit;
   text-decoration: none;
@@ -113,6 +114,7 @@
   margin: 0;
   font-size: 1.25rem;
   line-height: 1.5;
+  
 }
 
 .logo {
@@ -128,4 +130,34 @@
     width: 100%;
     flex-direction: column;
   }
+  .footer {
+    height: 22px;
+  }
+  .footer div p {
+    margin: 0px;
+    font-size: x-small;
+    margin-block: unset;
+    margin-inline: unset;
+    display: table-row;
+  }
 }
+.Quadro {
+  background-color: #000;
+    width: 100vw;
+    height: 170px;
+    position: absolute;
+    top: 0px;
+    background-image: url('/background.jpg');
+    background-position: left;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.App{
+  position: relative;
+  top: 10px;
+}
+
+.App::after{
+  content: '';
+}
+
