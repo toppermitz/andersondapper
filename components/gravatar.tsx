@@ -1,3 +1,5 @@
+import md5 from 'md5';
+
 export default function Gravatar({size}) {
   let hashedEmail = md5('topper.mitz@gmail.com');
   return (

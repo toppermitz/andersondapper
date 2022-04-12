@@ -2,20 +2,25 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import md5 from 'md5'
 import Image from 'next/image'
-import Footer from '../components/footer'
+import Footer from './footer'
 import { NextSeo } from 'next-seo'
 
-function GravatarAsFavicon(size) {
+function GravatarAsFavicon(size: number) {
   let hashedEmail = md5('topper.mitz@gmail.com');
-  return "https://www.gravatar.com/avatar/" + hashedEmail + "?s="+size;
+  return "https://www.gravatar.com/avatar/" + hashedEmail + "?s="+size.toString();
 }
-export default function Layout({ children,
-                                 dataString, 
-                                 title= '' }) {
+
+interface LayoutProps {
+  children?: React.ReactNode;
+  dataString: string;
+  title?: string;
+}
+
+export default function Layout({dataString,title = 'Anderson Dapper - Delphi Developer',children}:LayoutProps) {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Anderson Dapper - Delphi Developer</title>
+        <title>{title}</title>
         <link rel="icon" href='/profile_300.jpg'/>
       </Head>
 
