@@ -5,9 +5,9 @@ import Image from 'next/image'
 import Footer from './footer'
 import { NextSeo } from 'next-seo'
 
-function GravatarAsFavicon(size: number) {
-  let hashedEmail = md5('topper.mitz@gmail.com');
-  return "https://www.gravatar.com/avatar/" + hashedEmail + "?s="+size.toString();
+export const GravatarAsFavicon = (options : {size: number, email: string}) => {
+  let hashedEmail = md5(options.email);
+  return "https://www.gravatar.com/avatar/" + hashedEmail + "?s="+options.size.toString();
 }
 
 interface LayoutProps {
@@ -16,7 +16,10 @@ interface LayoutProps {
   title?: string;
 }
 
-export default function Layout({dataString,title = 'Anderson Dapper - Delphi Developer',children}:LayoutProps) {
+const Layout = ({ dataString, 
+                  title = 'Anderson Dapper - Delphi Developer',
+                  children
+                }:LayoutProps) => {
   return (
     <div className={styles.container}>
       <Head>
@@ -66,3 +69,5 @@ export default function Layout({dataString,title = 'Anderson Dapper - Delphi Dev
     </div>
   )
 }
+
+export default Layout;
