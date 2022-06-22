@@ -17,7 +17,7 @@ interface LayoutProps {
 }
 
 const Layout = ({ dataString, 
-                  title = 'Anderson Dapper - Delphi Developer',
+                  title = 'Anderson Dapper - Software Developer',
                   children
                 }:LayoutProps) => {
   return (
@@ -28,13 +28,13 @@ const Layout = ({ dataString,
       </Head>
 
       <NextSeo
-        title="Anderson Dapper - Delphi Developer"
-        description="Desenvolvimento em Delphi"
-        canonical="https://www.andersondapper.com.br/"
+        title="Anderson Dapper"
+        description="Desenvolvedor de Software"
+        canonical="https://andersondapper.dev/"
         openGraph={{
-          url: 'https://www.andersondapper.com.br/',
-          title: 'Anderson Dapper - Delphi Developer',
-          description: 'Desenvolvimento em Delphi',
+          url: 'https://andersondapper.dev/',
+          title: 'Anderson Dapper',
+          description: 'Desenvolvedor de Software',
           images: [
             {
               url: '/profile_300.jpg',
@@ -56,7 +56,7 @@ const Layout = ({ dataString,
           Anderson Dapper
         </h1>
         <div className={styles.h2}>
-          Delphi Developer
+          Software Developer
         </div>
         
         <div className={styles.grid}>

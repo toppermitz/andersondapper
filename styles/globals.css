@@ -2,8 +2,8 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: monospace, Roboto, Segoe UI, -apple-system, BlinkMacSystemFont, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  /* font-family: monospace, Roboto, Segoe UI, -apple-system, BlinkMacSystemFont, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif; */
 }
 
 a {
@@ -15,7 +15,7 @@ a {
   box-sizing: border-box;
 }
 
-p {
+/* p {
   text-indent: 1rem;
   text-overflow: ellipsis;
-}
+} */
