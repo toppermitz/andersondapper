@@ -5,6 +5,7 @@ import * as gtag from '../lib/gtag'
 import { init as initApm } from '@elastic/apm-rum'
 import { NextWebVitalsMetric } from 'next/app'
 
+
 function MyApp({ Component, pageProps }) {
   const apm = initApm({
     serviceName: "anderson-dapper",
@@ -25,9 +26,9 @@ function MyApp({ Component, pageProps }) {
   return <Component {...pageProps} />
 }
 
+
 export function reportWebVitals(metric: NextWebVitalsMetric) {
   console.log(metric)
 }
-
 
 export default MyApp
