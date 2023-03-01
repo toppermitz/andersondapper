@@ -24,15 +24,13 @@ class MyDocument extends Document {
           />
         </Head>
         <body>
-          <script async src="https://bshopatualizacao.s3.us-west-2.amazonaws.com/elastic-apm-rum.umd.min.js" crossOrigin='anonymous'/>
-          <script dangerouslySetInnerHTML={{
+          <script async src="https://bshopatualizacao.s3.us-west-2.amazonaws.com/elastic-apm-rum.umd.min.js" crossOrigin='anonymous' dangerouslySetInnerHTML={{
               __html:`
                   elasticApm.init({
                     serviceName: 'anderson-dapper',
                     serverUrl: 'https://acbb1e3ff16b40268668037b68ecf072.apm.us-west-2.aws.cloud.es.io:443',
                     environment: 'production',
                   })`}}/>
-          
           <Main />
           <NextScript />
         </body>
