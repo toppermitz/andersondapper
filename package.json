@@ -9,6 +9,7 @@
     "type-check": "tsc"
   },
   "dependencies": {
+    "@elastic/apm-rum-react": "^1.4.2",
     "md5": "^2.3.0",
     "moment": "^2.29.3",
     "next": "^12.1.6",
