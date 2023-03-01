@@ -1,7 +1,7 @@
 import styles from '../styles/Home.module.css'
+import { withTransaction } from '@elastic/apm-rum-react'
 
-
-export default function Footer({dateString}){
+function Footer({dateString}){
   return (<footer className={styles.footer}>
             <div><p>Última atualização {dateString}</p></div>
             {/*<div><a
@@ -15,4 +15,4 @@ export default function Footer({dateString}){
             </div> */}
           </footer>
   )}
-  
+ export default withTransaction("Footer", "component")(Footer);

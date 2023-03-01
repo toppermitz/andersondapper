@@ -4,6 +4,7 @@ import md5 from 'md5'
 import Image from 'next/image'
 import Footer from './footer'
 import { NextSeo } from 'next-seo'
+import { withTransaction } from '@elastic/apm-rum-react'
 
 export const GravatarAsFavicon = (options : {size: number, email: string}) => {
   let hashedEmail = md5(options.email);
@@ -70,4 +71,4 @@ const Layout = ({ dataString,
   )
 }
 
-export default Layout;
+export default withTransaction('Layout', 'component')(Layout);
