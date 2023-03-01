@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import * as gtag from '../lib/gtag'
 import { init as initApm } from '@elastic/apm-rum'
+import { NextWebVitalsMetric } from 'next/app'
 
 function MyApp({ Component, pageProps }) {
   const apm = initApm({
@@ -23,5 +24,10 @@ function MyApp({ Component, pageProps }) {
    }, [router.events])
   return <Component {...pageProps} />
 }
+
+export function reportWebVitals(metric: NextWebVitalsMetric) {
+  console.log(metric)
+}
+
 
 export default MyApp
