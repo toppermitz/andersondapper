@@ -9,7 +9,7 @@ import { NextWebVitalsMetric } from 'next/app'
 function MyApp({ Component, pageProps }) {
   const apm = initApm({
     serviceName: "anderson-dapper",
-    serverUrl: "https://acbb1e3ff16b40268668037b68ecf072.apm.us-west-2.aws.cloud.es.io:443",
+    serverUrl: "https://a6a8f34ee40e49bb95603e82f8b5e4ce.apm.us-west-2.aws.cloud.es.io:443",
     environment: "production",
     active: true,
   });
