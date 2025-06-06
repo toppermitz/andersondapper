@@ -1,4 +1,5 @@
 'use client'
+import Image from 'next/image';
 
 interface CircularProfilePhotoProps {
   src: string;
@@ -32,13 +33,13 @@ export default function CircularProfilePhoto({
     return (
       <div className={`relative ${sizeClass} ${className}`}>
         <div className="w-full h-full rounded-full overflow-hidden relative">
-          <img 
+          <Image 
             src={src} 
-            alt={alt} 
+            alt={alt}
+            width={size === 'sm' ? 64 : size === 'md' ? 96 : size === 'lg' ? 128 : 160}
+            height={size === 'sm' ? 64 : size === 'md' ? 96 : size === 'lg' ? 128 : 160} 
             className="w-full h-full object-cover object-center transition-transform duration-300 hover:scale-110"
-            loading="eager"
-            decoding="async"
-            fetchPriority="high"
+            priority
             style={{ objectPosition }}
           />
         </div>
