@@ -1,7 +1,7 @@
 import Header from '../components/Header'
 import About from '../components/About'
 import Stack from '../components/Stack'
-import Projects from '../components/Projects'
+// import Projects from '../components/Projects'
 import Contact from '../components/Contact'
 import Footer from '../components/Footer'
 
@@ -11,7 +11,7 @@ export default function HomePage() {
       <Header />
       <About />
       <Stack />
-      <Projects />
+      {/* <Projects /> */}
       <Contact />
       <Footer />
     </main>
