@@ -7,7 +7,7 @@ import {
   SiPrisma, 
   SiDocker, 
   SiRedis, 
-  SiGraphql, 
+  // SiGraphql, 
   SiTailwindcss, 
   SiGit, 
   SiGithub, 
@@ -78,7 +78,7 @@ export default function Stack() {
               />
               ) : (
               (() => {
-                const IconComponent = stack.icon as any
+                const IconComponent = stack.icon;
                 return <IconComponent className="w-8 h-8" />
               })()
               )}

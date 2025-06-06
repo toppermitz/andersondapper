@@ -55,13 +55,13 @@ export default function CircularProfilePhoto({
         <div className="w-full h-full bg-white dark:bg-gray-800 rounded-full p-1">
           {/* Profile Image Container */}
           <div className="w-full h-full rounded-full overflow-hidden relative">
-            <img 
+            <Image 
               src={src} 
               alt={alt} 
+              width={size === 'sm' ? 64 : size === 'md' ? 96 : size === 'lg' ? 128 : 160}
+              height={size === 'sm' ? 64 : size === 'md' ? 96 : size === 'lg' ? 128 : 160}
               className="w-full h-full object-cover object-center transition-transform duration-300 hover:scale-110"
-              loading="eager"
-              decoding="async"
-              fetchPriority="high"
+              priority
               style={{ objectPosition }}
             />
           </div>
