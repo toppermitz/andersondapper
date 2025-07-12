@@ -2,6 +2,7 @@
 // import Image from 'next/image'
 import ThemeToggle from './ThemeToggle'
 import CircularProfilePhoto from './CircularProfilePhoto'
+import Logo from './Logo'
 
 export default function Header() {
   return (
@@ -21,6 +22,11 @@ export default function Header() {
         />
         
         <div className="space-y-4">
+          {/* New Logo */}
+          <div className="flex justify-center mb-4">
+            <Logo size="lg" />
+          </div>
+          
           <div>
             <h1 className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2">
               Anderson Dapper
