@@ -5,7 +5,7 @@ import Image from 'next/image'
 
 interface LogoProps {
   className?: string
-  size?: 'sm' | 'md' | 'lg'
+  size?: 'sm' | 'md' | 'lg' | 'xl'
 }
 
 export default function Logo({ className = '', size = 'md' }: LogoProps) {
@@ -44,7 +44,7 @@ export default function Logo({ className = '', size = 'md' }: LogoProps) {
   )
 }
 
-function getSizeClasses(size: 'sm' | 'md' | 'lg'): string {
+function getSizeClasses(size: 'sm' | 'md' | 'lg' | 'xl'): string {
   switch (size) {
     case 'sm':
       return 'h-8 w-auto'
@@ -52,12 +52,14 @@ function getSizeClasses(size: 'sm' | 'md' | 'lg'): string {
       return 'h-12 w-auto'
     case 'lg':
       return 'h-16 w-auto'
+    case 'xl':
+      return 'h-24 w-auto'
     default:
       return 'h-12 w-auto'
   }
 }
 
-function getSizeDimensions(size: 'sm' | 'md' | 'lg'): { width: number; height: number } {
+function getSizeDimensions(size: 'sm' | 'md' | 'lg' | 'xl'): { width: number; height: number } {
   switch (size) {
     case 'sm':
       return { width: 100, height: 32 }
@@ -65,6 +67,8 @@ function getSizeDimensions(size: 'sm' | 'md' | 'lg'): { width: number; height: n
       return { width: 150, height: 48 }
     case 'lg':
       return { width: 200, height: 64 }
+    case 'xl':
+      return { width: 300, height: 96 }
     default:
       return { width: 150, height: 48 }
   }

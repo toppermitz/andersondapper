@@ -1,7 +1,6 @@
 'use client'
 // import Image from 'next/image'
 import ThemeToggle from './ThemeToggle'
-import CircularProfilePhoto from './CircularProfilePhoto'
 import Logo from './Logo'
 
 export default function Header() {
@@ -14,19 +13,12 @@ export default function Header() {
 
       {/* Profile Section */}
       <div className="flex flex-col items-center space-y-6">
-        <CircularProfilePhoto
-          src="/Profile.jpg"
-          alt="Anderson Dapper"
-          size="lg"
-          objectPosition="center 30%"
-        />
+        {/* Logo as main focal point */}
+        <div className="flex justify-center mb-4">
+          <Logo size="xl" />
+        </div>
         
         <div className="space-y-4">
-          {/* New Logo */}
-          <div className="flex justify-center mb-4">
-            <Logo size="lg" />
-          </div>
-          
           <div>
             <h1 className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2">
               Anderson Dapper
