@@ -2,13 +2,76 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* Root element background - highest priority for mobile overscroll */
+:root {
+  background-color: #f9fafb !important; /* bg-gray-50 equivalent */
+  --bg-light: #f9fafb;
+  --bg-dark: #030712;
+}
+
+:root.dark {
+  background-color: #030712 !important; /* bg-gray-950 equivalent */
+}
+
 /* Force explicit dark mode */
 html {
   scroll-behavior: smooth;
+  /* Ensure html background covers overscroll areas on mobile */
+  background-color: var(--bg-light) !important;
+  min-height: 100vh;
+  min-height: 100dvh; /* Use dynamic viewport height on mobile */
+  min-height: -webkit-fill-available; /* Safari support */
+  /* Prevent overscroll from showing white background */
+  overscroll-behavior: none;
+  overscroll-behavior-y: none;
+  /* Ensure background is fixed during scroll */
+  background-attachment: local;
 }
 
 html.dark {
   color-scheme: dark;
+  background-color: var(--bg-dark) !important;
+}
+
+/* Ensure body also has proper background for mobile overscroll */
+body {
+  background-color: var(--bg-light) !important;
+  min-height: 100vh;
+  min-height: 100dvh;
+  min-height: -webkit-fill-available;
+  /* Prevent overscroll bounce on iOS */
+  overscroll-behavior: none;
+  overscroll-behavior-y: none;
+  /* Prevent background color gaps */
+  margin: 0;
+  padding: 0;
+}
+
+html.dark body {
+  background-color: var(--bg-dark) !important;
+}
+
+/* Additional mobile-specific fixes */
+@media (max-width: 768px) {
+  html, body {
+    /* Force background on mobile */
+    background-color: inherit !important;
+    /* Prevent iOS Safari from showing white during overscroll */
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Ensure viewport height works correctly on mobile */
+  html {
+    height: 100%;
+    height: 100dvh;
+    height: -webkit-fill-available;
+  }
+  
+  body {
+    height: 100%;
+    height: 100dvh;
+    height: -webkit-fill-available;
+  }
 }
 
 * {
