@@ -1,5 +1,4 @@
 'use client'
-import { useTheme } from 'next-themes'
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
 
@@ -9,7 +8,6 @@ interface LogoProps {
 }
 
 export default function Logo({ className = '', size = 'md' }: LogoProps) {
-  const { theme, systemTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
 
   // Avoid hydration issues
@@ -18,10 +16,10 @@ export default function Logo({ className = '', size = 'md' }: LogoProps) {
   }, [])
 
   if (!mounted) {
-    // Return light version as default to avoid hydration mismatch
+    // Return logo as default to avoid hydration mismatch
     return (
       <Image
-        src="/ad-logo.svg"
+        src="/newlogotipo.svg"
         alt="Anderson Dapper Logo"
         width={getSizeDimensions(size).width}
         height={getSizeDimensions(size).height}
@@ -30,12 +28,9 @@ export default function Logo({ className = '', size = 'md' }: LogoProps) {
     )
   }
 
-  const currentTheme = theme === 'system' ? systemTheme : theme
-  const isDark = currentTheme === 'dark'
-
   return (
     <Image
-      src={isDark ? '/ad-logo-dark.svg' : '/ad-logo.svg'}
+      src="/newlogotipo.svg"
       alt="Anderson Dapper Logo"
       width={getSizeDimensions(size).width}
       height={getSizeDimensions(size).height}
@@ -60,16 +55,17 @@ function getSizeClasses(size: 'sm' | 'md' | 'lg' | 'xl'): string {
 }
 
 function getSizeDimensions(size: 'sm' | 'md' | 'lg' | 'xl'): { width: number; height: number } {
+  // The logo has approximately 1.73:1 aspect ratio (130.35:75.32 mm)
   switch (size) {
     case 'sm':
-      return { width: 100, height: 32 }
+      return { width: 120, height: 69 }
     case 'md':
-      return { width: 150, height: 48 }
+      return { width: 173, height: 100 }
     case 'lg':
-      return { width: 200, height: 64 }
+      return { width: 230, height: 133 }
     case 'xl':
-      return { width: 300, height: 96 }
+      return { width: 346, height: 200 }
     default:
-      return { width: 150, height: 48 }
+      return { width: 173, height: 100 }
   }
 }
