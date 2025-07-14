@@ -1,0 +1,14 @@
+<svg width="200" height="80" viewBox="0 0 200 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Left angle bracket -->
+  <path d="M30 20L15 40L30 60" stroke="#F97316" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  
+  <!-- Letter A -->
+  <path d="M50 60L50 25L65 60M50 45H65" stroke="#3B82F6" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <path d="M50 25L57.5 15L65 25" stroke="#3B82F6" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  
+  <!-- Letter D -->
+  <path d="M85 25L85 60M85 25Q120 25 120 42.5Q120 60 85 60" stroke="#3B82F6" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  
+  <!-- Right angle bracket -->
+  <path d="M170 20L185 40L170 60" stroke="#F97316" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</svg>
