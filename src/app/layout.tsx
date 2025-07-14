@@ -12,6 +12,7 @@ export const metadata = {
   title: 'Anderson Dapper - Desenvolvedor Full Stack',
   description: 'Portfolio de Anderson Dapper - Desenvolvedor especializado em Node.js, Next.js, NestJS e tecnologias modernas.',
   keywords: ['Anderson Dapper', 'Desenvolvedor', 'Next.js', 'Node.js', 'NestJS', 'TypeScript'],
+  
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

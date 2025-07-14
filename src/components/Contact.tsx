@@ -41,7 +41,7 @@ export default function Contact() {
         </h2>
       </div>
       
-      <div className="grid gap-8 lg:grid-cols-2">
+      <div className="grid gap-8 lg:grid-cols-1 items-center">
         {/* Contact Info */}
         <div className="space-y-6">
           <div className="bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-950/20 dark:to-purple-950/20 rounded-2xl p-6 border border-blue-100 dark:border-blue-900/30">
