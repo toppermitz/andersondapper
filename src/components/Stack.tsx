@@ -55,7 +55,7 @@ export default function Stack() {
   return (
     <section className="mb-16">
       <div className="flex items-center gap-3 mb-6">
-        <div className="w-1 h-8 bg-gradient-to-b from-blue-500 to-purple-600 rounded-full"></div>
+        <div className="w-1 h-8 bg-linear-to-b from-blue-500 to-purple-600 rounded-full"></div>
         <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100">
           Stack & Ferramentas
         </h2>
