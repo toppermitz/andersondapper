@@ -30,13 +30,13 @@ body {
    ======================================== */
 
 .gradient-animated {
-  background: linear-gradient(-45deg, #06b6d4, #3b82f6, #8b5cf6, #ec4899);
+  background: linear-gradient(-45deg, #06b6d4, #3b82f6, #8b5cf6, #3b82f6);
   background-size: 400% 400%;
   animation: gradient 8s ease infinite;
 }
 
 .gradient-text-animated {
-  background: linear-gradient(-45deg, #06b6d4, #3b82f6, #8b5cf6, #ec4899, #06b6d4);
+  background: linear-gradient(-45deg, #06b6d4, #3b82f6, #8b5cf6, #3b82f6, #06b6d4);
   background-size: 300% 300%;
   -webkit-background-clip: text;
   background-clip: text;
@@ -47,7 +47,7 @@ body {
 .gradient-border {
   position: relative;
   background: linear-gradient(var(--bg-color, white), var(--bg-color, white)) padding-box,
-              linear-gradient(135deg, #06b6d4, #3b82f6, #8b5cf6, #ec4899) border-box;
+              linear-gradient(135deg, #06b6d4, #3b82f6, #8b5cf6, #3b82f6) border-box;
   border: 2px solid transparent;
 }
 
