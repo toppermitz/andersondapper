@@ -3,13 +3,6 @@ import ThemeToggle from './ThemeToggle'
 import Logo from './Logo'
 
 export default function Header() {
-  const skills = [
-    { name: 'Delphi', color: 'from-red-500 to-orange-500' },
-    { name: 'Node.js', color: 'from-green-500 to-emerald-500' },
-    { name: 'Next.js', color: 'from-slate-600 to-slate-800 dark:from-slate-300 dark:to-slate-500' },
-    { name: 'NestJS', color: 'from-red-500 to-blue-500' },
-  ]
-
   return (
     <header className="relative mb-16 sm:mb-20">
       {/* Theme Toggle */}
@@ -46,26 +39,6 @@ export default function Header() {
             </p>
             <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-cyan-500 via-purple-500 to-blue-500 rounded-full" />
           </div>
-        </div>
-
-        {/* Skills Pills with stagger animation */}
-        <div className="flex flex-wrap justify-center gap-3 mt-10 animate-fade-in-up delay-300">
-          {skills.map((skill, index) => (
-            <span 
-              key={skill.name}
-              className="group relative px-5 py-2.5 rounded-full text-sm font-semibold text-white overflow-hidden transition-all duration-300 hover:scale-110 hover:shadow-lg cursor-default"
-              style={{ animationDelay: `${0.4 + index * 0.1}s` }}
-            >
-              {/* Gradient background */}
-              <span className={`absolute inset-0 bg-gradient-to-r ${skill.color} opacity-90 group-hover:opacity-100 transition-opacity`} />
-              
-              {/* Shimmer effect on hover */}
-              <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
-              
-              {/* Text */}
-              <span className="relative z-10">{skill.name}</span>
-            </span>
-          ))}
         </div>
 
         {/* Subtle scroll indicator */}
