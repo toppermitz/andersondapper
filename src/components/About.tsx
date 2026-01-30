@@ -77,7 +77,7 @@ export default function About() {
           glowColor="bg-cyan-500"
           delay="delay-100"
         >
-          <Highlight>Com mais de duas décadas</Highlight> atuando como desenvolvedor, deixei de trabalhar exclusivamente com <Tech>Delphi</Tech> em 2022 e expandi minha stack para tecnologias modernas como <Tech>NodeJS</Tech>, <Tech>NextJS</Tech> e <Tech>Golang</Tech>. Atualmente, concentro meu foco em desenvolvimento web e backend escaláveis.
+          <Highlight>+20 anos transformando código em soluções de negócio.</Highlight> Comecei com <Tech>Delphi</Tech> quando poucos acreditavam em software nacional — e ajudei a construir sistemas que hoje processam milhões em transações de varejo. Em 2022, expandi minha stack para <Tech>Node.js</Tech>, <Tech>Next.js</Tech> e <Tech>Go</Tech>, provando que veterano também evolui.
         </TimelineItem>
 
         <TimelineItem 
@@ -86,7 +86,7 @@ export default function About() {
           glowColor="bg-purple-500"
           delay="delay-200"
         >
-          Meu cotidiano profissional envolve fortemente <Tech>NodeJS</Tech> e <Tech>NextJS</Tech> para criação de aplicações front-end e back-end, explorando conceitos avançados como <Highlight>Server-side Rendering</Highlight>, <Highlight>APIs RESTful</Highlight> e <Highlight>microserviços</Highlight>. Utilizo <Tech>Golang</Tech> para sistemas que demandam alta performance e concorrência.
+          Hoje <Highlight>arquiteto e desenvolvo</Highlight> aplicações completas — do banco de dados à interface. <Tech>APIs RESTful</Tech> que aguentam carga, frontends em <Tech>Next.js</Tech> que carregam rápido, backends em <Tech>NestJS</Tech> que escalam. Quando o sistema precisa de performance bruta, <Tech>Golang</Tech> entra em ação.
         </TimelineItem>
 
         <TimelineItem 
@@ -95,16 +95,16 @@ export default function About() {
           glowColor="bg-orange-500"
           delay="delay-300"
         >
-          Venho explorando <Tech>Python</Tech> e <Tech>Rust</Tech>, linguagens que estudo como complemento às minhas habilidades principais, buscando sempre entender tendências tecnológicas e ampliar minha versatilidade profissional.
+          <Highlight>Nunca parei de estudar.</Highlight> <Tech>Python</Tech> para automação e IA, <Tech>Rust</Tech> para entender os limites do hardware. A tecnologia muda rápido — quem não acompanha fica pra trás. Prefiro estar na frente.
         </TimelineItem>
 
         <TimelineItem 
-          icon="🎮" 
+          icon="🎯" 
           color="bg-gradient-to-br from-emerald-500 to-teal-500" 
           glowColor="bg-emerald-500"
           delay="delay-400"
         >
-          <Highlight>Apaixonado por</Highlight> tecnologia, games e carros — sempre buscando aprender e aplicar as melhores práticas no desenvolvimento.
+          <Highlight>Resolvo problemas.</Highlight> Seja debugar código legado das 3h da manhã ou arquitetar um sistema do zero — entrego. Tecnologia, games e carros são paixões; mas fazer software que funciona é o que me move.
         </TimelineItem>
       </div>
     </section>
