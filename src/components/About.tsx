@@ -44,7 +44,7 @@ function Highlight({ children }: { children: React.ReactNode }) {
 
 function Tech({ children }: { children: React.ReactNode }) {
   return (
-    <code className="px-2 py-0.5 mx-0.5 text-sm font-medium bg-slate-100 dark:bg-slate-800 text-purple-600 dark:text-purple-400 rounded-md">
+    <code className="px-1.5 py-px text-sm font-semibold text-purple-600 dark:text-purple-400 bg-purple-50 dark:bg-purple-950/30 rounded">
       {children}
     </code>
   )
