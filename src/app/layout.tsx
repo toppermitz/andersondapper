@@ -12,12 +12,12 @@ import type { Metadata } from 'next'
 
 const siteUrl = 'https://andersondapper.com.br'
 const siteName = 'Anderson Dapper'
-const siteDescription = 'Desenvolvedor Full Stack com mais de 20 anos de experiência em projetos de alta complexidade. Especialista em Node.js, Next.js, NestJS, TypeScript e Golang. Atuação em todas as camadas do desenvolvimento.'
+const siteDescription = '+20 anos de experiência em software. Especialista em Node.js, Next.js, NestJS e Golang. Do banco de dados à interface.'
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: 'Anderson Dapper - Desenvolvedor Full Stack - Desktop, Mobile e Web',
+    default: 'Anderson Dapper - Full Stack - Desktop, Mobile e Web',
     template: '%s | Anderson Dapper'
   },
   description: siteDescription,
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     locale: 'pt_BR',
     url: siteUrl,
     siteName: siteName,
-    title: 'Anderson Dapper - Desenvolvedor Full Stack - Desktop, Mobile e Web',
+    title: 'Anderson Dapper - Full Stack - Desktop, Mobile e Web',
     description: siteDescription,
     images: [
       {
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Anderson Dapper - Desenvolvedor Full Stack - Desktop, Mobile e Web',
+    title: 'Anderson Dapper - Full Stack - Desktop, Mobile e Web',
     description: siteDescription,
     images: ['/og-image.png'],
     creator: '@toppermitz',
