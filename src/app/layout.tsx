@@ -17,7 +17,7 @@ const siteDescription = 'Desenvolvedor Full Stack com +20 anos de experiência. 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: 'Anderson Dapper - Desenvolvedor Full Stack',
+    default: 'Anderson Dapper - Desenvolvedor Full Stack | Desktop, Mobile e Web',
     template: '%s | Anderson Dapper'
   },
   description: siteDescription,
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     locale: 'pt_BR',
     url: siteUrl,
     siteName: siteName,
-    title: 'Anderson Dapper - Desenvolvedor Full Stack',
+    title: 'Anderson Dapper - Desenvolvedor Full Stack | Desktop, Mobile e Web',
     description: siteDescription,
     images: [
       {
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Anderson Dapper - Desenvolvedor Full Stack',
+    title: 'Anderson Dapper - Desenvolvedor Full Stack | Desktop, Mobile e Web',
     description: siteDescription,
     images: ['/og-image.png'],
     creator: '@toppermitz',
