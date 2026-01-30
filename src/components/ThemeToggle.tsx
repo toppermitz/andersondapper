@@ -1,7 +1,7 @@
 'use client'
 import { useTheme } from 'next-themes'
 import { useState, useEffect } from 'react'
-import { FiSun, FiMoon } from "react-icons/fi";
+import { FiSun, FiMoon } from "react-icons/fi"
 
 export default function ThemeToggle() {
   const { setTheme, resolvedTheme } = useTheme()
@@ -11,26 +11,56 @@ export default function ThemeToggle() {
     setMounted(true)
   }, [])
 
-  // Prevent hydration mismatch by not rendering until mounted
+  // Prevent hydration mismatch
   if (!mounted) {
     return (
-      <div className="group flex items-center justify-center w-12 h-12 rounded-xl bg-gray-100 border border-gray-200 transition-all duration-200">
-        <div className="w-5 h-5 bg-gray-300 rounded animate-pulse"></div>
+      <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-white/60 dark:bg-slate-800/60 backdrop-blur-sm border border-slate-200/50 dark:border-slate-700/50">
+        <div className="w-5 h-5 bg-slate-300 dark:bg-slate-600 rounded animate-pulse" />
       </div>
     )
   }
 
   return (
     <button
-      onClick={()=> setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
+      onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
       aria-label={resolvedTheme === 'dark' ? 'Mudar para modo claro' : 'Mudar para modo escuro'}
-      className="group flex items-center justify-center w-12 h-12 rounded-xl bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
+      className="group relative flex items-center justify-center w-12 h-12 rounded-xl
+        bg-white/60 dark:bg-slate-800/60 backdrop-blur-sm
+        border border-slate-200/50 dark:border-slate-700/50
+        hover:bg-white dark:hover:bg-slate-800
+        hover:border-cyan-300 dark:hover:border-purple-500
+        hover:shadow-lg hover:shadow-cyan-500/10 dark:hover:shadow-purple-500/20
+        transition-all duration-300 hover:scale-105
+        focus:outline-none focus:ring-2 focus:ring-cyan-500 dark:focus:ring-purple-500 focus:ring-offset-2 dark:focus:ring-offset-slate-900"
     >
-      {resolvedTheme === 'dark' ? (
-        <FiSun className="w-5 h-5 text-yellow-500 group-hover:text-yellow-400 transition-colors" />
-      ) : (
-        <FiMoon className="w-5 h-5 text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-gray-100 transition-colors" />
-      )}
+      {/* Sun icon */}
+      <FiSun className={`
+        absolute w-5 h-5 text-amber-500
+        transition-all duration-500
+        ${resolvedTheme === 'dark' 
+          ? 'rotate-0 scale-100 opacity-100' 
+          : 'rotate-90 scale-0 opacity-0'
+        }
+      `} />
+      
+      {/* Moon icon */}
+      <FiMoon className={`
+        absolute w-5 h-5 text-slate-700 dark:text-slate-300
+        transition-all duration-500
+        ${resolvedTheme === 'dark' 
+          ? '-rotate-90 scale-0 opacity-0' 
+          : 'rotate-0 scale-100 opacity-100'
+        }
+      `} />
+
+      {/* Glow effect on hover */}
+      <div className={`
+        absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300
+        ${resolvedTheme === 'dark' 
+          ? 'bg-gradient-to-br from-amber-500/20 to-orange-500/20' 
+          : 'bg-gradient-to-br from-purple-500/10 to-blue-500/10'
+        }
+      `} />
     </button>
   )
 }

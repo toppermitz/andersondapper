@@ -1,3 +1,4 @@
+'use client'
 import { 
   SiTypescript, 
   SiNextdotjs, 
@@ -7,7 +8,6 @@ import {
   SiPrisma, 
   SiDocker, 
   SiRedis, 
-  // SiGraphql, 
   SiTailwindcss, 
   SiGit, 
   SiGithub, 
@@ -17,75 +17,107 @@ import {
 import { FaServer, FaCloud } from 'react-icons/fa'
 import Image from 'next/image'
 
+interface StackItem {
+  name: string
+  icon: React.ComponentType<{ className?: string }> | 'custom'
+  gradient: string
+  shadow: string
+}
+
 export default function Stack() {
-  const stacks = [
-    { name: 'TypeScript', color: 'blue', icon: SiTypescript },
-    { name: 'Next.js', color: 'gray', icon: SiNextdotjs },
-    { name: 'NestJS', color: 'red', icon: SiNestjs },
-    { name: 'Node.js', color: 'green', icon: SiNodedotjs },
-    { name: 'PostgreSQL', color: 'blue', icon: SiPostgresql },
-    { name: 'Prisma', color: 'indigo', icon: SiPrisma },
-    { name: 'CI/CD', color: 'orange', icon: FaCloud },
-    { name: 'Docker', color: 'blue', icon: SiDocker },
-    { name: 'Redis', color: 'red', icon: SiRedis },
-    // { name: 'GraphQL', color: 'purple', icon: SiGraphql },
-    { name: 'REST API', color: 'gray', icon: FaServer },
-    { name: 'Tailwind CSS', color: 'indigo', icon: SiTailwindcss },
-    { name: 'Git', color: 'orange', icon: SiGit },
-    { name: 'GitHub', color: 'blue', icon: SiGithub },
-    { name: 'GitLab', color: 'red', icon: SiGitlab },
-    { name: 'Delphi', color: 'red', icon: 'custom' },
-    { name: 'AWS', color: 'orange', icon: SiAmazon },
-    
+  const stacks: StackItem[] = [
+    { name: 'TypeScript', icon: SiTypescript, gradient: 'from-blue-500 to-blue-700', shadow: 'group-hover:shadow-blue-500/30' },
+    { name: 'Next.js', icon: SiNextdotjs, gradient: 'from-slate-700 to-slate-900 dark:from-slate-200 dark:to-slate-400', shadow: 'group-hover:shadow-slate-500/30' },
+    { name: 'NestJS', icon: SiNestjs, gradient: 'from-red-500 to-rose-600', shadow: 'group-hover:shadow-red-500/30' },
+    { name: 'Node.js', icon: SiNodedotjs, gradient: 'from-green-500 to-emerald-600', shadow: 'group-hover:shadow-green-500/30' },
+    { name: 'PostgreSQL', icon: SiPostgresql, gradient: 'from-blue-600 to-indigo-700', shadow: 'group-hover:shadow-blue-500/30' },
+    { name: 'Prisma', icon: SiPrisma, gradient: 'from-indigo-500 to-purple-600', shadow: 'group-hover:shadow-indigo-500/30' },
+    { name: 'CI/CD', icon: FaCloud, gradient: 'from-orange-500 to-amber-600', shadow: 'group-hover:shadow-orange-500/30' },
+    { name: 'Docker', icon: SiDocker, gradient: 'from-cyan-500 to-blue-600', shadow: 'group-hover:shadow-cyan-500/30' },
+    { name: 'Redis', icon: SiRedis, gradient: 'from-red-600 to-red-700', shadow: 'group-hover:shadow-red-500/30' },
+    { name: 'REST API', icon: FaServer, gradient: 'from-slate-600 to-slate-700', shadow: 'group-hover:shadow-slate-500/30' },
+    { name: 'Tailwind', icon: SiTailwindcss, gradient: 'from-cyan-400 to-cyan-600', shadow: 'group-hover:shadow-cyan-500/30' },
+    { name: 'Git', icon: SiGit, gradient: 'from-orange-500 to-red-600', shadow: 'group-hover:shadow-orange-500/30' },
+    { name: 'GitHub', icon: SiGithub, gradient: 'from-slate-700 to-slate-900 dark:from-slate-300 dark:to-slate-500', shadow: 'group-hover:shadow-slate-500/30' },
+    { name: 'GitLab', icon: SiGitlab, gradient: 'from-orange-600 to-red-600', shadow: 'group-hover:shadow-orange-500/30' },
+    { name: 'Delphi', icon: 'custom', gradient: 'from-red-500 to-red-700', shadow: 'group-hover:shadow-red-500/30' },
+    { name: 'AWS', icon: SiAmazon, gradient: 'from-amber-500 to-orange-600', shadow: 'group-hover:shadow-amber-500/30' },
   ]
 
-  const getColorClasses = (color: string) => {
-    const colors = {
-      blue: 'bg-blue-100 text-blue-700 border-blue-200 dark:bg-blue-900/30 dark:text-blue-300 dark:border-blue-800/50',
-      gray: 'bg-gray-100 text-gray-700 border-gray-200 dark:bg-gray-800/50 dark:text-gray-300 dark:border-gray-700/50',
-      red: 'bg-red-100 text-red-700 border-red-200 dark:bg-red-900/30 dark:text-red-300 dark:border-red-800/50',
-      green: 'bg-green-100 text-green-700 border-green-200 dark:bg-green-900/30 dark:text-green-300 dark:border-green-800/50',
-      indigo: 'bg-indigo-100 text-indigo-700 border-indigo-200 dark:bg-indigo-900/30 dark:text-indigo-300 dark:border-indigo-800/50',
-      orange: 'bg-orange-100 text-orange-700 border-orange-200 dark:bg-orange-900/30 dark:text-orange-300 dark:border-orange-800/50',
-      purple: 'bg-purple-100 text-purple-700 border-purple-200 dark:bg-purple-900/30 dark:text-purple-300 dark:border-purple-800/50'
-    }
-    return colors[color as keyof typeof colors] || colors.gray
-  }
-
   return (
-    <section className="mb-16 animate-fade-in-up delay-200">
-      <div className="flex items-center gap-3 mb-6">
-        <div className="w-1 h-8 bg-gradient-to-b from-blue-500 to-purple-600 rounded-full"></div>
-        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100">
-          Stack & Ferramentas
-        </h2>
+    <section className="mb-20">
+      {/* Section header */}
+      <div className="flex items-center gap-4 mb-10 animate-fade-in">
+        <div className="relative">
+          <div className="w-2 h-12 bg-gradient-to-b from-cyan-500 via-purple-500 to-pink-500 rounded-full" />
+          <div className="absolute inset-0 w-2 h-12 bg-gradient-to-b from-cyan-500 via-purple-500 to-pink-500 rounded-full blur-sm opacity-50" />
+        </div>
+        <div>
+          <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-slate-100">
+            Stack & Ferramentas
+          </h2>
+          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
+            Tecnologias que uso no dia a dia
+          </p>
+        </div>
       </div>
-      
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
-        {stacks.map(stack => {
-          return (
-            <div 
-              key={stack.name} 
-              className={`flex items-center gap-3 px-4 py-3 rounded-xl border transition-all duration-200 hover:scale-105 hover-glow ${getColorClasses(stack.color)}`}
-            >
-              {stack.name === 'Delphi' ? (
-              <Image 
-                src="/Delphi_Language_Logo.svg" 
-                alt="Delphi Logo" 
-                width={32} 
-                height={32} 
-                className="w-8 h-8"
-              />
-              ) : (
-              (() => {
-                const IconComponent = stack.icon;
-                return <IconComponent className="w-8 h-8" />
-              })()
-              )}
-              <span className="font-medium text-sm sm:text-base">{stack.name}</span>
+
+      {/* Stack Grid */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+        {stacks.map((stack, index) => (
+          <div 
+            key={stack.name} 
+            className={`group relative animate-fade-in-up`}
+            style={{ animationDelay: `${0.1 + index * 0.05}s`, opacity: 0 }}
+          >
+            <div className={`
+              relative flex items-center gap-3 px-4 py-4 rounded-2xl
+              bg-white/60 dark:bg-slate-800/60 backdrop-blur-sm
+              border border-slate-200/50 dark:border-slate-700/50
+              transition-all duration-300 ease-out
+              hover:scale-[1.05] hover:-translate-y-1
+              ${stack.shadow} hover:shadow-xl
+            `}>
+              {/* Icon container with gradient background */}
+              <div className={`
+                relative flex items-center justify-center w-12 h-12 rounded-xl
+                bg-gradient-to-br ${stack.gradient}
+                shadow-md group-hover:shadow-lg
+                transition-all duration-300
+                group-hover:scale-110
+              `}>
+                {/* Glow effect */}
+                <div className={`absolute inset-0 rounded-xl bg-gradient-to-br ${stack.gradient} opacity-0 group-hover:opacity-50 blur-lg transition-opacity duration-300`} />
+                
+                {/* Icon */}
+                {stack.name === 'Delphi' ? (
+                  <Image 
+                    src="/Delphi_Language_Logo.svg" 
+                    alt="Delphi Logo" 
+                    width={24} 
+                    height={24} 
+                    className="w-6 h-6 relative z-10 brightness-0 invert"
+                  />
+                ) : (
+                  (() => {
+                    const IconComponent = stack.icon as React.ComponentType<{ className?: string }>
+                    return <IconComponent className="w-6 h-6 text-white relative z-10" />
+                  })()
+                )}
+              </div>
+              
+              {/* Label */}
+              <span className="font-semibold text-sm sm:text-base text-slate-700 dark:text-slate-200 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
+                {stack.name}
+              </span>
+
+              {/* Subtle shine effect on hover */}
+              <div className="absolute inset-0 rounded-2xl overflow-hidden pointer-events-none">
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+              </div>
             </div>
-          )
-        })}
+          </div>
+        ))}
       </div>
     </section>
   )
