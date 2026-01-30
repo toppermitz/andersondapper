@@ -32,7 +32,7 @@ export default function About() {
             <div className="flex items-start gap-4">
               <div className="flex-shrink-0 w-2 h-2 bg-yellow-500 rounded-full mt-2"></div>
               <p className="text-base sm:text-lg leading-relaxed">
-                Venho exlorando à algum tempo <BB>Python</BB> e <BB>Rust</BB>, linguagens que estudo como complemento às minhas habilidades principais, buscando sempre entender tendências tecnológicas e ampliar minha versatilidade profissional.
+                Venho explorando há algum tempo <BB>Python</BB> e <BB>Rust</BB>, linguagens que estudo como complemento às minhas habilidades principais, buscando sempre entender tendências tecnológicas e ampliar minha versatilidade profissional.
               </p>
             </div>
             
