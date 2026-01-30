@@ -14,7 +14,13 @@ import {
   SiGitlab, 
   SiAmazon,
   SiGo,
-  SiTerraform 
+  SiTerraform,
+  SiLinux,
+  SiRabbitmq,
+  SiJest,
+  SiSwagger,
+  SiPython,
+  SiTraefikproxy
 } from 'react-icons/si'
 import { FaServer, FaCloud } from 'react-icons/fa'
 import Image from 'next/image'
@@ -46,6 +52,12 @@ export default function Stack() {
     { name: 'AWS', icon: SiAmazon, gradient: 'from-amber-500 to-orange-600', shadow: 'group-hover:shadow-amber-500/30' },
     { name: 'Golang', icon: SiGo, gradient: 'from-cyan-500 to-cyan-700', shadow: 'group-hover:shadow-cyan-500/30' },
     { name: 'Terraform', icon: SiTerraform, gradient: 'from-purple-500 to-violet-600', shadow: 'group-hover:shadow-purple-500/30' },
+    { name: 'Linux', icon: SiLinux, gradient: 'from-amber-500 to-yellow-600', shadow: 'group-hover:shadow-amber-500/30' },
+    { name: 'RabbitMQ', icon: SiRabbitmq, gradient: 'from-orange-500 to-orange-600', shadow: 'group-hover:shadow-orange-500/30' },
+    { name: 'Jest', icon: SiJest, gradient: 'from-red-400 to-rose-500', shadow: 'group-hover:shadow-red-500/30' },
+    { name: 'Swagger', icon: SiSwagger, gradient: 'from-green-500 to-emerald-600', shadow: 'group-hover:shadow-green-500/30' },
+    { name: 'Python', icon: SiPython, gradient: 'from-blue-500 to-yellow-500', shadow: 'group-hover:shadow-blue-500/30' },
+    { name: 'Traefik', icon: SiTraefikproxy, gradient: 'from-cyan-400 to-blue-500', shadow: 'group-hover:shadow-cyan-500/30' },
   ]
 
   return (
