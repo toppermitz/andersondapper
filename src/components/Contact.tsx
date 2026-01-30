@@ -128,7 +128,7 @@ export default function Contact() {
       </div>
 
       {/* Social links */}
-      <div className="grid gap-4 md:grid-cols-3">
+      <div className="grid gap-3 sm:gap-4 lg:grid-cols-3">
         {socialLinks.map((link, index) => (
           <SocialLink 
             key={link.name} 
