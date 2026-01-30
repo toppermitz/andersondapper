@@ -8,10 +8,63 @@ const inter = Inter({
   variable: '--font-inter'
 })
 
-export const metadata = {
-  title: 'Anderson Dapper - Desenvolvedor Full Stack',
-  description: 'Portfolio de Anderson Dapper - Desenvolvedor especializado em Node.js, Next.js, NestJS e tecnologias modernas.',
-  keywords: ['Anderson Dapper', 'Desenvolvedor', 'Next.js', 'Node.js', 'NestJS', 'TypeScript'],
+import type { Metadata } from 'next'
+
+const siteUrl = 'https://andersondapper.com.br'
+const siteName = 'Anderson Dapper'
+const siteDescription = 'Desenvolvedor Full Stack com +20 anos de experiência. Especialista em Node.js, Next.js, NestJS, TypeScript e Golang. Construindo soluções robustas e escaláveis.'
+
+export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: 'Anderson Dapper - Desenvolvedor Full Stack',
+    template: '%s | Anderson Dapper'
+  },
+  description: siteDescription,
+  keywords: ['Anderson Dapper', 'Desenvolvedor Full Stack', 'Node.js', 'Next.js', 'NestJS', 'TypeScript', 'Golang', 'Delphi', 'Backend', 'Frontend', 'Brasil'],
+  authors: [{ name: 'Anderson Dapper', url: siteUrl }],
+  creator: 'Anderson Dapper',
+  publisher: 'Anderson Dapper',
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'pt_BR',
+    url: siteUrl,
+    siteName: siteName,
+    title: 'Anderson Dapper - Desenvolvedor Full Stack',
+    description: siteDescription,
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Anderson Dapper - Desenvolvedor Full Stack',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Anderson Dapper - Desenvolvedor Full Stack',
+    description: siteDescription,
+    images: ['/og-image.png'],
+    creator: '@toppermitz',
+  },
+  verification: {
+    google: 'adicione-seu-codigo-aqui',
+  },
+  alternates: {
+    canonical: siteUrl,
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
