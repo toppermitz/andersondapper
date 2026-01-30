@@ -10,7 +10,7 @@ export default function Footer() {
         </div>
         
         <div className="text-sm text-gray-500 dark:text-gray-400">
-          © 2025 Anderson Dapper. Todos os direitos reservados.
+          © 2026 Anderson Dapper. Todos os direitos reservados.
         </div>
         
         <div className="w-20 h-px bg-gradient-to-r from-blue-500 to-purple-600"></div>
