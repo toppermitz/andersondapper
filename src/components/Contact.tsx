@@ -15,7 +15,7 @@ function SocialLink({ name, url, icon, gradient, hoverGlow, delay }: SocialLinkP
       href={url}
       target="_blank"
       rel="noopener noreferrer"
-      className={`group relative flex items-center gap-4 p-5 rounded-2xl
+      className={`group relative flex items-center gap-3 p-4 sm:p-5 rounded-2xl
         bg-white/60 dark:bg-slate-800/60 backdrop-blur-sm
         border border-slate-200/50 dark:border-slate-700/50
         transition-all duration-300 ease-out
@@ -128,7 +128,7 @@ export default function Contact() {
       </div>
 
       {/* Social links */}
-      <div className="grid gap-4 sm:grid-cols-3">
+      <div className="grid gap-4 md:grid-cols-3">
         {socialLinks.map((link, index) => (
           <SocialLink 
             key={link.name} 
