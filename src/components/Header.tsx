@@ -5,7 +5,7 @@ import Logo from './Logo'
 
 export default function Header() {
   return (
-    <header className="text-center mb-12 relative">
+    <header className="text-center mb-12 relative animate-fade-in">
       {/* Theme Toggle Button */}
       <div className="absolute top-0 right-0">
         <ThemeToggle />

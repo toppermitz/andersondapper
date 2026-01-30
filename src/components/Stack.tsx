@@ -53,7 +53,7 @@ export default function Stack() {
   }
 
   return (
-    <section className="mb-16">
+    <section className="mb-16 animate-fade-in-up delay-200">
       <div className="flex items-center gap-3 mb-6">
         <div className="w-1 h-8 bg-gradient-to-b from-blue-500 to-purple-600 rounded-full"></div>
         <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100">
@@ -66,7 +66,7 @@ export default function Stack() {
           return (
             <div 
               key={stack.name} 
-              className={`flex items-center gap-3 px-4 py-3 rounded-xl border transition-all duration-200 hover:scale-105 hover:shadow-md ${getColorClasses(stack.color)}`}
+              className={`flex items-center gap-3 px-4 py-3 rounded-xl border transition-all duration-200 hover:scale-105 hover-glow ${getColorClasses(stack.color)}`}
             >
               {stack.name === 'Delphi' ? (
               <Image 
