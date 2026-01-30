@@ -13,12 +13,9 @@ export default function Header() {
       {/* Hero Content */}
       <div className="flex flex-col items-center pt-8 sm:pt-4">
         
-        {/* Logo with glow effect */}
-        <div className="relative mb-8 animate-fade-in">
-          <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 via-purple-500/20 to-blue-500/20 blur-2xl rounded-full scale-150" />
-          <div className="relative float">
-            <Logo size="xl" />
-          </div>
+        {/* Logo */}
+        <div className="mb-8 animate-fade-in">
+          <Logo size="xl" />
         </div>
 
         {/* Name with animated gradient */}
