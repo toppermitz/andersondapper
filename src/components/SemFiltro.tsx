@@ -68,9 +68,12 @@ export default function SemFiltro({ isVisible }: SemFiltroProps) {
         animation: 'fade-in-up 0.8s ease-out forwards'
       }}
     >
-      <div className="flex items-center gap-3 mb-6">
-        <div className="w-1 h-8 bg-gradient-to-b from-red-500 to-orange-600 rounded-full"></div>
-        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100">
+      <div className="flex items-center gap-4 mb-6">
+        <div className="relative">
+          <div className="w-2 h-12 bg-gradient-to-b from-cyan-500 via-purple-500 to-blue-500 rounded-full" />
+          <div className="absolute inset-0 w-2 h-12 bg-gradient-to-b from-cyan-500 via-purple-500 to-blue-500 rounded-full blur-sm opacity-50" />
+        </div>
+        <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-slate-100">
           O que NÃO está no LinkedIn
         </h2>
         <span className="ml-2 px-2 py-1 text-xs font-mono bg-green-900 text-green-400 rounded border border-green-700">
@@ -78,7 +81,7 @@ export default function SemFiltro({ isVisible }: SemFiltroProps) {
         </span>
       </div>
 
-      <div className="bg-gradient-to-br from-red-50 to-orange-50 dark:from-red-950/20 dark:to-orange-950/20 rounded-2xl p-6 sm:p-8 border border-red-100 dark:border-red-900/30">
+      <div className="bg-gradient-to-br from-cyan-50 to-purple-50 dark:from-cyan-950/30 dark:to-purple-950/30 rounded-2xl p-6 sm:p-8 border border-cyan-200/50 dark:border-cyan-800/30">
         <div className="grid gap-4">
           {items.map((item, index) => {
             const Icon = item.icon
@@ -95,7 +98,7 @@ export default function SemFiltro({ isVisible }: SemFiltroProps) {
                 <div className={`flex-shrink-0 p-2 rounded-lg ${item.bgColor}`}>
                   <Icon className={`w-4 h-4 ${item.color}`} />
                 </div>
-                <p className="text-base sm:text-lg leading-relaxed text-gray-700 dark:text-gray-300">
+                <p className="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300">
                   {item.text}
                 </p>
               </div>
