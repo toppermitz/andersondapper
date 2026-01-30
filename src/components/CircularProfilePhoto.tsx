@@ -23,7 +23,7 @@ export default function CircularProfilePhoto({
   alt,
   size = 'lg',
   showGradientRing = true,
-  gradientColors = 'from-blue-500 via-purple-500 to-pink-500',
+  gradientColors = 'from-blue-500 via-purple-500 to-blue-500',
   objectPosition = 'center 20%',
   className = ''
 }: CircularProfilePhotoProps) {

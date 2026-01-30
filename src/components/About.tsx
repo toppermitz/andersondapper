@@ -56,8 +56,8 @@ export default function About() {
       {/* Section header */}
       <div className="flex items-center gap-4 mb-10 animate-fade-in">
         <div className="relative">
-          <div className="w-2 h-12 bg-gradient-to-b from-cyan-500 via-purple-500 to-pink-500 rounded-full" />
-          <div className="absolute inset-0 w-2 h-12 bg-gradient-to-b from-cyan-500 via-purple-500 to-pink-500 rounded-full blur-sm opacity-50" />
+          <div className="w-2 h-12 bg-gradient-to-b from-cyan-500 via-purple-500 to-blue-500 rounded-full" />
+          <div className="absolute inset-0 w-2 h-12 bg-gradient-to-b from-cyan-500 via-purple-500 to-blue-500 rounded-full blur-sm opacity-50" />
         </div>
         <div>
           <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-slate-100">
@@ -82,7 +82,7 @@ export default function About() {
 
         <TimelineItem 
           icon="⚡" 
-          color="bg-gradient-to-br from-purple-500 to-pink-500" 
+          color="bg-gradient-to-br from-purple-500 to-blue-500" 
           glowColor="bg-purple-500"
           delay="delay-200"
         >

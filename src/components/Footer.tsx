@@ -43,7 +43,7 @@ export default function Footer() {
         </div>
 
         {/* Decorative gradient line */}
-        <div className="w-24 h-1 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 rounded-full opacity-60" />
+        <div className="w-24 h-1 bg-gradient-to-r from-cyan-500 via-purple-500 to-blue-500 rounded-full opacity-60" />
       </div>
     </footer>
   )

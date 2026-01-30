@@ -7,7 +7,7 @@ export default function Header() {
     { name: 'Delphi', color: 'from-red-500 to-orange-500' },
     { name: 'Node.js', color: 'from-green-500 to-emerald-500' },
     { name: 'Next.js', color: 'from-slate-600 to-slate-800 dark:from-slate-300 dark:to-slate-500' },
-    { name: 'NestJS', color: 'from-red-500 to-pink-500' },
+    { name: 'NestJS', color: 'from-red-500 to-blue-500' },
   ]
 
   return (
@@ -22,7 +22,7 @@ export default function Header() {
         
         {/* Logo with glow effect */}
         <div className="relative mb-8 animate-fade-in">
-          <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 via-purple-500/20 to-pink-500/20 blur-2xl rounded-full scale-150" />
+          <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 via-purple-500/20 to-blue-500/20 blur-2xl rounded-full scale-150" />
           <div className="relative float">
             <Logo size="xl" />
           </div>
@@ -44,7 +44,7 @@ export default function Header() {
                 Full Stack
               </span>
             </p>
-            <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 rounded-full" />
+            <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-cyan-500 via-purple-500 to-blue-500 rounded-full" />
           </div>
         </div>
 
