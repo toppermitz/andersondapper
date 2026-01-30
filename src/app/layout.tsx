@@ -12,7 +12,7 @@ import type { Metadata } from 'next'
 
 const siteUrl = 'https://andersondapper.com.br'
 const siteName = 'Anderson Dapper'
-const siteDescription = '+20 anos transformando código em soluções de negócio. Arquiteto e desenvolvedor Full Stack especializado em Node.js, Next.js, NestJS e Go. Do legado ao moderno, entrego sistemas que escalam.'
+const siteDescription = 'Desenvolvedor Full Stack com mais de 20 anos de experiência em projetos de alta complexidade. Especialista em Node.js, Next.js, NestJS, TypeScript e Golang. Atuação em todas as camadas do desenvolvimento.'
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
