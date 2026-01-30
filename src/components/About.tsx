@@ -77,7 +77,7 @@ export default function About() {
           glowColor="bg-cyan-500"
           delay="delay-100"
         >
-          <Highlight>Mais de 20 anos de experiência</Highlight> em desenvolvimento de software, com atuação em projetos de alta complexidade no setor de varejo. Iniciei minha carreira com <Tech>Delphi</Tech> e, em 2022, ampliei minha expertise para incluir <Tech>Node.js</Tech>, <Tech>Next.js</Tech> e <Tech>Golang</Tech>, mantendo-me alinhado às demandas do mercado.
+          <Highlight>Mais de 20 anos de experiência</Highlight> em desenvolvimento de software, com atuação em projetos de alta complexidade nos setores de varejo, fiscal/contábil e bancário. Iniciei minha carreira com <Tech>Delphi</Tech> e, em 2022, ampliei minha expertise para incluir <Tech>Node.js</Tech>, <Tech>Next.js</Tech> e <Tech>Golang</Tech>, mantendo-me alinhado às demandas do mercado.
         </TimelineItem>
 
         <TimelineItem 
