@@ -41,11 +41,11 @@ function SocialLink({ name, url, icon, gradient, hoverGlow, delay }: SocialLinkP
       </div>
       
       {/* Label and description */}
-      <div className="flex-1">
+      <div className="flex-1 min-w-0">
         <span className="block font-bold text-lg text-slate-800 dark:text-slate-100 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
           {name}
         </span>
-        <span className="text-sm text-slate-500 dark:text-slate-400">
+        <span className="block text-sm text-slate-500 dark:text-slate-400 truncate">
           {name === 'Email' ? 'eu@andersondapper.com.br' : name === 'LinkedIn' ? '/andersondapper' : '/toppermitz'}
         </span>
       </div>
