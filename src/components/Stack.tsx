@@ -20,14 +20,14 @@ import {
   SiJest,
   SiSwagger,
   SiPython,
-  SiTraefikproxy
+  SiTraefikproxy,
+  SiDelphi
 } from 'react-icons/si'
 import { FaServer, FaCloud } from 'react-icons/fa'
-import Image from 'next/image'
 
 interface StackItem {
   name: string
-  icon: React.ComponentType<{ className?: string }> | 'custom'
+  icon: React.ComponentType<{ className?: string }>
   gradient: string
   shadow: string
 }
@@ -48,7 +48,7 @@ export default function Stack() {
     { name: 'Git', icon: SiGit, gradient: 'from-orange-500 to-red-600', shadow: 'group-hover:shadow-orange-500/30' },
     { name: 'GitHub', icon: SiGithub, gradient: 'from-slate-700 to-slate-900 dark:from-slate-300 dark:to-slate-500', shadow: 'group-hover:shadow-slate-500/30' },
     { name: 'GitLab', icon: SiGitlab, gradient: 'from-orange-600 to-red-600', shadow: 'group-hover:shadow-orange-500/30' },
-    { name: 'Delphi', icon: 'custom', gradient: 'from-red-500 to-red-700', shadow: 'group-hover:shadow-red-500/30' },
+    { name: 'Delphi', icon: SiDelphi, gradient: 'from-red-500 to-red-700', shadow: 'group-hover:shadow-red-500/30' },
     { name: 'AWS', icon: SiAmazon, gradient: 'from-amber-500 to-orange-600', shadow: 'group-hover:shadow-amber-500/30' },
     { name: 'Golang', icon: SiGo, gradient: 'from-cyan-500 to-cyan-700', shadow: 'group-hover:shadow-cyan-500/30' },
     { name: 'Terraform', icon: SiTerraform, gradient: 'from-purple-500 to-violet-600', shadow: 'group-hover:shadow-purple-500/30' },
@@ -106,20 +106,10 @@ export default function Stack() {
                 <div className={`absolute inset-0 rounded-xl bg-gradient-to-br ${stack.gradient} opacity-0 group-hover:opacity-50 blur-lg transition-opacity duration-300`} />
                 
                 {/* Icon */}
-                {stack.name === 'Delphi' ? (
-                  <Image 
-                    src="/Delphi_Language_Logo.svg" 
-                    alt="Delphi Logo" 
-                    width={24} 
-                    height={24} 
-                    className="w-6 h-6 relative z-10 brightness-0 invert"
-                  />
-                ) : (
-                  (() => {
-                    const IconComponent = stack.icon as React.ComponentType<{ className?: string }>
-                    return <IconComponent className="w-6 h-6 text-white relative z-10" />
-                  })()
-                )}
+                {(() => {
+                  const IconComponent = stack.icon as React.ComponentType<{ className?: string }>
+                  return <IconComponent className="w-6 h-6 text-white relative z-10" />
+                })()}
               </div>
               
               {/* Label */}
