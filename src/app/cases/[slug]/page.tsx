@@ -58,9 +58,64 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
 
   const { details } = caseStudy
   const visual = caseStudyVisuals[caseStudy.icon]
+  const caseUrl = `https://andersondapper.com.br/cases/${caseStudy.slug}`
+  const caseStructuredData = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'Article',
+        '@id': `${caseUrl}#case`,
+        headline: caseStudy.title,
+        description: details.seoDescription,
+        url: caseUrl,
+        mainEntityOfPage: caseUrl,
+        articleSection: caseStudy.context,
+        keywords: details.tags.join(', '),
+        inLanguage: 'pt-BR',
+        author: {
+          '@id': 'https://andersondapper.com.br/#person',
+        },
+        publisher: {
+          '@id': 'https://andersondapper.com.br/#person',
+        },
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Início',
+            item: 'https://andersondapper.com.br',
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'Cases',
+            item: 'https://andersondapper.com.br/cases',
+          },
+          {
+            '@type': 'ListItem',
+            position: 3,
+            name: caseStudy.title,
+            item: caseUrl,
+          },
+        ],
+      },
+    ],
+  }
+  const serializedCaseStructuredData = JSON.stringify(caseStructuredData).replace(
+    /</g,
+    '\\u003c',
+  )
 
   return (
     <div>
+      <script
+        id="case-structured-data"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: serializedCaseStructuredData }}
+      />
       <nav aria-label="Navegação do case" className="mb-8 flex items-center justify-between gap-4 animate-fade-in">
         <Link
           href="/cases"
