@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import Header from '../components/Header'
 import About from '../components/About'
 import EasterEggWrapper from '../components/EasterEggWrapper'
@@ -5,40 +6,19 @@ import Stack from '../components/Stack'
 import Contact from '../components/Contact'
 import Footer from '../components/Footer'
 import SectionHeading from '../components/SectionHeading'
-import { FaFileInvoice, FaLayerGroup, FaRocket } from 'react-icons/fa'
+import {
+  FaArrowRight,
+  FaFileInvoice,
+  FaLayerGroup,
+  FaRocket,
+} from 'react-icons/fa'
+import { caseStudies, type CaseStudyIcon } from '../data/case-studies'
 
-const caseStudies = [
-  {
-    title: 'Modernização sem ruptura',
-    context: 'Legado → Web',
-    description: 'Migração de sistemas Delphi e ERPs com regras críticas, evitando uma reescrita de alto risco.',
-    contribution: 'Arquitetura incremental, APIs, paridade e testes entre o legado e a nova experiência.',
-    result: 'Regras preservadas e evolução por etapas, com risco operacional controlado.',
-    icon: FaLayerGroup,
-    iconGradient: 'from-red-500 to-orange-500',
-    accent: 'text-orange-600 dark:text-orange-400',
-  },
-  {
-    title: 'Operações fiscais rastreáveis',
-    context: 'Fiscal & integrações',
-    description: 'Emissão e integrações em que schema, certificado, idempotência e disponibilidade formam um único contrato.',
-    contribution: 'APIs resilientes, observabilidade e estados explícitos de processamento e reenvio.',
-    result: 'Operações repetíveis e diagnóstico rápido entre sistema, fiscal e infraestrutura.',
-    icon: FaFileInvoice,
-    iconGradient: 'from-cyan-500 to-blue-600',
-    accent: 'text-cyan-700 dark:text-cyan-300',
-  },
-  {
-    title: 'Entrega que chega à produção',
-    context: 'CI/CD & plataforma',
-    description: 'Frontend, APIs, bancos e serviços que precisam continuar previsíveis depois que chegam à produção.',
-    contribution: 'Containers, pipelines, deploy automatizado e telemetria depois da entrega.',
-    result: 'Releases reproduzíveis e diagnóstico baseado em evidência, não em tentativa e erro.',
-    icon: FaRocket,
-    iconGradient: 'from-purple-500 to-violet-600',
-    accent: 'text-purple-700 dark:text-purple-300',
-  },
-]
+const caseStudyIcons: Record<CaseStudyIcon, typeof FaLayerGroup> = {
+  layers: FaLayerGroup,
+  invoice: FaFileInvoice,
+  rocket: FaRocket,
+}
 
 function FeaturedWork() {
   return (
@@ -57,7 +37,7 @@ function FeaturedWork() {
 
       <div className="grid gap-4 lg:grid-cols-3">
         {caseStudies.map((caseStudy) => {
-          const Icon = caseStudy.icon
+          const Icon = caseStudyIcons[caseStudy.icon]
 
           return (
             <article
@@ -98,6 +78,20 @@ function FeaturedWork() {
                   </dd>
                 </div>
               </dl>
+
+              {caseStudy.details && (
+                <Link
+                  href={`/cases/${caseStudy.slug}`}
+                  aria-label={`Ver case completo: ${caseStudy.title}`}
+                  className="mt-5 inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-orange-300/80 bg-orange-50/80 px-4 py-2.5 text-sm font-semibold text-orange-700 transition-all hover:-translate-y-0.5 hover:border-orange-400 hover:bg-orange-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-400 dark:border-orange-800/70 dark:bg-orange-950/30 dark:text-orange-300 dark:hover:border-orange-600 dark:hover:bg-orange-950/50"
+                >
+                  Ver case completo
+                  <FaArrowRight
+                    aria-hidden="true"
+                    className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5"
+                  />
+                </Link>
+              )}
 
               <div aria-hidden="true" className={`absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r ${caseStudy.iconGradient} opacity-70`} />
             </article>
