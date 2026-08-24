@@ -63,7 +63,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
     <div>
       <nav aria-label="Navegação do case" className="mb-8 flex items-center justify-between gap-4 animate-fade-in">
         <Link
-          href="/#projetos"
+          href="/cases"
           className="group inline-flex min-h-11 items-center gap-2 rounded-lg px-2 text-sm font-medium text-slate-500 transition-colors hover:text-cyan-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 dark:text-slate-400 dark:hover:text-cyan-300"
         >
           <FaArrowLeft
