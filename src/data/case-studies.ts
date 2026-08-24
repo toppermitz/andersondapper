@@ -6,17 +6,31 @@ interface CaseStudyStep {
   description: string
 }
 
+interface CaseStudyCallToAction {
+  title: string
+  description: string
+  label: string
+}
+
+interface CaseStudySectionSubtitles {
+  challenge: string
+  responsibilities: string
+  approach: string
+}
+
 interface CaseStudyDetails {
   intro: string
   seoDescription: string
   confidentialityNote: string
   challenge: string
+  sectionSubtitles: CaseStudySectionSubtitles
   constraints: string[]
   responsibilities: string[]
   approach: CaseStudyStep[]
   validation: string[]
   outcomes: string[]
   tags: string[]
+  callToAction: CaseStudyCallToAction
 }
 
 export interface CaseStudy {
@@ -59,6 +73,11 @@ export const caseStudies: CaseStudy[] = [
         'Este relato preserva nomes, volumes, telas e dados do projeto. O foco está no problema de engenharia, nas decisões tomadas e nos critérios usados para validar a evolução.',
       challenge:
         'O sistema existente concentrava anos de comportamento operacional em telas, validações, consultas e integrações. Uma reescrita total criaria um longo período sem entrega e transformaria regras conhecidas em hipóteses.',
+      sectionSubtitles: {
+        challenge: 'Modernizar sem transformar a operação em laboratório.',
+        responsibilities: 'Do entendimento do legado à comprovação em produção.',
+        approach: 'Uma sequência repetível em vez de uma grande virada.',
+      },
       constraints: [
         'A operação precisava continuar durante toda a transição.',
         'Parte das regras estava implícita no comportamento do sistema legado.',
@@ -110,6 +129,12 @@ export const caseStudies: CaseStudy[] = [
         'Uma base reutilizável para converter novos módulos com o mesmo método.',
       ],
       tags: ['Delphi', 'Web', 'APIs REST', 'Paridade funcional', 'Entrega incremental'],
+      callToAction: {
+        title: 'Precisa evoluir um sistema sem apostar tudo em uma reescrita?',
+        description:
+          'Podemos conversar sobre um caminho incremental, com regras explícitas, entregas verificáveis e risco operacional controlado.',
+        label: 'Conversar sobre modernização',
+      },
     },
   },
   {
@@ -125,6 +150,78 @@ export const caseStudies: CaseStudy[] = [
     icon: 'invoice',
     iconGradient: 'from-cyan-500 to-blue-600',
     accent: 'text-cyan-700 dark:text-cyan-300',
+    details: {
+      intro:
+        'Um recorte de como tornar emissões e integrações fiscais previsíveis quando certificados, schemas, serviços externos e tentativas repetidas fazem parte da mesma operação.',
+      seoDescription:
+        'Case anonimizado de engenharia fiscal com APIs idempotentes, estados explícitos e observabilidade para emissões e integrações rastreáveis.',
+      confidentialityNote:
+        'Este relato não expõe clientes, documentos, volumes ou provedores. Ele descreve os limites técnicos, as decisões de arquitetura e as evidências usadas para validar a operação.',
+      challenge:
+        'Uma emissão fiscal não termina quando a API aceita a requisição. Assinatura, schema, certificado, disponibilidade externa, recibos, rejeições e reenvios precisam formar uma única história operacional — inclusive quando uma resposta se perde no caminho.',
+      sectionSubtitles: {
+        challenge: 'Integrar sem perder a história do que aconteceu.',
+        responsibilities: 'Do contrato de entrada à evidência operacional.',
+        approach: 'Identidade, estado e evidência em uma única sequência.',
+      },
+      constraints: [
+        'Uma repetição após timeout não poderia criar uma segunda operação fiscal.',
+        'Certificados, ambientes e schemas mudavam o comportamento da integração.',
+        'Indisponibilidades externas precisavam ser separadas de rejeições de negócio.',
+        'O suporte precisava reconstruir cada tentativa sem depender de suposições.',
+      ],
+      responsibilities: [
+        'Modelar identidade, estados e transições da operação fiscal de ponta a ponta.',
+        'Definir contratos de API, validação de payload e limites de idempotência.',
+        'Separar falhas transitórias, rejeições fiscais e erros internos recuperáveis.',
+        'Correlacionar requisição, documento, retorno externo e reprocessamento na telemetria.',
+      ],
+      approach: [
+        {
+          eyebrow: '01 · Contrato',
+          title: 'Identificar a operação',
+          description:
+            'Cada emissão ganhava uma identidade estável, regras de entrada explícitas e uma resposta coerente mesmo quando a chamada era repetida.',
+        },
+        {
+          eyebrow: '02 · Estados',
+          title: 'Explicitar a jornada',
+          description:
+            'Processamento, autorização, rejeição e contingência deixavam de ser efeitos colaterais e passavam a formar uma máquina de estados consultável.',
+        },
+        {
+          eyebrow: '03 · Resiliência',
+          title: 'Repetir com segurança',
+          description:
+            'Timeouts e indisponibilidades eram tratados com reconsulta e reprocessamento controlados, sem confundir ausência de resposta com ausência de resultado.',
+        },
+        {
+          eyebrow: '04 · Evidência',
+          title: 'Ligar todos os sinais',
+          description:
+            'Logs estruturados e correlação conectavam API, documento, serviço fiscal e infraestrutura em uma linha do tempo única para diagnóstico.',
+        },
+      ],
+      validation: [
+        'Payloads e documentos validados contra contratos e schemas aplicáveis.',
+        'Requisições repetidas exercitadas para comprovar o mesmo resultado operacional.',
+        'Timeouts, rejeições e indisponibilidades simulados como cenários distintos.',
+        'Rastreabilidade verificada da entrada até o retorno e eventuais reprocessamentos.',
+      ],
+      outcomes: [
+        'Reenvios controlados sem transformar retry em duplicidade fiscal.',
+        'Estados compreensíveis para aplicação, suporte e operação.',
+        'Diagnóstico baseado em uma linha do tempo correlacionada.',
+        'Integrações mais previsíveis mesmo diante de dependências externas.',
+      ],
+      tags: ['NF-e', 'APIs', 'Idempotência', 'Observabilidade', 'Integrações'],
+      callToAction: {
+        title: 'Precisa tornar uma operação fiscal previsível de ponta a ponta?',
+        description:
+          'Podemos conversar sobre contratos explícitos, idempotência e observabilidade para integrações que precisam sobreviver a condições reais.',
+        label: 'Conversar sobre integrações fiscais',
+      },
+    },
   },
   {
     slug: 'entrega-que-chega-a-producao',

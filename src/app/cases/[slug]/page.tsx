@@ -1,10 +1,11 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { FaArrowLeft, FaArrowRight, FaCheckCircle, FaLayerGroup } from 'react-icons/fa'
+import { FaArrowLeft, FaArrowRight, FaCheckCircle } from 'react-icons/fa'
 import SectionHeading from '../../../components/SectionHeading'
 import ThemeToggle from '../../../components/ThemeToggle'
 import { getPublishedCaseStudy, publishedCaseStudies } from '../../../data/case-studies'
+import CaseStudyHero, { caseStudyVisuals } from './CaseStudyHero'
 
 interface CaseStudyPageProps {
   params: Promise<{ slug: string }>
@@ -56,6 +57,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
   }
 
   const { details } = caseStudy
+  const visual = caseStudyVisuals[caseStudy.icon]
 
   return (
     <div>
@@ -73,61 +75,14 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
         <ThemeToggle />
       </nav>
 
-      <header className="relative mb-16 overflow-hidden rounded-3xl border border-slate-200/70 bg-white/55 px-5 py-8 dark:border-slate-700/70 dark:bg-slate-900/45 sm:px-8 sm:py-12 lg:px-12">
-        <div className="relative z-10 grid gap-8 lg:grid-cols-[1fr_0.42fr] lg:items-end">
-          <div className="animate-fade-in-up">
-            <div className="mb-5 flex flex-wrap items-center gap-3">
-              <span className="rounded-full bg-orange-100 px-3 py-1 font-mono text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-orange-700 dark:bg-orange-950/50 dark:text-orange-300">
-                Case anonimizado
-              </span>
-              <span className="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-slate-500 dark:text-slate-400">
-                {caseStudy.context}
-              </span>
-            </div>
-            <h1 className="text-4xl font-black leading-tight tracking-tight text-slate-950 dark:text-white sm:text-5xl lg:text-6xl">
-              {caseStudy.title}
-            </h1>
-            <p className="mt-6 max-w-3xl text-base leading-relaxed text-slate-600 dark:text-slate-300 sm:text-lg">
-              {details.intro}
-            </p>
-
-            <div className="mt-7 flex flex-wrap gap-2">
-              {details.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="rounded-full border border-slate-200/80 bg-white/75 px-3 py-1.5 text-xs font-medium text-slate-700 dark:border-slate-700 dark:bg-slate-900/70 dark:text-slate-200"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          <aside className="rounded-2xl border border-orange-200/70 bg-gradient-to-br from-orange-50/90 to-red-50/70 p-5 dark:border-orange-900/60 dark:from-orange-950/30 dark:to-red-950/20 sm:p-6">
-            <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-red-500 to-orange-500 text-white shadow-lg">
-              <FaLayerGroup aria-hidden="true" className="h-5 w-5" />
-            </div>
-            <p className="mb-2 text-xs font-bold uppercase tracking-[0.14em] text-orange-700 dark:text-orange-300">
-              Resultado em síntese
-            </p>
-            <p className="text-sm font-medium leading-relaxed text-slate-800 dark:text-slate-200">
-              {caseStudy.result}
-            </p>
-          </aside>
-        </div>
-
-        <div
-          aria-hidden="true"
-          className="absolute -right-16 -top-20 h-56 w-56 rounded-full bg-gradient-to-br from-orange-400/15 to-red-500/5 blur-3xl"
-        />
-      </header>
+      <CaseStudyHero caseStudy={caseStudy} />
 
       <section className="mb-16 sm:mb-20" aria-labelledby="challenge-title">
         <SectionHeading
           id="challenge-title"
           eyebrow="Contexto"
           title="O desafio"
-          subtitle="Modernizar sem transformar a operação em laboratório."
+          subtitle={details.sectionSubtitles.challenge}
           className="mb-8"
         />
 
@@ -136,7 +91,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
             <p className="text-base leading-relaxed text-slate-700 dark:text-slate-300 sm:text-lg">
               {details.challenge}
             </p>
-            <p className="mt-6 border-l-2 border-orange-400 pl-4 text-sm leading-relaxed text-slate-500 dark:text-slate-400">
+            <p className={`mt-6 border-l-2 pl-4 text-sm leading-relaxed text-slate-500 dark:text-slate-400 ${visual.noteBorder}`}>
               {details.confidentialityNote}
             </p>
           </div>
@@ -149,7 +104,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
               >
                 <FaCheckCircle
                   aria-hidden="true"
-                  className="mt-0.5 h-4 w-4 shrink-0 text-orange-500"
+                  className={`mt-0.5 h-4 w-4 shrink-0 ${visual.constraintIcon}`}
                 />
                 {constraint}
               </li>
@@ -163,7 +118,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
           id="role-title"
           eyebrow="Responsabilidade"
           title="Minha atuação"
-          subtitle="Do entendimento do legado à comprovação em produção."
+          subtitle={details.sectionSubtitles.responsibilities}
           className="mb-8"
         />
 
@@ -189,7 +144,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
           id="approach-title"
           eyebrow="Estratégia"
           title="A abordagem"
-          subtitle="Uma sequência repetível em vez de uma grande virada."
+          subtitle={details.sectionSubtitles.approach}
           className="mb-8"
         />
 
@@ -279,17 +234,16 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
           id="case-contact-title"
           className="text-2xl font-bold text-slate-950 dark:text-white sm:text-3xl"
         >
-          Precisa evoluir um sistema sem apostar tudo em uma reescrita?
+          {details.callToAction.title}
         </h2>
         <p className="mx-auto mt-3 max-w-2xl text-base leading-relaxed text-slate-600 dark:text-slate-300">
-          Podemos conversar sobre um caminho incremental, com regras explícitas,
-          entregas verificáveis e risco operacional controlado.
+          {details.callToAction.description}
         </p>
         <Link
           href="/#contato"
           className="mt-7 inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 px-7 py-3 font-semibold text-white shadow-lg shadow-cyan-500/20 transition-all hover:-translate-y-0.5 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900"
         >
-          Conversar sobre modernização
+          {details.callToAction.label}
           <FaArrowRight aria-hidden="true" className="h-4 w-4" />
         </Link>
       </section>
