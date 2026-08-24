@@ -1,5 +1,6 @@
 import './globals.css'
 import { Providers } from '../context/ThemeContext'
+import SiteAnalytics from '../components/SiteAnalytics'
 import { Inter } from 'next/font/google'
 
 const inter = Inter({ 
@@ -14,6 +15,45 @@ const siteUrl = 'https://andersondapper.com.br'
 const siteName = 'Anderson Dapper'
 const siteTitle = 'Anderson Dapper | Software legado, APIs e Web'
 const siteDescription = 'Modernização de sistemas críticos, APIs e produtos web com mais de 20 anos de experiência. Do legado à plataforma, sem perder as regras do negócio.'
+const siteStructuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Person',
+      '@id': `${siteUrl}/#person`,
+      name: siteName,
+      url: siteUrl,
+      sameAs: [
+        'https://linkedin.com/in/andersondapper',
+        'https://github.com/toppermitz',
+      ],
+      knowsAbout: [
+        'Modernização de sistemas legados',
+        'APIs',
+        'Produtos web',
+        'Delphi',
+        'TypeScript',
+        'PostgreSQL',
+        'CI/CD',
+      ],
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${siteUrl}/#website`,
+      url: siteUrl,
+      name: siteName,
+      description: siteDescription,
+      inLanguage: 'pt-BR',
+      publisher: {
+        '@id': `${siteUrl}/#person`,
+      },
+    },
+  ],
+}
+const serializedSiteStructuredData = JSON.stringify(siteStructuredData).replace(
+  /</g,
+  '\\u003c',
+)
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -69,6 +109,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="pt-br" className={inter.variable} suppressHydrationWarning>
       <body className="font-sans bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 min-h-screen overflow-x-hidden" suppressHydrationWarning>
+        <script
+          id="site-structured-data"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: serializedSiteStructuredData }}
+        />
         <Providers>
           {/* Background - static gradient, no blur animations */}
           <div className="fixed inset-0 overflow-hidden pointer-events-none">
@@ -86,6 +131,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </main>
           </div>
         </Providers>
+        <SiteAnalytics />
       </body>
     </html>
   )
