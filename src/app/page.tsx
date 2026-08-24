@@ -8,11 +8,14 @@ import Footer from '../components/Footer'
 import SectionHeading from '../components/SectionHeading'
 import {
   FaArrowRight,
+  FaBookOpen,
+  FaClock,
   FaFileInvoice,
   FaLayerGroup,
   FaRocket,
 } from 'react-icons/fa'
 import { caseStudies, type CaseStudyIcon } from '../data/case-studies'
+import { publishedInsights } from '../data/insights'
 
 const caseStudyIcons: Record<CaseStudyIcon, typeof FaLayerGroup> = {
   layers: FaLayerGroup,
@@ -102,11 +105,84 @@ function FeaturedWork() {
   )
 }
 
+function FeaturedInsights() {
+  const insight = publishedInsights[0]
+
+  return (
+    <section className="mb-20" aria-labelledby="insights-title">
+      <SectionHeading
+        id="insights-title"
+        eyebrow="Experiência transformada em princípio"
+        title="Ideias que orientam meu trabalho"
+        subtitle="Textos sobre decisões técnicas que continuam relevantes quando a ferramenta muda."
+        className="mb-8"
+      />
+
+      <article className="group relative overflow-hidden rounded-2xl border border-slate-200/70 bg-white/65 p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:border-slate-700/70 dark:bg-slate-800/65 sm:p-7">
+        <div className="grid gap-7 lg:grid-cols-[0.7fr_1.3fr] lg:items-center">
+          <div className="rounded-2xl border border-purple-200/60 bg-gradient-to-br from-purple-50 to-cyan-50 p-5 dark:border-purple-900/50 dark:from-purple-950/25 dark:to-cyan-950/25">
+            <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-purple-500 to-cyan-500 text-white shadow-lg shadow-purple-500/20">
+              <FaBookOpen aria-hidden="true" className="h-5 w-5" />
+            </div>
+            <p className="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-purple-700 dark:text-purple-300">
+              {insight.category}
+            </p>
+            <div className="mt-4 flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
+              <FaClock aria-hidden="true" className="h-3 w-3" />
+              {insight.readTime}
+            </div>
+          </div>
+
+          <div>
+            <h3 className="text-2xl font-bold leading-tight text-slate-950 dark:text-white sm:text-3xl">
+              {insight.title}
+            </h3>
+            <p className="mt-4 text-base leading-relaxed text-slate-600 dark:text-slate-300">
+              {insight.description}
+            </p>
+            <div className="mt-5 flex flex-wrap gap-2">
+              {insight.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="rounded-full border border-slate-200/80 bg-slate-50/80 px-3 py-1 text-xs font-medium text-slate-600 dark:border-slate-700 dark:bg-slate-900/60 dark:text-slate-300"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+              <Link
+                href={`/insights/${insight.slug}`}
+                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-purple-500 to-blue-600 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-purple-500/20 transition-all hover:-translate-y-0.5 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900"
+              >
+                Ler insight
+                <FaArrowRight aria-hidden="true" className="h-3.5 w-3.5" />
+              </Link>
+              <Link
+                href="/insights"
+                className="inline-flex min-h-11 items-center justify-center rounded-xl border border-slate-300/80 bg-white/60 px-5 py-2.5 text-sm font-semibold text-slate-700 transition-all hover:-translate-y-0.5 hover:border-purple-400 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 dark:border-slate-600 dark:bg-slate-900/40 dark:text-slate-200 dark:hover:border-purple-500 dark:hover:bg-slate-900/70"
+              >
+                Ver todos os textos
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        <div
+          aria-hidden="true"
+          className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-purple-500 via-blue-500 to-cyan-500"
+        />
+      </article>
+    </section>
+  )
+}
+
 export default function HomePage() {
   return (
     <div>
       <Header />
       <FeaturedWork />
+      <FeaturedInsights />
       <About />
       <EasterEggWrapper />
       <Stack />
