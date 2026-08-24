@@ -1,3 +1,5 @@
+import SectionHeading from './SectionHeading'
+
 interface TimelineItemProps {
   icon: string
   color: string
@@ -50,21 +52,13 @@ function Tech({ children }: { children: React.ReactNode }) {
 
 export default function About() {
   return (
-    <section className="mb-16 sm:mb-20">
-      <div className="flex items-center gap-4 mb-7 animate-fade-in sm:mb-10">
-        <div className="relative">
-          <div className="w-2 h-12 bg-gradient-to-b from-cyan-500 via-purple-500 to-blue-500 rounded-full" />
-          <div className="absolute inset-0 w-2 h-12 bg-gradient-to-b from-cyan-500 via-purple-500 to-blue-500 rounded-full blur-sm opacity-50" />
-        </div>
-        <div>
-          <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-slate-100">
-            Sobre mim
-          </h2>
-          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
-            +20 anos construindo soluções
-          </p>
-        </div>
-      </div>
+    <section className="mb-16 sm:mb-20" aria-labelledby="about-title">
+      <SectionHeading
+        id="about-title"
+        title="Sobre mim"
+        subtitle="+20 anos construindo soluções"
+        className="mb-7 sm:mb-10"
+      />
 
       <div className="relative sm:ml-6">
         <TimelineItem 
