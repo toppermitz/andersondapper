@@ -12,16 +12,17 @@ import type { Metadata } from 'next'
 
 const siteUrl = 'https://andersondapper.com.br'
 const siteName = 'Anderson Dapper'
-const siteDescription = '+20 anos de experiência em software. Especialista em Node.js, Next.js, NestJS e Golang. Do banco de dados à interface.'
+const siteTitle = 'Anderson Dapper | Software legado, APIs e Web'
+const siteDescription = 'Modernização de sistemas críticos, APIs e produtos web com mais de 20 anos de experiência. Do legado à plataforma, sem perder as regras do negócio.'
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: 'Anderson Dapper - Full Stack - Desktop, Mobile e Web',
+    default: siteTitle,
     template: '%s | Anderson Dapper'
   },
   description: siteDescription,
-  keywords: ['Anderson Dapper', 'Desenvolvedor Full Stack', 'Node.js', 'Next.js', 'NestJS', 'TypeScript', 'Golang', 'Delphi', 'Backend', 'Frontend', 'Brasil'],
+  keywords: ['Anderson Dapper', 'Modernização de sistemas legados', 'Desenvolvedor Full Stack', 'APIs REST', 'Node.js', 'Next.js', 'NestJS', 'TypeScript', 'Golang', 'Delphi', 'PostgreSQL', 'Brasil'],
   authors: [{ name: 'Anderson Dapper', url: siteUrl }],
   creator: 'Anderson Dapper',
   publisher: 'Anderson Dapper',
@@ -41,26 +42,23 @@ export const metadata: Metadata = {
     locale: 'pt_BR',
     url: siteUrl,
     siteName: siteName,
-    title: 'Anderson Dapper - Full Stack - Desktop, Mobile e Web',
+    title: siteTitle,
     description: siteDescription,
     images: [
       {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'Anderson Dapper - Desenvolvedor Full Stack',
+        alt: 'Anderson Dapper - Software legado, APIs e Web',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Anderson Dapper - Full Stack - Desktop, Mobile e Web',
+    title: siteTitle,
     description: siteDescription,
     images: ['/og-image.png'],
     creator: '@toppermitz',
-  },
-  verification: {
-    google: 'adicione-seu-codigo-aqui',
   },
   alternates: {
     canonical: siteUrl,

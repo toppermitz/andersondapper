@@ -1,15 +1,19 @@
 'use client'
 import { useTheme } from 'next-themes'
-import { useState, useEffect } from 'react'
+import { useSyncExternalStore } from 'react'
 import { FiSun, FiMoon } from "react-icons/fi"
+
+const subscribe = () => () => undefined
+const getClientSnapshot = () => true
+const getServerSnapshot = () => false
 
 export default function ThemeToggle() {
   const { setTheme, resolvedTheme } = useTheme()
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
+  const mounted = useSyncExternalStore(
+    subscribe,
+    getClientSnapshot,
+    getServerSnapshot,
+  )
 
   // Prevent hydration mismatch
   if (!mounted) {
