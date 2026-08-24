@@ -236,6 +236,78 @@ export const caseStudies: CaseStudy[] = [
     icon: 'rocket',
     iconGradient: 'from-purple-500 to-violet-600',
     accent: 'text-purple-700 dark:text-purple-300',
+    details: {
+      intro:
+        'Um recorte de como transformar código aprovado em uma release previsível, conectando artefato, configuração, banco de dados, deploy e sinais de saúde à mesma versão.',
+      seoDescription:
+        'Case anonimizado de entrega contínua com containers, pipelines, deploy rastreável e observabilidade para releases reproduzíveis.',
+      confidentialityNote:
+        'Este relato preserva nomes de serviços, ambientes e detalhes de infraestrutura. O foco está no desenho da entrega, nas decisões operacionais e nas provas usadas para confirmar cada release.',
+      challenge:
+        'Um pipeline verde comprova que etapas terminaram, mas não que a versão correta está atendendo usuários. Entre o commit e a produção existem artefatos, configurações, migrações, dependências e mecanismos de deploy que também precisam ser tratados como parte do produto.',
+      sectionSubtitles: {
+        challenge: 'Fechar a distância entre commit e operação.',
+        responsibilities: 'Da definição do pipeline à prova da versão ativa.',
+        approach: 'Evidência em cada transição da cadeia de entrega.',
+      },
+      constraints: [
+        'Frontend, APIs, bancos e serviços precisavam evoluir sem um deploy indivisível.',
+        'Diferenças de configuração entre ambientes não poderiam invalidar o build aprovado.',
+        'Cada publicação precisava indicar artefato, revisão e caminho de recuperação.',
+        'Job concluído, serviço iniciado e operação saudável eram provas diferentes.',
+      ],
+      responsibilities: [
+        'Mapear estágios, dependências, artefatos e critérios de promoção da release.',
+        'Padronizar containers e separar configuração de ambiente do código construído.',
+        'Coordenar mudanças de aplicação e banco com compatibilidade durante o deploy.',
+        'Conectar pipeline, plataforma e telemetria à revisão efetivamente publicada.',
+      ],
+      approach: [
+        {
+          eyebrow: '01 · Artefato',
+          title: 'Construir uma vez',
+          description:
+            'A mesma saída versionada avançava pelos ambientes, evitando recompilações que pudessem mudar silenciosamente o conteúdo aprovado.',
+        },
+        {
+          eyebrow: '02 · Critérios',
+          title: 'Separar as provas',
+          description:
+            'Qualidade do código, geração do artefato, publicação e saúde em execução tinham verificações próprias e resultados identificáveis.',
+        },
+        {
+          eyebrow: '03 · Rollout',
+          title: 'Implantar com contrato',
+          description:
+            'Configuração, dependências, mudanças de dados e ordem de atualização eram tratadas como entradas explícitas do deploy, não como conhecimento informal.',
+        },
+        {
+          eyebrow: '04 · Runtime',
+          title: 'Provar a versão ativa',
+          description:
+            'Revisão publicada, endpoints de saúde, logs e telemetria confirmavam separadamente que a entrega chegou e permaneceu operacional.',
+        },
+      ],
+      validation: [
+        'O mesmo artefato versionado promovido entre os ambientes previstos.',
+        'Falhas de qualidade, build e publicação verificadas em estágios distintos.',
+        'Revisão ativa, configuração, mudanças de dados e saúde conferidas após o deploy.',
+        'Reexecução e recuperação exercitadas sem depender de passos não documentados.',
+      ],
+      outcomes: [
+        'Releases reproduzíveis, identificáveis e mais simples de promover.',
+        'Menos divergência causada por configuração ou recompilação entre ambientes.',
+        'Falhas localizadas na etapa que realmente precisa de intervenção.',
+        'Diagnóstico operacional ligado à revisão publicada, e não a suposições.',
+      ],
+      tags: ['CI/CD', 'Containers', 'Deploy', 'Observabilidade', 'Plataforma'],
+      callToAction: {
+        title: 'Precisa que a entrega continue previsível depois do merge?',
+        description:
+          'Podemos conversar sobre uma cadeia de entrega reproduzível, com critérios claros de promoção e evidência da versão realmente ativa.',
+        label: 'Conversar sobre entrega e plataforma',
+      },
+    },
   },
 ]
 
