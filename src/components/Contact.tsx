@@ -105,7 +105,7 @@ export default function Contact() {
   ]
 
   return (
-    <section className="mb-20" aria-labelledby="contact-title">
+    <section id="contato" className="mb-20 scroll-mt-6" aria-labelledby="contact-title">
       <SectionHeading
         id="contact-title"
         title="Vamos conversar?"
