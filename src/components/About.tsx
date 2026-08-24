@@ -1,3 +1,5 @@
+import Link from 'next/link'
+import { FaArrowRight } from 'react-icons/fa'
 import SectionHeading from './SectionHeading'
 
 interface TimelineItemProps {
@@ -52,7 +54,7 @@ function Tech({ children }: { children: React.ReactNode }) {
 
 export default function About() {
   return (
-    <section className="mb-16 sm:mb-20" aria-labelledby="about-title">
+    <section id="sobre" className="mb-16 scroll-mt-6 sm:mb-20" aria-labelledby="about-title">
       <SectionHeading
         id="about-title"
         title="Sobre mim"
@@ -96,6 +98,19 @@ export default function About() {
         >
           <Highlight>Foco em resultados</Highlight> e comprometimento com a qualidade. Experiência tanto em manutenção de sistemas legados quanto em arquitetura de novas soluções. Interesse genuíno por tecnologia, complementado por hobbies em games e automobilismo.
         </TimelineItem>
+      </div>
+
+      <div className="flex justify-start sm:ml-[4.5rem]">
+        <Link
+          href="/about"
+          className="group inline-flex min-h-11 items-center gap-2 rounded-lg px-2 font-semibold text-cyan-700 transition-colors hover:text-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 dark:text-cyan-300 dark:hover:text-blue-300"
+        >
+          Conheça minha trajetória completa
+          <FaArrowRight
+            aria-hidden="true"
+            className="h-4 w-4 transition-transform group-hover:translate-x-1"
+          />
+        </Link>
       </div>
     </section>
   )

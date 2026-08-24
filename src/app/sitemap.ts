@@ -1,12 +1,20 @@
 import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  const lastModified = new Date()
+
   return [
     {
       url: 'https://andersondapper.com.br',
-      lastModified: new Date(),
+      lastModified,
       changeFrequency: 'monthly',
       priority: 1,
+    },
+    {
+      url: 'https://andersondapper.com.br/about',
+      lastModified,
+      changeFrequency: 'monthly',
+      priority: 0.8,
     },
   ]
 }
