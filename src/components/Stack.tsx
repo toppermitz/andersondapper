@@ -23,6 +23,7 @@ import {
   SiDelphi
 } from 'react-icons/si'
 import { FaAws, FaServer, FaCloud } from 'react-icons/fa'
+import SectionHeading from './SectionHeading'
 
 interface StackItem {
   name: string
@@ -60,22 +61,12 @@ export default function Stack() {
   ]
 
   return (
-    <section className="mb-20">
-      {/* Section header */}
-      <div className="flex items-center gap-4 mb-10 animate-fade-in">
-        <div className="relative">
-          <div className="w-2 h-12 bg-gradient-to-b from-cyan-500 via-purple-500 to-blue-500 rounded-full" />
-          <div className="absolute inset-0 w-2 h-12 bg-gradient-to-b from-cyan-500 via-purple-500 to-blue-500 rounded-full blur-sm opacity-50" />
-        </div>
-        <div>
-          <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-slate-100">
-            Stack & Ferramentas
-          </h2>
-          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
-            Tecnologias que uso no dia a dia
-          </p>
-        </div>
-      </div>
+    <section className="mb-20" aria-labelledby="stack-title">
+      <SectionHeading
+        id="stack-title"
+        title="Stack & Ferramentas"
+        subtitle="Tecnologias que uso no dia a dia"
+      />
 
       {/* Stack Grid */}
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">

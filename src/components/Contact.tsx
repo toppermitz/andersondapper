@@ -1,5 +1,7 @@
 'use client'
 
+import SectionHeading from './SectionHeading'
+
 interface SocialLinkProps {
   name: string
   url: string
@@ -103,22 +105,12 @@ export default function Contact() {
   ]
 
   return (
-    <section className="mb-20">
-      {/* Section header */}
-      <div className="flex items-center gap-4 mb-10 animate-fade-in">
-        <div className="relative">
-          <div className="w-2 h-12 bg-gradient-to-b from-cyan-500 via-purple-500 to-blue-500 rounded-full" />
-          <div className="absolute inset-0 w-2 h-12 bg-gradient-to-b from-cyan-500 via-purple-500 to-blue-500 rounded-full blur-sm opacity-50" />
-        </div>
-        <div>
-          <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-slate-100">
-            Vamos conversar?
-          </h2>
-          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
-            Sempre aberto a novas oportunidades
-          </p>
-        </div>
-      </div>
+    <section className="mb-20" aria-labelledby="contact-title">
+      <SectionHeading
+        id="contact-title"
+        title="Vamos conversar?"
+        subtitle="Sempre aberto a novas oportunidades"
+      />
 
       {/* Intro text */}
       <div className="mb-8 p-6 rounded-2xl bg-gradient-to-br from-cyan-50 to-purple-50 dark:from-cyan-950/30 dark:to-purple-950/30 border border-cyan-200/50 dark:border-cyan-800/30 animate-fade-in-up delay-100">

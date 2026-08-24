@@ -4,6 +4,7 @@ import EasterEggWrapper from '../components/EasterEggWrapper'
 import Stack from '../components/Stack'
 import Contact from '../components/Contact'
 import Footer from '../components/Footer'
+import SectionHeading from '../components/SectionHeading'
 import { FaFileInvoice, FaLayerGroup, FaRocket } from 'react-icons/fa'
 
 const caseStudies = [
@@ -42,20 +43,12 @@ const caseStudies = [
 function FeaturedWork() {
   return (
     <section id="projetos" className="mb-20 scroll-mt-6" aria-labelledby="projetos-title">
-      <div className="mb-8 flex items-center gap-4 animate-fade-in sm:mb-10">
-        <div className="relative">
-          <div className="h-12 w-2 rounded-full bg-gradient-to-b from-cyan-500 via-purple-500 to-blue-500" />
-          <div className="absolute inset-0 h-12 w-2 rounded-full bg-gradient-to-b from-cyan-500 via-purple-500 to-blue-500 opacity-50 blur-sm" />
-        </div>
-        <div>
-          <p className="mb-1 font-mono text-xs font-semibold uppercase tracking-[0.18em] text-cyan-700 dark:text-cyan-300">
-            Problema → engenharia → resultado
-          </p>
-          <h2 id="projetos-title" className="text-3xl font-bold text-slate-900 dark:text-slate-100 sm:text-4xl">
-            Trabalho em contexto real
-          </h2>
-        </div>
-      </div>
+      <SectionHeading
+        id="projetos-title"
+        eyebrow="Problema → engenharia → resultado"
+        title="Trabalho em contexto real"
+        className="mb-8 sm:mb-10"
+      />
 
       <p className="mb-7 max-w-3xl text-base leading-relaxed text-slate-600 dark:text-slate-400 sm:text-lg">
         Alguns projetos são privados. Estes recortes mostram problema, atuação e impacto
