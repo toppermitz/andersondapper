@@ -11,8 +11,7 @@ import {
   SiTailwindcss, 
   SiGit, 
   SiGithub, 
-  SiGitlab, 
-  SiAmazon,
+  SiGitlab,
   SiGo,
   SiTerraform,
   SiLinux,
@@ -23,7 +22,7 @@ import {
   SiTraefikproxy,
   SiDelphi
 } from 'react-icons/si'
-import { FaServer, FaCloud } from 'react-icons/fa'
+import { FaAws, FaServer, FaCloud } from 'react-icons/fa'
 
 interface StackItem {
   name: string
@@ -49,7 +48,7 @@ export default function Stack() {
     { name: 'GitHub', icon: SiGithub, gradient: 'from-slate-700 to-slate-900 dark:from-slate-300 dark:to-slate-500', shadow: 'group-hover:shadow-slate-500/30' },
     { name: 'GitLab', icon: SiGitlab, gradient: 'from-orange-600 to-red-600', shadow: 'group-hover:shadow-orange-500/30' },
     { name: 'Delphi', icon: SiDelphi, gradient: 'from-red-500 to-red-700', shadow: 'group-hover:shadow-red-500/30' },
-    { name: 'AWS', icon: SiAmazon, gradient: 'from-amber-500 to-orange-600', shadow: 'group-hover:shadow-amber-500/30' },
+    { name: 'AWS', icon: FaAws, gradient: 'from-amber-500 to-orange-600', shadow: 'group-hover:shadow-amber-500/30' },
     { name: 'Golang', icon: SiGo, gradient: 'from-cyan-500 to-cyan-700', shadow: 'group-hover:shadow-cyan-500/30' },
     { name: 'Terraform', icon: SiTerraform, gradient: 'from-purple-500 to-violet-600', shadow: 'group-hover:shadow-purple-500/30' },
     { name: 'Linux', icon: SiLinux, gradient: 'from-amber-500 to-yellow-600', shadow: 'group-hover:shadow-amber-500/30' },

@@ -1,6 +1,5 @@
 'use client'
 
-import { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 
 interface GlitchOverlayProps {
@@ -8,13 +7,7 @@ interface GlitchOverlayProps {
 }
 
 export default function GlitchOverlay({ isActive }: GlitchOverlayProps) {
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  if (!isActive || !mounted) return null
+  if (!isActive || typeof document === 'undefined') return null
 
   const overlay = (
     <>

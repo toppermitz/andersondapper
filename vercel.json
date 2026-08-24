@@ -2,7 +2,19 @@
   "redirects": [
     {
       "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.andersondapper.com.br" }],
+      "destination": "https://andersondapper.com.br/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
       "has": [{ "type": "host", "value": "andersondapper.dev" }],
+      "destination": "https://andersondapper.com.br/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.andersondapper.dev" }],
       "destination": "https://andersondapper.com.br/:path*",
       "permanent": true
     }

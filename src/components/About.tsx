@@ -1,5 +1,3 @@
-'use client'
-
 interface TimelineItemProps {
   icon: string
   color: string
@@ -10,21 +8,21 @@ interface TimelineItemProps {
 
 function TimelineItem({ icon, color, glowColor, children, delay }: TimelineItemProps) {
   return (
-    <div className={`group relative flex gap-6 animate-fade-in-up ${delay}`}>
-      {/* Timeline connector */}
-      <div className="flex flex-col items-center">
+    <div className={`group relative flex gap-0 animate-fade-in-up sm:gap-6 ${delay}`}>
+      <div className="hidden flex-col items-center sm:flex">
         <div className={`relative flex items-center justify-center w-12 h-12 rounded-2xl ${color} shadow-lg group-hover:scale-110 transition-all duration-300`}>
-          <span className="text-xl">{icon}</span>
-          {/* Glow effect */}
+          <span aria-hidden="true" className="text-xl">{icon}</span>
           <div className={`absolute inset-0 rounded-2xl ${glowColor} opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-300`} />
         </div>
-        {/* Connector line */}
         <div className="w-0.5 h-full bg-gradient-to-b from-slate-300 to-transparent dark:from-slate-700 mt-4" />
       </div>
-      
-      {/* Content card */}
-      <div className="flex-1 pb-10">
+
+      <div className="min-w-0 flex-1 pb-5 sm:pb-10">
         <div className="glass-card rounded-2xl p-5 sm:p-6 group-hover:shadow-xl transition-all duration-300 border border-slate-200/50 dark:border-slate-700/50">
+          <div className={`relative mb-4 flex h-10 w-10 items-center justify-center rounded-xl shadow-md sm:hidden ${color}`}>
+            <span aria-hidden="true" className="text-lg">{icon}</span>
+            <div className={`absolute inset-0 rounded-xl ${glowColor} opacity-20 blur-lg`} />
+          </div>
           <div className="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300">
             {children}
           </div>
@@ -52,9 +50,8 @@ function Tech({ children }: { children: React.ReactNode }) {
 
 export default function About() {
   return (
-    <section className="mb-20">
-      {/* Section header */}
-      <div className="flex items-center gap-4 mb-10 animate-fade-in">
+    <section className="mb-16 sm:mb-20">
+      <div className="flex items-center gap-4 mb-7 animate-fade-in sm:mb-10">
         <div className="relative">
           <div className="w-2 h-12 bg-gradient-to-b from-cyan-500 via-purple-500 to-blue-500 rounded-full" />
           <div className="absolute inset-0 w-2 h-12 bg-gradient-to-b from-cyan-500 via-purple-500 to-blue-500 rounded-full blur-sm opacity-50" />
@@ -69,8 +66,7 @@ export default function About() {
         </div>
       </div>
 
-      {/* Timeline */}
-      <div className="relative ml-2 sm:ml-6">
+      <div className="relative sm:ml-6">
         <TimelineItem 
           icon="🚀" 
           color="bg-gradient-to-br from-blue-500 to-cyan-500" 
