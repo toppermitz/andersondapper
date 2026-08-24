@@ -1,4 +1,6 @@
 import Image from 'next/image'
+import Link from 'next/link'
+import { FaArrowRight } from 'react-icons/fa'
 import ThemeToggle from './ThemeToggle'
 
 export default function Header() {
@@ -45,15 +47,13 @@ export default function Header() {
           </p>
 
           <div className="mt-7 flex w-full flex-col justify-center gap-3 sm:w-auto sm:flex-row">
-            <a
-              href="#projetos"
+            <Link
+              href="/cases"
               className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 px-6 py-3 font-semibold text-white shadow-lg shadow-cyan-500/20 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-cyan-500/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900"
             >
               Ver cases
-              <svg aria-hidden="true" className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-              </svg>
-            </a>
+              <FaArrowRight aria-hidden="true" className="h-4 w-4" />
+            </Link>
             <a
               href="mailto:eu@andersondapper.com.br"
               className="inline-flex min-h-12 items-center justify-center rounded-xl border border-slate-300/80 bg-white/60 px-6 py-3 font-semibold text-slate-800 transition-all duration-300 hover:-translate-y-0.5 hover:border-purple-400 hover:bg-white dark:border-slate-600 dark:bg-slate-800/60 dark:text-slate-100 dark:hover:border-purple-400 dark:hover:bg-slate-800"
