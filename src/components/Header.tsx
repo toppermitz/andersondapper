@@ -11,20 +11,12 @@ export default function Header() {
 
       <div className="relative z-10 flex flex-col items-center px-1 pb-4 pt-2 text-center sm:px-8 sm:pb-8">
         <div className="flex max-w-4xl flex-col items-center animate-fade-in-up">
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-cyan-400/25 bg-cyan-500/10 px-3 py-1.5 font-mono text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-cyan-700 dark:text-cyan-300 sm:text-xs">
-            <span>Delphi</span>
-            <span aria-hidden="true" className="text-purple-500">→</span>
-            <span>APIs</span>
-            <span aria-hidden="true" className="text-purple-500">→</span>
-            <span>Web</span>
-          </div>
-
-          <p className="gradient-text-animated text-lg font-bold tracking-tight sm:text-xl">
+          <h1 className="gradient-text-animated text-[clamp(2.25rem,10vw,4.5rem)] font-black leading-[0.98] tracking-[-0.045em]">
             Anderson Dapper
-          </p>
-          <h1 className="mt-3 max-w-4xl text-4xl font-black leading-[1.04] tracking-[-0.035em] text-slate-950 dark:text-white sm:text-5xl lg:text-6xl">
-            Engenharia de software que atravessa décadas.
           </h1>
+          <p className="mt-5 max-w-3xl text-2xl font-bold leading-tight tracking-[-0.025em] text-slate-900 dark:text-slate-100 sm:text-3xl lg:text-4xl">
+            Engenharia de software que atravessa décadas.
+          </p>
 
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-slate-600 dark:text-slate-300 sm:text-lg">
             Modernizo sistemas críticos e construo APIs, produtos web e infraestrutura

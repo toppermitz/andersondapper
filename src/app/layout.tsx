@@ -1,7 +1,6 @@
 import './globals.css'
 import { Providers } from '../context/ThemeContext'
 import SiteAnalytics from '../components/SiteAnalytics'
-import SiteNav from '../components/SiteNav'
 import { Inter } from 'next/font/google'
 
 const inter = Inter({ 
@@ -135,7 +134,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </div>
 
           <div className="relative min-h-screen">
-            <SiteNav />
             <main
               id="conteudo-principal"
               tabIndex={-1}
