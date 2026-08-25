@@ -1,55 +1,76 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 
 const SECRET_COMMAND = 'sudo su'
+const FEEDBACK_DURATION_MS = 450
 
 export function useEasterEgg() {
   const [isUnlocked, setIsUnlocked] = useState(false)
   const [isGlitching, setIsGlitching] = useState(false)
-  const [, setTypedKeys] = useState('')
+  const typedKeys = useRef('')
+  const unlockTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  const finishUnlock = useCallback(() => {
+    if (unlockTimer.current) {
+      clearTimeout(unlockTimer.current)
+      unlockTimer.current = null
+    }
+
+    setIsGlitching(false)
+    setIsUnlocked(true)
+  }, [])
 
   const triggerGlitch = useCallback(() => {
     setIsGlitching(true)
+    unlockTimer.current = setTimeout(finishUnlock, FEEDBACK_DURATION_MS)
+  }, [finishUnlock])
 
-    // Glitch dura 1.5 segundos, depois revela
-    setTimeout(() => {
-      setIsGlitching(false)
-      setIsUnlocked(true)
-    }, 1500)
+  useEffect(() => {
+    return () => {
+      if (unlockTimer.current) clearTimeout(unlockTimer.current)
+    }
   }, [])
 
   useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      // Ignora se já desbloqueou ou tá glitchando
-      if (isUnlocked || isGlitching) return
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (isUnlocked) return
 
-      // Ignora se tá digitando em input/textarea
-      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) {
+      if (isGlitching) {
+        if (event.key === 'Escape') {
+          event.preventDefault()
+          finishUnlock()
+        }
         return
       }
 
-      const key = e.key.toLowerCase()
+      if (event.metaKey || event.ctrlKey || event.altKey || event.repeat) return
 
-      // Só aceita letras e espaço
-      if (key.length === 1 || key === ' ') {
-        setTypedKeys(prev => {
-          const newTyped = (prev + key).slice(-SECRET_COMMAND.length)
+      const target = event.target
+      if (
+        target instanceof HTMLInputElement ||
+        target instanceof HTMLTextAreaElement ||
+        target instanceof HTMLSelectElement ||
+        (target instanceof HTMLElement &&
+          (target.isContentEditable || Boolean(target.closest('[contenteditable="true"]'))))
+      ) {
+        return
+      }
 
-          // Checa se bateu o comando
-          if (newTyped === SECRET_COMMAND) {
-            triggerGlitch()
-            return ''
-          }
+      const key = event.key.toLowerCase()
+      if (key.length !== 1) return
 
-          return newTyped
-        })
+      typedKeys.current = (typedKeys.current + key).slice(-SECRET_COMMAND.length)
+
+      if (typedKeys.current === SECRET_COMMAND) {
+        typedKeys.current = ''
+        triggerGlitch()
       }
     }
 
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [isUnlocked, isGlitching, triggerGlitch])
+  }, [finishUnlock, isGlitching, isUnlocked, triggerGlitch])
 
   return { isUnlocked, isGlitching }
 }

@@ -45,11 +45,11 @@ export default function CasesPage() {
       >
         <Link
           href="/"
-          className="group inline-flex min-h-11 items-center gap-2 rounded-lg px-2 text-sm font-medium text-slate-500 transition-colors hover:text-cyan-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 dark:text-slate-400 dark:hover:text-cyan-300"
+          className="pressable inline-flex min-h-11 items-center gap-2 rounded-lg px-2 text-sm font-medium text-slate-500 hover:text-cyan-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 dark:text-slate-400 dark:hover:text-cyan-300"
         >
           <FaArrowLeft
             aria-hidden="true"
-            className="h-3.5 w-3.5 transition-transform group-hover:-translate-x-1"
+            className="h-3.5 w-3.5"
           />
           Voltar para a página inicial
         </Link>
@@ -105,7 +105,7 @@ export default function CasesPage() {
           {publishedCaseStudies.map((caseStudy, index) => (
             <article
               key={caseStudy.slug}
-              className="group relative overflow-hidden rounded-2xl border border-slate-200/70 bg-white/60 p-5 shadow-sm transition-all hover:-translate-y-1 hover:shadow-xl dark:border-slate-700/70 dark:bg-slate-800/60 sm:p-7"
+              className="relative overflow-hidden rounded-2xl border border-slate-200/70 bg-white/60 p-5 shadow-sm dark:border-slate-700/70 dark:bg-slate-800/60 sm:p-7"
             >
               <div className="grid gap-7 lg:grid-cols-[0.82fr_1.18fr] lg:items-center">
                 <div>
@@ -160,12 +160,12 @@ export default function CasesPage() {
                   </div>
                   <Link
                     href={`/cases/${caseStudy.slug}`}
-                    className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-cyan-300/80 bg-cyan-50/80 px-4 py-2.5 text-sm font-semibold text-cyan-800 transition-all hover:-translate-y-0.5 hover:border-cyan-400 hover:bg-cyan-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 dark:border-cyan-800/70 dark:bg-cyan-950/30 dark:text-cyan-300 dark:hover:border-cyan-600 dark:hover:bg-cyan-950/50"
+                    className="pressable pressable-lift group inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-cyan-300/80 bg-cyan-50/80 px-4 py-2.5 text-sm font-semibold text-cyan-800 hover:border-cyan-400 hover:bg-cyan-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 dark:border-cyan-800/70 dark:bg-cyan-950/30 dark:text-cyan-300 dark:hover:border-cyan-600 dark:hover:bg-cyan-950/50"
                   >
                     Explorar case
                     <FaArrowRight
                       aria-hidden="true"
-                      className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5"
+                      className="interactive-arrow h-3.5 w-3.5"
                     />
                   </Link>
                 </div>
@@ -196,10 +196,10 @@ export default function CasesPage() {
         </p>
         <Link
           href="/#contato"
-          className="mt-7 inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 px-7 py-3 font-semibold text-white shadow-lg shadow-cyan-500/20 transition-all hover:-translate-y-0.5 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900"
+          className="pressable pressable-lift group mt-7 inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 px-7 py-3 font-semibold text-white shadow-lg shadow-cyan-500/20 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900"
         >
           Conversar sobre o desafio
-          <FaArrowRight aria-hidden="true" className="h-4 w-4" />
+          <FaArrowRight aria-hidden="true" className="interactive-arrow h-4 w-4" />
         </Link>
       </section>
     </div>

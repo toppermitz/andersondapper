@@ -48,11 +48,11 @@ export default function AboutPage() {
       >
         <Link
           href="/"
-          className="group inline-flex min-h-11 items-center gap-2 rounded-lg px-2 text-sm font-medium text-slate-500 transition-colors hover:text-cyan-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 dark:text-slate-400 dark:hover:text-cyan-300"
+          className="pressable inline-flex min-h-11 items-center gap-2 rounded-lg px-2 text-sm font-medium text-slate-500 hover:text-cyan-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 dark:text-slate-400 dark:hover:text-cyan-300"
         >
           <FaArrowLeft
             aria-hidden="true"
-            className="h-3.5 w-3.5 transition-transform group-hover:-translate-x-1"
+            className="h-3.5 w-3.5"
           />
           Voltar para a página inicial
         </Link>
@@ -76,14 +76,14 @@ export default function AboutPage() {
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Link
               href="/cases"
-              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 px-6 py-3 font-semibold text-white shadow-lg shadow-cyan-500/20 transition-all hover:-translate-y-0.5 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900"
+              className="pressable pressable-lift group inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 px-6 py-3 font-semibold text-white shadow-lg shadow-cyan-500/20 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900"
             >
               Ver cases
-              <FaArrowRight aria-hidden="true" className="h-4 w-4" />
+              <FaArrowRight aria-hidden="true" className="interactive-arrow h-4 w-4" />
             </Link>
             <Link
               href="/#contato"
-              className="inline-flex min-h-12 items-center justify-center rounded-xl border border-slate-300/80 bg-white/70 px-6 py-3 font-semibold text-slate-800 transition-all hover:-translate-y-0.5 hover:border-purple-400 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 dark:border-slate-600 dark:bg-slate-800/70 dark:text-slate-100 dark:hover:border-purple-400"
+              className="pressable pressable-lift inline-flex min-h-12 items-center justify-center rounded-xl border border-slate-300/80 bg-white/70 px-6 py-3 font-semibold text-slate-800 hover:border-purple-400 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 dark:border-slate-600 dark:bg-slate-800/70 dark:text-slate-100 dark:hover:border-purple-400"
             >
               Entrar em contato
             </Link>
@@ -116,7 +116,7 @@ export default function AboutPage() {
             return (
               <li
                 key={stage.title}
-                className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200/70 bg-white/65 p-5 shadow-sm transition-all hover:-translate-y-1 hover:shadow-xl dark:border-slate-700/70 dark:bg-slate-800/65 sm:p-6"
+                className="relative flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200/70 bg-white/65 p-5 shadow-sm dark:border-slate-700/70 dark:bg-slate-800/65 sm:p-6"
               >
                 <div className="mb-5 flex items-center justify-between gap-4">
                   <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-slate-100 shadow-sm dark:bg-slate-900/80">
@@ -263,10 +263,10 @@ export default function AboutPage() {
           </p>
           <Link
             href="/#contato"
-            className="mt-7 inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 px-7 py-3 font-semibold text-white shadow-lg shadow-cyan-500/20 transition-all hover:-translate-y-0.5 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900"
+            className="pressable pressable-lift group mt-7 inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 px-7 py-3 font-semibold text-white shadow-lg shadow-cyan-500/20 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900"
           >
             Vamos conversar
-            <FaArrowRight aria-hidden="true" className="h-4 w-4" />
+            <FaArrowRight aria-hidden="true" className="interactive-arrow h-4 w-4" />
           </Link>
         </div>
       </section>

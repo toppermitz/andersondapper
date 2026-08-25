@@ -119,11 +119,11 @@ export default async function InsightPage({ params }: InsightPageProps) {
       >
         <Link
           href="/insights"
-          className="group inline-flex min-h-11 items-center gap-2 rounded-lg px-2 text-sm font-medium text-slate-500 transition-colors hover:text-purple-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 dark:text-slate-400 dark:hover:text-purple-300"
+          className="pressable inline-flex min-h-11 items-center gap-2 rounded-lg px-2 text-sm font-medium text-slate-500 hover:text-purple-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 dark:text-slate-400 dark:hover:text-purple-300"
         >
           <FaArrowLeft
             aria-hidden="true"
-            className="h-3.5 w-3.5 transition-transform group-hover:-translate-x-1"
+            className="h-3.5 w-3.5"
           />
           Voltar aos insights
         </Link>
@@ -283,10 +283,10 @@ export default async function InsightPage({ params }: InsightPageProps) {
             </p>
             <Link
               href={`/cases/${insight.relatedCase.slug}`}
-              className="mt-6 inline-flex min-h-11 items-center gap-2 rounded-xl bg-gradient-to-r from-purple-500 to-blue-600 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-purple-500/20 transition-all hover:-translate-y-0.5 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900"
+              className="pressable pressable-lift group mt-6 inline-flex min-h-11 items-center gap-2 rounded-xl bg-gradient-to-r from-purple-500 to-blue-600 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-purple-500/20 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900"
             >
               Explorar o case relacionado
-              <FaArrowRight aria-hidden="true" className="h-3.5 w-3.5" />
+              <FaArrowRight aria-hidden="true" className="interactive-arrow h-3.5 w-3.5" />
             </Link>
           </aside>
         </div>

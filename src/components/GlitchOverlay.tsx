@@ -9,108 +9,31 @@ interface GlitchOverlayProps {
 export default function GlitchOverlay({ isActive }: GlitchOverlayProps) {
   if (!isActive || typeof document === 'undefined') return null
 
-  const overlay = (
-    <>
-      {/* Overlay escuro */}
-      <div
-        className="bg-black/90 animate-pulse"
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          zIndex: 99999
-        }}
-      />
-
-      {/* Efeito de scanlines */}
-      <div
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          zIndex: 99999,
-          pointerEvents: 'none',
-          opacity: 0.3,
-          backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 255, 0, 0.1) 2px, rgba(0, 255, 0, 0.1) 4px)',
-          animation: 'scanlines 0.1s linear infinite'
-        }}
-      />
-
-      {/* Texto glitchado */}
-      <div
-        className="flex items-center justify-center"
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          zIndex: 99999
-        }}
-      >
-        <div className="text-center">
-          <p
-            className="text-green-500 font-mono text-2xl sm:text-4xl font-bold mb-4"
-            style={{
-              textShadow: '2px 0 #ff0000, -2px 0 #00ffff',
-              animation: 'glitch-text 0.1s infinite'
-            }}
-          >
-            $ sudo su
+  const status = (
+    <div
+      role="status"
+      aria-live="polite"
+      aria-atomic="true"
+      className="pointer-events-none fixed inset-x-4 bottom-5 z-[60] flex justify-center sm:bottom-8"
+    >
+      <div className="animate-scale-in flex w-full max-w-sm items-center gap-3 rounded-2xl border border-emerald-500/40 bg-slate-950 px-4 py-3 text-left text-white shadow-2xl shadow-emerald-950/30">
+        <span
+          aria-hidden="true"
+          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-500/15 font-mono text-lg font-bold text-emerald-400"
+        >
+          $
+        </span>
+        <div className="min-w-0">
+          <p className="font-mono text-sm font-bold text-emerald-400">
+            sudo su
           </p>
-          <p
-            className="text-green-400 font-mono text-lg sm:text-xl"
-            style={{ animation: 'blink 0.5s infinite' }}
-          >
-            root access granted_
+          <p className="text-sm text-slate-300">
+            Acesso liberado. Revelando o modo sem filtro…
           </p>
-          <div className="mt-6 flex justify-center gap-1">
-            {[...Array(5)].map((_, i) => (
-              <div
-                key={i}
-                className="w-2 h-8 bg-green-500"
-                style={{
-                  animation: `bar-wave 0.5s ease-in-out infinite`,
-                  animationDelay: `${i * 0.1}s`
-                }}
-              />
-            ))}
-          </div>
         </div>
       </div>
-
-      {/* CSS das animações */}
-      <style jsx global>{`
-        @keyframes scanlines {
-          0% { transform: translateY(0); }
-          100% { transform: translateY(4px); }
-        }
-
-        @keyframes glitch-text {
-          0% { transform: translate(0); }
-          20% { transform: translate(-2px, 2px); }
-          40% { transform: translate(-2px, -2px); }
-          60% { transform: translate(2px, 2px); }
-          80% { transform: translate(2px, -2px); }
-          100% { transform: translate(0); }
-        }
-
-        @keyframes blink {
-          0%, 50% { opacity: 1; }
-          51%, 100% { opacity: 0; }
-        }
-
-        @keyframes bar-wave {
-          0%, 100% { transform: scaleY(0.5); }
-          50% { transform: scaleY(1.5); }
-        }
-      `}</style>
-    </>
+    </div>
   )
 
-  return createPortal(overlay, document.body)
+  return createPortal(status, document.body)
 }

@@ -10,20 +10,34 @@ export default function EasterEggWrapper() {
   const hasScrolled = useRef(false)
 
   useEffect(() => {
-    // Scroll pra seção quando desbloquear (só uma vez)
-    if (isUnlocked && !hasScrolled.current) {
-      hasScrolled.current = true
+    if (!isUnlocked || hasScrolled.current) return
 
-      // Pequeno delay pra dar tempo do componente renderizar
-      setTimeout(() => {
-        const section = document.getElementById('sem-filtro')
-        if (section) {
-          const yOffset = -20 // Offset pra não ficar colado no topo
-          const y = section.getBoundingClientRect().top + window.pageYOffset + yOffset
-          window.scrollTo({ top: y, behavior: 'smooth' })
-        }
-      }, 100)
-    }
+    hasScrolled.current = true
+    const frame = window.requestAnimationFrame(() => {
+      const section = document.getElementById('sem-filtro')
+      const nav = document.querySelector('nav[aria-label="Navegação principal"]')
+
+      if (!section) return
+
+      const navOffset = nav?.getBoundingClientRect().bottom ?? 0
+      let sectionOffset = 0
+      let offsetElement: HTMLElement | null = section
+
+      while (offsetElement) {
+        sectionOffset += offsetElement.offsetTop
+        offsetElement = offsetElement.offsetParent as HTMLElement | null
+      }
+
+      const top = sectionOffset - navOffset - 16
+      const root = document.documentElement
+      const previousScrollBehavior = root.style.scrollBehavior
+
+      root.style.scrollBehavior = 'auto'
+      window.scrollTo({ top: Math.max(0, top), behavior: 'auto' })
+      root.style.scrollBehavior = previousScrollBehavior
+    })
+
+    return () => window.cancelAnimationFrame(frame)
   }, [isUnlocked])
 
   return (

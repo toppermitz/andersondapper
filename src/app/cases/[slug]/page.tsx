@@ -119,11 +119,11 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
       <nav aria-label="Navegação do case" className="mb-8 flex items-center justify-between gap-4 animate-fade-in">
         <Link
           href="/cases"
-          className="group inline-flex min-h-11 items-center gap-2 rounded-lg px-2 text-sm font-medium text-slate-500 transition-colors hover:text-cyan-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 dark:text-slate-400 dark:hover:text-cyan-300"
+          className="pressable inline-flex min-h-11 items-center gap-2 rounded-lg px-2 text-sm font-medium text-slate-500 hover:text-cyan-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 dark:text-slate-400 dark:hover:text-cyan-300"
         >
           <FaArrowLeft
             aria-hidden="true"
-            className="h-3.5 w-3.5 transition-transform group-hover:-translate-x-1"
+            className="h-3.5 w-3.5"
           />
           Voltar aos cases
         </Link>
@@ -296,10 +296,10 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
         </p>
         <Link
           href="/#contato"
-          className="mt-7 inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 px-7 py-3 font-semibold text-white shadow-lg shadow-cyan-500/20 transition-all hover:-translate-y-0.5 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900"
+          className="pressable pressable-lift group mt-7 inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 px-7 py-3 font-semibold text-white shadow-lg shadow-cyan-500/20 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900"
         >
           {details.callToAction.label}
-          <FaArrowRight aria-hidden="true" className="h-4 w-4" />
+          <FaArrowRight aria-hidden="true" className="interactive-arrow h-4 w-4" />
         </Link>
       </section>
     </div>
