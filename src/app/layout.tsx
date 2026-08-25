@@ -1,6 +1,7 @@
 import './globals.css'
 import { Providers } from '../context/ThemeContext'
 import SiteAnalytics from '../components/SiteAnalytics'
+import SiteNav from '../components/SiteNav'
 import { Inter } from 'next/font/google'
 
 const inter = Inter({ 
@@ -107,7 +108,12 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-br" className={inter.variable} suppressHydrationWarning>
+    <html
+      lang="pt-br"
+      className={inter.variable}
+      data-scroll-behavior="smooth"
+      suppressHydrationWarning
+    >
       <body className="font-sans bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 min-h-screen overflow-x-hidden" suppressHydrationWarning>
         <script
           id="site-structured-data"
@@ -115,6 +121,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: serializedSiteStructuredData }}
         />
         <Providers>
+          <a
+            href="#conteudo-principal"
+            className="pressable fixed left-4 top-4 z-[100] -translate-y-20 rounded-xl bg-slate-950 px-4 py-3 text-sm font-semibold text-white shadow-xl focus:translate-y-0 focus:outline-none focus:ring-2 focus:ring-cyan-400 dark:bg-white dark:text-slate-950"
+          >
+            Ir para o conteúdo
+          </a>
+
           {/* Background - static gradient, no blur animations */}
           <div className="fixed inset-0 overflow-hidden pointer-events-none">
             <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-cyan-400/20 to-blue-500/20 dark:from-cyan-500/10 dark:to-blue-600/10 rounded-full blur-2xl" />
@@ -122,11 +135,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </div>
 
           <div className="relative min-h-screen">
-            <main className="relative z-10">
-              <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-16">
-                <div className="glass-card rounded-3xl p-6 sm:p-10 lg:p-14">
-                  {children}
-                </div>
+            <SiteNav />
+            <main
+              id="conteudo-principal"
+              tabIndex={-1}
+              className="relative z-10 focus:outline-none"
+            >
+              <div className="mx-auto max-w-5xl px-4 pb-8 pt-4 sm:px-6 sm:pb-16 sm:pt-8 lg:px-8">
+                {children}
               </div>
             </main>
           </div>

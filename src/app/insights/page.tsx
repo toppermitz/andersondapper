@@ -51,11 +51,11 @@ export default function InsightsPage() {
       >
         <Link
           href="/"
-          className="group inline-flex min-h-11 items-center gap-2 rounded-lg px-2 text-sm font-medium text-slate-500 transition-colors hover:text-cyan-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 dark:text-slate-400 dark:hover:text-cyan-300"
+          className="pressable inline-flex min-h-11 items-center gap-2 rounded-lg px-2 text-sm font-medium text-slate-500 hover:text-cyan-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 dark:text-slate-400 dark:hover:text-cyan-300"
         >
           <FaArrowLeft
             aria-hidden="true"
-            className="h-3.5 w-3.5 transition-transform group-hover:-translate-x-1"
+            className="h-3.5 w-3.5"
           />
           Voltar para a página inicial
         </Link>
@@ -103,7 +103,7 @@ export default function InsightsPage() {
           {publishedInsights.map((insight) => (
             <article
               key={insight.slug}
-              className="group relative overflow-hidden rounded-2xl border border-slate-200/70 bg-white/60 p-5 shadow-sm transition-all hover:-translate-y-1 hover:shadow-xl dark:border-slate-700/70 dark:bg-slate-800/60 sm:p-7"
+              className="relative overflow-hidden rounded-2xl border border-slate-200/70 bg-white/60 p-5 shadow-sm dark:border-slate-700/70 dark:bg-slate-800/60 sm:p-7"
             >
               <div className="grid gap-7 lg:grid-cols-[1fr_0.58fr] lg:items-end">
                 <div>
@@ -139,12 +139,12 @@ export default function InsightsPage() {
                   </div>
                   <Link
                     href={`/insights/${insight.slug}`}
-                    className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-xl border border-purple-300/80 bg-purple-50/80 px-4 py-2.5 text-sm font-semibold text-purple-800 transition-all hover:-translate-y-0.5 hover:border-purple-400 hover:bg-purple-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 dark:border-purple-800/70 dark:bg-purple-950/30 dark:text-purple-300 dark:hover:border-purple-600 dark:hover:bg-purple-950/50"
+                    className="pressable pressable-lift group inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-xl border border-purple-300/80 bg-purple-50/80 px-4 py-2.5 text-sm font-semibold text-purple-800 hover:border-purple-400 hover:bg-purple-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 dark:border-purple-800/70 dark:bg-purple-950/30 dark:text-purple-300 dark:hover:border-purple-600 dark:hover:bg-purple-950/50"
                   >
                     Ler insight
                     <FaArrowRight
                       aria-hidden="true"
-                      className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5"
+                      className="interactive-arrow h-3.5 w-3.5"
                     />
                   </Link>
                 </div>
