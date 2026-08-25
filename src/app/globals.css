@@ -93,20 +93,6 @@ body {
 }
 
 /* ========================================
-   GLASSMORPHISM
-   ======================================== */
-
-.glass {
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid rgba(0, 0, 0, 0.06);
-}
-
-.dark .glass {
-  background: rgba(17, 24, 39, 0.9);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* ========================================
    ENTRANCE ANIMATIONS
    ======================================== */
 
@@ -225,16 +211,6 @@ body {
 }
 
 @media (prefers-reduced-transparency: reduce) {
-  .glass {
-    -webkit-backdrop-filter: none;
-    backdrop-filter: none;
-    background: rgb(255, 255, 255);
-  }
-
-  .dark .glass {
-    background: rgb(15, 23, 42);
-  }
-
   .backdrop-blur-sm {
     -webkit-backdrop-filter: none !important;
     backdrop-filter: none !important;
@@ -242,14 +218,6 @@ body {
 }
 
 @media (prefers-contrast: more) {
-  .glass {
-    border-color: rgb(51, 65, 85);
-  }
-
-  .dark .glass {
-    border-color: rgb(203, 213, 225);
-  }
-
   *:focus-visible {
     outline-width: 3px;
   }
