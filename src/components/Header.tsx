@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import { FaArrowRight } from 'react-icons/fa'
 import ThemeToggle from './ThemeToggle'
@@ -5,11 +6,20 @@ import ThemeToggle from './ThemeToggle'
 export default function Header() {
   return (
     <header className="relative mb-16 overflow-hidden rounded-2xl sm:mb-20">
-      <div className="absolute top-0 right-0 z-20">
+      <div className="relative z-20 mb-5 grid grid-cols-[3rem_1fr_3rem] items-center">
+        <span aria-hidden="true" />
+        <Image
+          src="/newlogotipo.svg"
+          alt=""
+          width={97}
+          height={56}
+          priority
+          className="h-12 w-auto justify-self-center dark:brightness-0 dark:invert sm:h-14"
+        />
         <ThemeToggle />
       </div>
 
-      <div className="relative z-10 flex flex-col items-center px-1 pb-4 pt-2 text-center sm:px-8 sm:pb-8">
+      <div className="relative z-10 flex flex-col items-center px-1 pb-4 text-center sm:px-8 sm:pb-8">
         <div className="flex max-w-4xl flex-col items-center animate-fade-in-up">
           <h1 className="gradient-text-animated text-[clamp(2.25rem,10vw,4.5rem)] font-black leading-[0.98] tracking-[-0.045em]">
             Anderson Dapper
