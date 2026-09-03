@@ -1,0 +1,1739 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="dark" data-palette="grafite" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Anderson Dapper — Do legado à plataforma (esboço v1)</title>
+  <meta name="robots" content="noindex">
+  <script>
+    try {
+      var saved = localStorage.getItem('theme');
+      if (saved === 'light' || saved === 'dark') document.documentElement.dataset.theme = saved;
+      var palette = localStorage.getItem('palette');
+      if (['grafite', 'abismo', 'champanhe'].indexOf(palette) > -1) document.documentElement.dataset.palette = palette;
+    } catch (e) {}
+    document.documentElement.classList.replace('no-js', 'js');
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;600&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --display: 'Bricolage Grotesque', 'Inter', system-ui, sans-serif;
+      --text: 'Inter', system-ui, sans-serif;
+      --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+      --gutter: clamp(1.25rem, 5vw, 6rem);
+      --ease-out: cubic-bezier(.23, 1, .32, 1);
+      --ease-in-out: cubic-bezier(.77, 0, .175, 1);
+      font-optical-sizing: auto;
+
+      --card-dim-opacity: .4;
+      --code-fg: #e8e8ea;
+      --code-num: #f2c46d;
+      --code-cm: #8a8f98;
+      --code-gutter: #7a7f89;
+
+      --swatch-grafite: #7c86ff;
+      --swatch-abismo: #2fd3c2;
+      --swatch-champanhe: #d9b56a;
+    }
+    [data-theme="light"] { --card-dim-opacity: .1; }
+
+    /* Paletas: bloco dark por paleta, bloco light por paleta × tema. A ordem garante que o light da paleta ativa vença. */
+    :root, [data-palette="grafite"] {
+      --bg: #0a0a0c;
+      --surface: #121215;
+      --card: #15151a;
+      --fg: #f2f2f4;
+      --muted: #8e929c;
+      --line: rgba(242, 242, 244, .09);
+      --stroke: rgba(242, 242, 244, .16);
+      --accent: #7c86ff;
+      --accent-ink: #0a0a0c;
+      --accent-soft: rgba(124, 134, 255, .14);
+      --card-shadow: 0 -24px 60px rgba(0, 0, 0, .35);
+      --code-bg: #0a0a0c;
+      --code-kw: #a3aaff;
+      --code-str: #7c86ff;
+    }
+    [data-theme="light"], [data-palette="grafite"][data-theme="light"] {
+      --bg: #f7f7f8;
+      --surface: #ececef;
+      --card: #ffffff;
+      --fg: #0f0f12;
+      --muted: #5c6070;
+      --line: rgba(15, 15, 18, .10);
+      --stroke: rgba(15, 15, 18, .16);
+      --accent: #4a56d6;
+      --accent-ink: #ffffff;
+      --accent-soft: rgba(74, 86, 214, .10);
+      --card-shadow: 0 -24px 60px rgba(15, 15, 18, .12);
+    }
+
+    [data-palette="abismo"] {
+      --bg: #06111f;
+      --surface: #0b1a2b;
+      --card: #0e2035;
+      --fg: #e6edf5;
+      --muted: #8698ad;
+      --line: rgba(230, 237, 245, .09);
+      --stroke: rgba(230, 237, 245, .16);
+      --accent: #2fd3c2;
+      --accent-ink: #06111f;
+      --accent-soft: rgba(47, 211, 194, .13);
+      --card-shadow: 0 -24px 60px rgba(0, 0, 0, .35);
+      --code-bg: #06111f;
+      --code-kw: #7fe7db;
+      --code-str: #2fd3c2;
+    }
+    [data-palette="abismo"][data-theme="light"] {
+      --bg: #f3f6fa;
+      --surface: #e5ebf2;
+      --card: #ffffff;
+      --fg: #0b1a2b;
+      --muted: #4f6378;
+      --line: rgba(11, 26, 43, .10);
+      --stroke: rgba(11, 26, 43, .16);
+      --accent: #0b7f75;
+      --accent-ink: #ffffff;
+      --accent-soft: rgba(11, 127, 117, .10);
+      --card-shadow: 0 -24px 60px rgba(11, 26, 43, .12);
+    }
+
+    [data-palette="champanhe"] {
+      --bg: #0c0c0b;
+      --surface: #151412;
+      --card: #181715;
+      --fg: #f3efe8;
+      --muted: #928c82;
+      --line: rgba(243, 239, 232, .09);
+      --stroke: rgba(243, 239, 232, .16);
+      --accent: #d9b56a;
+      --accent-ink: #0c0c0b;
+      --accent-soft: rgba(217, 181, 106, .12);
+      --card-shadow: 0 -24px 60px rgba(0, 0, 0, .35);
+      --code-bg: #0c0c0b;
+      --code-kw: #e8cf8e;
+      --code-str: #d9b56a;
+      --code-num: #9ec5ff;
+    }
+    [data-palette="champanhe"][data-theme="light"] {
+      --bg: #f6f2ea;
+      --surface: #ebe5da;
+      --card: #fffdf9;
+      --fg: #16140f;
+      --muted: #635c50;
+      --line: rgba(22, 20, 15, .10);
+      --stroke: rgba(22, 20, 15, .16);
+      --accent: #85671f;
+      --accent-ink: #ffffff;
+      --accent-soft: rgba(133, 103, 31, .10);
+      --card-shadow: 0 -24px 60px rgba(22, 20, 15, .12);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { -webkit-text-size-adjust: 100%; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: var(--text);
+      font-size: 1rem;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, p, ul, ol, figure, pre { margin: 0; }
+    ul, ol { padding: 0; list-style: none; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+    img { display: block; max-width: 100%; }
+
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+    .mono { font-family: var(--mono); font-size: .8rem; letter-spacing: .02em; }
+    .eyebrow { font-family: var(--mono); font-size: .78rem; color: var(--muted); letter-spacing: .04em; }
+    .eyebrow em { font-style: normal; color: var(--accent); }
+
+    .outline {
+      color: transparent;
+      -webkit-text-stroke: 1px var(--stroke);
+      font-family: var(--display);
+      font-weight: 700;
+      letter-spacing: -.04em;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    .section { padding: clamp(5rem, 12vw, 10rem) var(--gutter); }
+
+    .js .hero__name,
+    .js .hero__tagline,
+    .js .hero__sub,
+    .js .hero__actions,
+    .js .hero__scroll,
+    .js .nav { visibility: hidden; }
+
+    /* ---------- Nav ---------- */
+    /* Fica fora do #smooth-wrapper: dentro do wrapper, position: fixed não funciona porque o conteúdo é transformado. */
+    .nav {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 50;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 1rem;
+      padding: .7rem var(--gutter);
+      background: color-mix(in srgb, var(--bg) 72%, transparent);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      border-bottom: 0;
+    }
+    .nav::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0; top: 100%;
+      height: 24px;
+      background: linear-gradient(var(--bg), transparent);
+      opacity: var(--nav-edge, 0);
+      transition: opacity .25s ease;
+      pointer-events: none;
+    }
+    .nav__brand { display: block; }
+    /* Paths do public/newlogotipo.svg embutidos: mask-image com file:// cai em CORS, e filter não chega em --fg. */
+    .nav__logo { display: block; height: 28px; width: auto; color: var(--fg); fill: currentColor; }
+    .nav__controls { justify-self: end; display: flex; align-items: center; gap: .9rem; }
+    .nav__palettes { display: flex; gap: .5rem; }
+    .nav__swatch {
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      transition: box-shadow .15s ease, scale 120ms var(--ease-out);
+    }
+    .nav__swatch[data-palette="grafite"] { background: var(--swatch-grafite); }
+    .nav__swatch[data-palette="abismo"] { background: var(--swatch-abismo); }
+    .nav__swatch[data-palette="champanhe"] { background: var(--swatch-champanhe); }
+    .nav__swatch[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--fg); }
+    .nav__swatch:active { scale: .9; }
+
+    .nav__links { display: flex; justify-content: center; gap: 1.6rem; }
+    .nav__links a {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: .8rem;
+      letter-spacing: .02em;
+      color: var(--muted);
+      transition: color .2s ease-out, scale 120ms var(--ease-out);
+    }
+
+    .nav__theme {
+      display: grid;
+      place-items: center;
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      color: var(--fg);
+      transition: border-color .2s ease-out, color .2s ease-out, scale 120ms var(--ease-out);
+    }
+    .nav__theme svg { width: 16px; height: 16px; }
+    [data-theme="dark"] .nav__theme .icon-moon { display: none; }
+    [data-theme="light"] .nav__theme .icon-sun { display: none; }
+
+    /* ---------- Hero ---------- */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 6rem var(--gutter) 5rem;
+      overflow: hidden;
+      background-image:
+        linear-gradient(var(--line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--line) 1px, transparent 1px);
+      background-size: 72px 72px;
+      background-position: center top;
+    }
+    .hero__sun {
+      position: absolute;
+      left: 50%; top: 50%;
+      width: 90vmax; height: 90vmax;
+      border-radius: 50%;
+      background: radial-gradient(closest-side, var(--accent-soft), transparent 70%);
+      opacity: 1;
+      pointer-events: none;
+      will-change: transform;
+      transform: translate(-50%, -50%);
+    }
+    [data-theme="light"] .hero__sun { opacity: .6; }
+
+    .hero__year {
+      position: absolute;
+      right: -.04em;
+      top: 50%;
+      transform: translateY(-58%);
+      font-size: clamp(9rem, 32vw, 28rem);
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+      pointer-events: none;
+    }
+
+    .hero__inner { position: relative; z-index: 1; max-width: 1400px; width: 100%; margin: 0 auto; }
+    .hero__eyebrow { display: block; min-height: 1.4em; margin-bottom: clamp(1.4rem, 3vw, 2.4rem); }
+
+    .hero__name {
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: clamp(3.2rem, 13.5vw, 13rem);
+      line-height: .88;
+      letter-spacing: -.04em;
+      text-transform: uppercase;
+      overflow-wrap: anywhere;
+    }
+    .hero__name span { display: block; }
+
+    .hero__tagline {
+      margin-top: clamp(1.6rem, 3.5vw, 3rem);
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: clamp(1.4rem, 3.2vw, 2.4rem);
+      line-height: 1.15;
+      letter-spacing: -.02em;
+      max-width: 22ch;
+    }
+    .hero__sub {
+      margin-top: 1.4rem;
+      max-width: 54ch;
+      color: var(--muted);
+      font-size: clamp(1rem, 1.3vw, 1.15rem);
+    }
+    .hero__actions { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 2.4rem; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      min-height: 3rem;
+      padding: 0 1.5rem;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: .95rem;
+      transition: background-color .15s ease, color .15s ease, border-color .15s ease, scale 120ms var(--ease-out);
+    }
+    .btn--solid { background: var(--accent); color: var(--accent-ink); }
+    .btn--ghost { border: 1px solid var(--stroke); color: var(--fg); }
+
+    .hero__scroll {
+      position: absolute;
+      left: var(--gutter);
+      bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: .8rem;
+      color: var(--muted);
+    }
+    .hero__scroll-line { width: 1px; height: 48px; background: var(--fg); transform-origin: top; }
+
+    /* ---------- Marquee ---------- */
+    .marquee-wrap { overflow: hidden; padding: 3rem 0; }
+    .marquee {
+      width: 110vw;
+      margin-left: -5vw;
+      background: var(--surface);
+      transform: rotate(-2deg);
+      overflow: hidden;
+      padding: 1.1rem 0;
+    }
+    .marquee__track { display: flex; width: max-content; will-change: transform; }
+    .marquee__group {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      padding-right: 2rem;
+      white-space: nowrap;
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: clamp(1.6rem, 3.6vw, 3rem);
+      letter-spacing: -.03em;
+      color: var(--accent);
+    }
+    .marquee__group i { font-style: normal; font-size: .45em; opacity: .8; }
+
+    /* ---------- Transformação ---------- */
+    .transform { position: relative; }
+    .transform__inner {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+      gap: clamp(2rem, 5vw, 5rem);
+      align-items: center;
+      padding: 6rem var(--gutter);
+      max-width: 1500px;
+      margin: 0 auto;
+    }
+    .transform__title {
+      margin-top: 1rem;
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: clamp(2rem, 4.6vw, 4.4rem);
+      line-height: .98;
+      letter-spacing: -.04em;
+    }
+    .transform__swap {
+      display: grid;
+      grid-template-areas: 'w';
+      overflow: clip;
+      line-height: 1;
+      padding-bottom: .14em;
+      color: var(--accent);
+    }
+    .transform__word { grid-area: w; white-space: nowrap; }
+
+    .transform__checks { margin-top: 2.6rem; display: grid; gap: .7rem; }
+    .transform__check { font-family: var(--mono); font-size: .9rem; opacity: .28; }
+    .transform__check b { font-weight: 600; color: var(--accent); margin-right: .6rem; }
+
+    .code {
+      --code-size: clamp(11px, 2.9vw, 13.5px);
+      background: var(--code-bg);
+      color: var(--code-fg);
+      border: 1px solid color-mix(in srgb, var(--code-fg) 12%, transparent);
+      border-radius: 10px;
+      overflow: hidden;
+      font-family: var(--mono);
+      font-size: var(--code-size);
+      line-height: 1.7;
+      box-shadow: 0 30px 80px -30px rgba(0, 0, 0, .6);
+    }
+    .code__bar {
+      display: grid;
+      grid-template-areas: 'f';
+      padding: .7rem 1rem;
+      border-bottom: 1px solid color-mix(in srgb, var(--code-fg) 10%, transparent);
+      font-size: .78rem;
+      color: var(--code-cm);
+    }
+    .code__file { grid-area: f; }
+    .code__file::before { content: '●'; color: var(--code-str); margin-right: .6rem; font-size: .6rem; vertical-align: middle; }
+    .code__file--to { opacity: 0; visibility: hidden; }
+
+    .code__body { display: grid; grid-template-columns: auto minmax(0, 1fr); padding: 1rem 0 1.1rem; overflow-x: auto; }
+    .code__gutter { padding: 0 .9rem 0 1rem; text-align: right; color: var(--code-gutter); user-select: none; }
+    .code__layers { position: relative; }
+    .code__layer { margin: 0; padding-right: 1rem; white-space: pre; font: inherit; line-height: inherit; }
+    .code__layer--ts { position: absolute; inset: 0; background: var(--code-bg); clip-path: inset(0 100% 0 0); }
+    .code__seam {
+      position: absolute;
+      top: -1rem; bottom: -1.1rem; left: -1px;
+      width: 2px;
+      background: var(--accent);
+      box-shadow: 0 0 14px 2px var(--accent-soft);
+      pointer-events: none;
+    }
+    .kw { color: var(--code-kw); }
+    .str { color: var(--code-str); }
+    .num { color: var(--code-num); }
+    .cm { color: var(--code-cm); font-style: italic; }
+
+    /* ---------- Trajetória ---------- */
+    .journey { position: relative; overflow: hidden; }
+    .journey__pin { position: relative; height: 100vh; display: flex; align-items: center; }
+    .journey__track { display: flex; align-items: stretch; padding-left: var(--gutter); }
+    .journey__panel {
+      position: relative;
+      flex: 0 0 80vw;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-content: center;
+      align-items: end;
+      gap: clamp(2rem, 5vw, 6rem);
+      padding: 0 8vw 0 0;
+      min-height: 100vh;
+    }
+    .journey__panel--wide .journey__content { grid-column: 1 / -1; max-width: none; }
+    .journey__year {
+      position: absolute;
+      left: -.06em;
+      top: 8vh;
+      font-size: clamp(11rem, 24vw, 22rem);
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+      pointer-events: none;
+    }
+    .journey__content { position: relative; max-width: 42ch; }
+    .journey__facts { position: relative; display: grid; gap: .55rem; padding-bottom: .4rem; }
+    .journey__facts .eyebrow { margin-bottom: .6rem; }
+    .journey__facts li { font-family: var(--mono); font-size: .9rem; color: var(--fg); }
+    .journey__facts li::before { content: '—'; color: var(--accent); margin-right: .7rem; }
+    .journey__title {
+      margin-top: .8rem;
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: clamp(1.8rem, 3.4vw, 3.2rem);
+      line-height: 1.02;
+      letter-spacing: -.035em;
+    }
+    .journey__text { margin-top: 1.2rem; color: var(--muted); font-size: clamp(1rem, 1.2vw, 1.1rem); }
+    .journey__tags { display: flex; flex-wrap: wrap; gap: .8rem 1rem; margin-top: 1.4rem; }
+    .journey__tags li {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: clamp(1.4rem, 2.8vw, 2.6rem);
+      letter-spacing: -.03em;
+      line-height: 1.1;
+      padding: .3em .7em;
+      background: var(--accent-soft);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+    }
+    .journey__progress {
+      position: absolute;
+      left: var(--gutter); right: var(--gutter);
+      bottom: 3rem;
+      height: 1px;
+      background: var(--line);
+    }
+    .journey__progress-bar { position: absolute; inset: 0; background: var(--accent); transform: scaleX(0); transform-origin: left; }
+    .journey__progress-dot {
+      position: absolute;
+      left: 0; top: 50%;
+      width: 10px; height: 10px;
+      margin-top: -5px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 12px var(--accent-soft);
+    }
+
+    /* ---------- Cases ---------- */
+    .section-title {
+      margin-top: .6rem;
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: clamp(2rem, 4.5vw, 4rem);
+      letter-spacing: -.04em;
+      line-height: 1;
+    }
+    .cases__heading { padding: 0 var(--gutter) 3rem; max-width: 1500px; margin: 0 auto; }
+    .case {
+      position: sticky;
+      top: 0;
+      min-height: 100vh;
+      display: flex;
+      background: var(--bg);
+    }
+    .case[data-order="1"] { z-index: 1; }
+    .case[data-order="2"] { z-index: 2; }
+    .case[data-order="3"] { z-index: 3; }
+    .case__card {
+      flex: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 6fr) minmax(0, 4fr);
+      gap: clamp(1.5rem, 4vw, 4rem);
+      align-content: start;
+      align-items: end;
+      padding: 12vh var(--gutter) clamp(5rem, 10vh, 8rem);
+      max-width: 1500px;
+      width: 100%;
+      margin: 0 auto;
+      position: relative;
+      background: var(--card);
+      border-top: 1px solid var(--line);
+      border-radius: 28px 28px 0 0;
+      box-shadow: var(--card-shadow);
+      transform-origin: center top;
+    }
+    .case__dim {
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: color-mix(in srgb, var(--bg) calc(var(--card-dim-opacity) * 100%), transparent);
+      opacity: 0;
+      pointer-events: none;
+    }
+    .case__num { font-size: clamp(5rem, 12vw, 11rem); line-height: .9; }
+    .case__tag { display: block; margin-top: 1rem; color: var(--accent); font-family: var(--mono); font-size: .82rem; letter-spacing: .02em; }
+    .case__title {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: clamp(2.2rem, 4.2vw, 4rem);
+      line-height: .98;
+      letter-spacing: -.04em;
+    }
+    .case__desc { margin-top: 1.4rem; color: var(--muted); font-size: clamp(1rem, 1.25vw, 1.15rem); max-width: 48ch; }
+    .case__cta { display: inline-flex; align-items: center; gap: .5rem; margin-top: 2rem; font-weight: 600; transition: scale 120ms var(--ease-out); }
+    .case__cta .arrow { display: inline-block; transition: transform .2s var(--ease-out); }
+    .case__result { border-top: 1px solid var(--accent); padding-top: 1.2rem; }
+    .case__result .eyebrow { display: block; margin-bottom: .8rem; }
+    .case__result p { font-weight: 500; font-size: clamp(1.05rem, 1.4vw, 1.3rem); line-height: 1.4; }
+
+    /* ---------- Insight ---------- */
+    .insight { background: var(--surface); }
+    .insight__inner { max-width: 1100px; margin: 0 auto; }
+    .insight__title {
+      margin-top: 1.4rem;
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      line-height: 1.02;
+      letter-spacing: -.035em;
+    }
+    .insight__title .line-mask { padding-bottom: .14em; margin-bottom: -.14em; }
+    .insight__desc { margin-top: 1.6rem; max-width: 62ch; color: var(--muted); font-size: clamp(1rem, 1.3vw, 1.2rem); }
+    .insight__links { display: flex; flex-wrap: wrap; gap: 1.2rem 2.4rem; align-items: baseline; margin-top: 2.4rem; }
+    .link-draw { position: relative; display: inline-block; font-weight: 600; padding-bottom: .2rem; transition: scale 120ms var(--ease-out); }
+    .link-draw::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: 2px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .2s var(--ease-out);
+    }
+    .link-quiet {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: .82rem;
+      letter-spacing: .02em;
+      color: var(--muted);
+      transition: color .2s ease-out, scale 120ms var(--ease-out);
+    }
+
+    /* ---------- Stack ---------- */
+    .stack__inner { max-width: 1500px; margin: 0 auto; }
+    .stack__grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 2.5rem 2rem;
+      margin-top: 3rem;
+    }
+    .stack__col .eyebrow { display: block; padding-bottom: .8rem; border-bottom: 1px solid var(--line); margin-bottom: 1rem; }
+    .stack__item {
+      font-family: var(--mono);
+      font-weight: 600;
+      font-size: 1.1rem;
+      line-height: 1.9;
+      transition: color .2s ease-out;
+    }
+    .stack__item::after {
+      content: attr(data-since);
+      display: inline-block;
+      margin-left: .6rem;
+      font-weight: 400;
+      font-size: .75rem;
+      color: var(--muted);
+      opacity: 0;
+      transform: translateX(-6px);
+      transition: opacity .25s ease-out, transform .25s var(--ease-out);
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .stack__item:hover { color: var(--accent); }
+      .stack__item:hover::after { opacity: 1; transform: translateX(0); }
+    }
+
+    /* ---------- Sem filtro (oculto) ---------- */
+    .secret__inner { max-width: 900px; margin: 0 auto; }
+    .secret__head { display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; }
+    .secret__head h2 {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: clamp(2rem, 4.5vw, 3.6rem);
+      letter-spacing: -.04em;
+      line-height: 1;
+    }
+    .secret__badge { font-family: var(--mono); font-size: .75rem; letter-spacing: .02em; color: var(--accent); border: 1px solid var(--accent); padding: .15rem .5rem; border-radius: 4px; }
+    .secret__list { margin-top: 2.5rem; display: grid; gap: 1.4rem; }
+    .secret__item { display: grid; grid-template-columns: 1.4rem 1fr; gap: .6rem; font-size: clamp(1rem, 1.3vw, 1.15rem); line-height: 1.6; }
+    .secret__item b { font-family: var(--mono); color: var(--accent); font-weight: 600; }
+
+    /* ---------- Contato ---------- */
+    .contact__inner { max-width: 1500px; margin: 0 auto; }
+    .contact__title {
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: clamp(2.5rem, 9vw, 8rem);
+      line-height: .92;
+      letter-spacing: -.045em;
+    }
+    .contact__email {
+      display: inline-grid;
+      grid-template-areas: 'e';
+      margin-top: 2.4rem;
+      font-family: var(--display);
+      font-weight: 500;
+      font-size: clamp(1.4rem, 4.6vw, 4.2rem);
+      letter-spacing: -.03em;
+      line-height: 1.1;
+      text-align: left;
+      overflow-wrap: anywhere;
+      transition: color .15s ease, scale 120ms var(--ease-out);
+    }
+    .contact__email > span { grid-area: e; }
+    .contact__email-size { visibility: hidden; }
+    .contact__hint { display: block; margin-top: .8rem; }
+    .contact__links { display: flex; flex-wrap: wrap; gap: 1.4rem 2.4rem; margin-top: 3rem; }
+    .contact__links a { display: inline-block; transition: scale 120ms var(--ease-out); }
+    .contact__links a .arrow { display: inline-block; margin-left: .4rem; transition: transform .2s var(--ease-out); }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1.6rem var(--gutter) 2rem;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+    }
+    .footer__cursor::after { content: '_'; animation: blink 1s steps(1) infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 1.6rem;
+      z-index: 60;
+      translate: -50% 0;
+      padding: .7rem 1.1rem;
+      border-radius: 6px;
+      background: var(--card);
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      font-family: var(--mono);
+      font-size: .82rem;
+      letter-spacing: .02em;
+      white-space: nowrap;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    :is(.btn, .nav__links a, .case__cta, .link-draw, .link-quiet, .contact__email, .contact__links a):active { scale: .97; }
+    /* O GSAP escreve inline "scale: none" em tudo que transforma; só !important vence isso sem trocar a estrutura. */
+    .magnetic:active { scale: .97 !important; }
+    .nav__theme:active { scale: .95; }
+
+    @media (hover: hover) and (pointer: fine) {
+      .nav__links a:hover { color: var(--fg); }
+      .nav__theme:hover { border-color: var(--accent); color: var(--accent); }
+      .btn--solid:hover { background: color-mix(in srgb, var(--accent) 88%, var(--fg)); }
+      .btn--ghost:hover { border-color: var(--accent); color: var(--accent); }
+      .case__cta:hover .arrow { transform: translateX(6px); }
+      .link-draw:hover::after { transform: scaleX(1); }
+      .link-quiet:hover { color: var(--fg); }
+      .contact__email:hover { color: var(--accent); }
+      .contact__links a:hover .arrow { transform: translate(3px, -3px); }
+    }
+
+    ::view-transition-old(root), ::view-transition-new(root) { animation-duration: 250ms; animation-timing-function: ease; }
+    .theme-fading body, .theme-fading .nav, .theme-fading .case__card, .theme-fading .code, .theme-fading .insight, .theme-fading .marquee {
+      transition: background-color .25s ease, color .25s ease, border-color .25s ease;
+    }
+
+    /* ---------- Responsivo ---------- */
+    @media (max-width: 900px) {
+      .nav { grid-template-columns: auto 1fr auto; }
+      .nav__links { justify-content: flex-end; gap: 1rem; }
+      .nav__links a { font-size: .72rem; }
+
+      .hero__year { top: auto; bottom: 4vh; right: -6vw; transform: none; font-size: 30vw; opacity: .55; }
+      .hero__name { letter-spacing: -.025em; }
+      .contact__email { letter-spacing: -.015em; }
+
+      .transform__inner { grid-template-columns: 1fr; gap: 3rem; padding: 5rem var(--gutter); min-height: 0; }
+
+      .journey__pin { height: auto; display: block; padding: 3rem 0; }
+      .journey__track { flex-direction: column; padding: 0 var(--gutter); gap: 4rem; }
+      .journey__panel { display: block; flex: none; padding: 0; min-height: 0; }
+      .journey__year { position: static; font-size: 22vw; }
+      .journey__content { margin-top: -3vw; }
+      .journey__facts { margin-top: 2rem; }
+      .journey__progress { display: none; }
+
+      .case { position: relative; min-height: 0; }
+      .case__card { grid-template-columns: 1fr; align-items: start; padding: 4rem var(--gutter); }
+      .case__num { font-size: 5rem; }
+      .case__tag { margin-top: .4rem; }
+    }
+
+    @media (max-width: 560px) {
+      .nav__links a:nth-child(2), .nav__links a:nth-child(3) { display: none; }
+      .nav__controls { gap: .6rem; }
+      .footer { flex-direction: column; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .footer__cursor::after { animation: none; }
+      .hero__scroll { display: none; }
+
+      .transform__swap { display: grid; }
+      .transform__word { grid-area: auto; }
+      .transform__check { opacity: 1; }
+
+      .code__bar { grid-template-columns: 1fr 1fr; grid-template-areas: none; }
+      .code__file { grid-area: auto; }
+      .code__file--to { opacity: 1; visibility: visible; }
+      .code__body { display: block; }
+      .code__layers { display: grid; grid-template-columns: 1fr 1fr; }
+      .code__gutter { display: none; }
+      .code__layer { padding: 0 1rem; overflow-x: auto; }
+      .code__layer--ts { position: static; clip-path: none; border-left: 1px solid color-mix(in srgb, var(--code-fg) 10%, transparent); }
+      .code__seam { display: none; }
+    }
+
+    @media (prefers-reduced-transparency: reduce) {
+      .nav { background: var(--bg); backdrop-filter: none; -webkit-backdrop-filter: none; }
+      .toast { background: var(--card); }
+    }
+
+    @media (prefers-contrast: more) {
+      :root, [data-palette], [data-theme] { --line: color-mix(in srgb, var(--fg) 40%, transparent); --stroke: color-mix(in srgb, var(--fg) 75%, transparent); }
+      .outline { -webkit-text-stroke-width: 1.5px; }
+      .nav { border-bottom: 1px solid var(--stroke); }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="nav" role="banner">
+    <a href="#top" class="nav__brand" aria-label="Início">
+      <svg class="nav__logo" viewBox="0 0 130.35542 75.319153" aria-hidden="true" focusable="false"><g transform="translate(-0.61665808,-0.66139)"><g transform="translate(-38.656672,-143.43104)"><path d="m 57.837448,219.13645 c -0.21561,-0.15102 -0.39202,-0.4555 -0.39202,-0.67663 0,-0.3522 1.47133,-4.26711 6.8186,-18.14288 1.3425,-3.48368 1.3425,-3.48368 5.26948,-3.48368 h 3.92699 l -0.9246,2.42535 c -0.92444,2.42493 -4.90291,12.7029 -6.62226,17.10795 -1.23361,3.16056 -1.05256,3.04448 -4.74859,3.04448 -2.37144,0 -3.01091,-0.0528 -3.3276,-0.27459 z M 114.09517,218.485 c -0.20066,-0.50933 -1.8037,-4.69636 -3.56231,-9.30452 -1.75861,-4.60815 -3.46348,-9.05315 -3.78859,-9.87777 -0.32512,-0.82462 -1.38192,-3.56306 -2.34845,-6.08541 -0.96653,-2.52237 -2.98921,-7.80081 -4.494852,-11.72987 -1.50563,-3.92906 -3.66247,-9.56469 -4.79299,-12.52361 -3.72593,-9.75194 -5.29394,-13.756 -5.38739,-13.75718 -0.0507,-5e-4 -1.26151,3.03494 -2.69066,6.74572 -1.42915,3.71078 -3.27683,8.49313 -4.10594,10.62743 -2.60499,6.70574 -5.57709,14.3884 -6.33852,16.38464 -1.15742,3.03436 -0.34436,2.75356 -7.97285,2.75356 -7.33363,0 -7.3546,-0.004 -8.12158,-1.34128 -0.75243,-1.31244 -0.32571,-3.21774 0.88615,-3.95665 0.51584,-0.31452 0.90521,-0.34526 4.38101,-0.34586 2.84396,-5e-4 3.85767,-0.0568 3.98304,-0.22114 0.13847,-0.18154 4.3162,-10.93355 8.00163,-20.59341 6.9335,-18.17336 7.74605,-20.20418 8.27493,-20.68159 0.53736,-0.48507 0.53736,-0.48507 3.63014,-0.48507 3.5873,0 3.9679,0.10945 4.49038,1.29134 0.17923,0.40542 1.23602,3.15807 2.34842,6.11699 1.11241,2.95893 2.99101,7.91986 4.174672,11.02431 1.18366,3.10444 3.20675,8.42257 4.49576,11.81805 3.67779,9.68794 6.91352,18.14476 9.61727,25.13542 1.36953,3.541 3.02062,7.85759 3.66906,9.59242 1.17901,3.15423 1.17901,3.15423 3.64845,3.04459 6.78779,-0.30139 12.24836,-2.66936 16.58493,-7.19204 3.23091,-3.36957 5.31341,-7.46517 6.47595,-12.73612 0.37941,-1.72025 0.3955,-2.13944 0.39714,-10.34774 0.001,-8.26392 -0.0121,-8.62085 -0.40582,-10.49514 -2.03305,-9.67971 -8.18167,-16.37038 -17.26749,-18.78973 -2.53391,-0.67473 -4.78756,-0.87054 -10.06111,-0.87419 l -4.98196,-0.004 -0.0451,14.44647 c -0.0451,14.44646 -0.0451,14.44646 -1.136,11.59756 -0.59998,-1.56689 -2.22717,-5.74608 -3.61598,-9.28708 -2.52509,-6.4382 -2.52509,-6.4382 -2.57234,-15.38994 l -0.0473,-8.95173 h 8.09144 c 8.83924,0 11.57996,0.14669 14.69,0.78627 2.79703,0.5752 4.90872,1.31831 7.82835,2.75479 9.85642,4.84944 16.11411,14.37652 17.19616,26.18046 0.23494,2.56282 0.2287,14.02112 -0.009,16.34138 -1.17887,11.51281 -7.46116,21.0731 -17.05781,25.95836 -4.96605,2.52802 -8.9011,3.29679 -16.87495,3.29679 -4.82117,0 -4.82117,0 -5.186,-0.92604 z m -21.812942,-0.20214 c -2.04919,-0.50671 -3.47621,-1.62603 -4.35915,-3.4192 -0.57974,-1.17742 -0.57974,-1.17742 -0.6292,-14.36641 -0.0272,-7.25394 -0.10658,-13.18917 -0.17639,-13.1894 -0.0698,-2.6e-4 -1.22208,0.25497 -2.56059,0.56711 -2.523,0.58836 -2.95878,0.57355 -3.09229,-0.10507 -0.0492,-0.24989 6.22058,-11.74458 7.49765,-13.74588 0.69913,-1.0956 1.01661,-0.89497 2.32024,1.4662 5.54608,10.04522 6.55961,11.949 6.51683,12.24101 -0.10582,0.72231 -0.53434,0.74258 -2.99704,0.14177 -1.28902,-0.31448 -2.40623,-0.5702 -2.48268,-0.56826 -0.18919,0.005 -0.1314,22.42676 0.0609,23.6213 0.19319,1.2001 0.65719,1.70696 1.78382,1.94858 0.51546,0.11054 3.3413,0.18643 6.941992,0.18643 7.09774,0 6.20911,-0.34304 7.24575,2.79714 0.49519,1.50004 0.61545,2.07616 0.47867,2.29305 -0.16441,0.2607 -0.95702,0.29268 -7.92461,0.3197 -5.644412,0.0219 -7.980872,-0.029 -8.623872,-0.18807 z"/><path d="m 55.388388,204.8968 c -0.36963,-0.20766 -1.17031,-0.94841 -5.26987,-4.87549 -2.00467,-1.92033 -4.42927,-4.24159 -8.1123,-7.76654 -2.53438,-2.42561 -2.72479,-2.68427 -2.7324,-3.71178 -0.006,-0.79375 -0.006,-0.79375 3.19107,-3.92635 5.67199,-5.55783 12.52264,-12.0301 12.9994,-12.28139 1.58605,-0.83597 3.57227,0.57043 3.0482,2.15837 -0.12788,0.38748 -2.18728,2.49953 -6.66737,6.83782 -3.56528,3.45244 -6.72046,6.48492 -7.0115,6.73885 -0.52916,0.4617 -0.52916,0.4617 1.5875,2.54565 3.70575,3.64846 10.85844,10.513 11.21326,10.76153 0.80798,0.56593 1.07772,1.77321 0.60181,2.69351 -0.47756,0.92349 -1.92619,1.34358 -2.8478,0.82582 z m 102.951482,-2.04359 c 0,-2.27033 0,-2.27033 0.83785,-2.38706 0.94243,-0.13129 1.24423,-0.31708 1.73305,-1.06689 0.2934,-0.45008 0.35413,-0.97715 0.44707,-3.88056 0.12905,-4.03196 0.29755,-4.64167 1.67593,-6.06478 0.93466,-0.96497 0.93466,-0.96497 0.17076,-1.8146 -1.5079,-1.67714 -1.86605,-2.98235 -1.86605,-6.80035 0,-2.19663 -0.048,-2.63467 -0.3545,-3.23549 -0.40701,-0.79778 -1.11752,-1.23133 -2.01799,-1.23133 -0.62612,0 -0.62612,0 -0.62612,-2.22972 0,-2.22972 0,-2.22972 1.50208,-2.13601 1.85917,0.11599 3.1249,0.68239 4.42392,1.97965 1.48729,1.48529 1.69877,2.26554 1.82931,6.74886 0.0985,3.38331 0.14349,3.79153 0.46519,4.22243 0.58287,0.78067 1.16751,1.11658 2.14485,1.23233 0.92354,0.10938 0.92354,0.10938 0.92354,2.28967 0,2.1803 0,2.1803 -0.723,2.1803 -0.97499,0 -1.74465,0.39858 -2.27561,1.17849 -0.42818,0.62892 -0.44366,0.75818 -0.53339,4.45302 -0.0902,3.71576 -0.10423,3.83111 -0.59517,4.90285 -0.59412,1.29703 -1.99399,2.71002 -3.19482,3.22476 -0.80811,0.34639 -2.56285,0.7009 -3.48183,0.70343 -0.48507,0.001 -0.48507,0.001 -0.48507,-2.269 z"/></g></g></svg>
+    </a>
+    <nav class="nav__links" aria-label="Seções">
+      <a href="#cases">cases</a>
+      <a href="#trajetoria">trajetória</a>
+      <a href="#insights">insights</a>
+      <a href="#contato">contato</a>
+    </nav>
+    <div class="nav__controls">
+      <div class="nav__palettes" role="group" aria-label="Paleta de cores">
+        <button class="nav__swatch" type="button" data-palette="grafite" aria-label="Paleta grafite" aria-pressed="true"></button>
+        <button class="nav__swatch" type="button" data-palette="abismo" aria-label="Paleta abismo" aria-pressed="false"></button>
+        <button class="nav__swatch" type="button" data-palette="champanhe" aria-label="Paleta champanhe" aria-pressed="false"></button>
+      </div>
+    <button class="nav__theme" type="button" aria-label="Ativar tema claro">
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="4"/>
+        <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>
+      </svg>
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>
+      </svg>
+    </button>
+    </div>
+  </header>
+
+  <div id="smooth-wrapper">
+    <div id="smooth-content">
+      <main id="top">
+
+        <section class="hero" aria-labelledby="hero-name">
+          <div class="hero__sun" aria-hidden="true"></div>
+          <div class="hero__year outline" aria-hidden="true">2003</div>
+          <div class="hero__inner">
+            <p class="hero__eyebrow eyebrow" data-text="// 2003 → 2026 · sistemas críticos · legado → plataforma">// 2003 → 2026 · sistemas críticos · legado → plataforma</p>
+            <h1 class="hero__name" id="hero-name"><span>Anderson</span><span>Dapper</span></h1>
+            <p class="hero__tagline">Engenharia de software que atravessa décadas.</p>
+            <p class="hero__sub">Modernizo sistemas críticos e construo APIs, produtos web e infraestrutura sem perder as regras que mantêm o negócio rodando.</p>
+            <div class="hero__actions">
+              <a class="btn btn--solid magnetic" href="#cases">Ver cases</a>
+              <a class="btn btn--ghost magnetic" href="#contato">Conversar</a>
+            </div>
+          </div>
+          <div class="hero__scroll" aria-hidden="true">
+            <span class="hero__scroll-line"></span>
+            <span class="mono">scroll</span>
+          </div>
+        </section>
+
+        <div class="marquee-wrap" aria-hidden="true">
+          <div class="marquee">
+            <div class="marquee__track">
+              <div class="marquee__group">
+                <span>sistemas críticos</span><i>◆</i>
+                <span>Delphi → TypeScript</span><i>◆</i>
+                <span>APIs que sobrevivem</span><i>◆</i>
+                <span>PostgreSQL</span><i>◆</i>
+                <span>CI/CD até produção</span><i>◆</i>
+                <span>20+ anos</span><i>◆</i>
+                <span>regras de negócio preservadas</span><i>◆</i>
+              </div>
+              <div class="marquee__group">
+                <span>sistemas críticos</span><i>◆</i>
+                <span>Delphi → TypeScript</span><i>◆</i>
+                <span>APIs que sobrevivem</span><i>◆</i>
+                <span>PostgreSQL</span><i>◆</i>
+                <span>CI/CD até produção</span><i>◆</i>
+                <span>20+ anos</span><i>◆</i>
+                <span>regras de negócio preservadas</span><i>◆</i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <section class="transform" id="transform" aria-labelledby="transform-title">
+          <div class="transform__inner">
+            <div class="transform__copy">
+              <p class="eyebrow">// a peça central</p>
+              <h2 class="transform__title" id="transform-title">
+                Regras de negócio
+                <span class="transform__swap">
+                  <span class="transform__word transform__word--from">em Delphi.</span>
+                  <span class="transform__word transform__word--to">em TypeScript.</span>
+                </span>
+              </h2>
+              <ul class="transform__checks">
+                <li class="transform__check"><b>✓</b>regra preservada</li>
+                <li class="transform__check"><b>✓</b>contrato explícito</li>
+                <li class="transform__check"><b>✓</b>verificável em produção</li>
+              </ul>
+            </div>
+
+            <figure class="code" aria-label="Mesma regra de ICMS em Object Pascal e em TypeScript">
+              <div class="code__bar">
+                <span class="code__file code__file--from">regras.pas</span>
+                <span class="code__file code__file--to">icms.service.ts</span>
+              </div>
+              <div class="code__body">
+                <ol class="code__gutter" aria-hidden="true">
+                  <li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li><li>7</li><li>8</li><li>9</li><li>10</li>
+                  <li>11</li><li>12</li><li>13</li><li>14</li><li>15</li><li>16</li><li>17</li><li>18</li><li>19</li><li>20</li>
+                </ol>
+                <div class="code__layers">
+<pre class="code__layer code__layer--pascal"><code><span class="kw">unit</span> Regras;
+
+<span class="kw">interface</span>
+
+<span class="kw">function</span> CalcularICMS(<span class="kw">const</span> ABase: Currency;
+  <span class="kw">const</span> AUF: string): Currency;
+
+<span class="kw">implementation</span>
+
+<span class="kw">function</span> CalcularICMS(<span class="kw">const</span> ABase: Currency;
+  <span class="kw">const</span> AUF: string): Currency;
+<span class="kw">begin</span>
+  <span class="cm">// regra vigente desde 2003</span>
+  <span class="kw">if</span> AUF = <span class="str">'SP'</span> <span class="kw">then</span>
+    Result := ABase * <span class="num">0.18</span>
+  <span class="kw">else</span>
+    Result := ABase * <span class="num">0.12</span>;
+<span class="kw">end</span>;
+
+<span class="kw">end</span>.</code></pre>
+<pre class="code__layer code__layer--ts"><code><span class="kw">import</span> { Injectable } <span class="kw">from</span> <span class="str">'@nestjs/common'</span>;
+
+<span class="kw">@Injectable</span>()
+<span class="kw">export class</span> IcmsService {
+
+  calcularICMS(base: <span class="kw">number</span>,
+    uf: <span class="kw">string</span>): <span class="kw">number</span> {
+
+    <span class="cm">// mesma regra, agora testável</span>
+    <span class="kw">const</span> aliquota = uf === <span class="str">'SP'</span>
+      ? <span class="num">0.18</span>
+      : <span class="num">0.12</span>;
+
+    <span class="kw">return</span> base * aliquota;
+  }
+}
+
+
+
+</code></pre>
+                  <div class="code__seam" aria-hidden="true"></div>
+                </div>
+              </div>
+            </figure>
+          </div>
+        </section>
+
+        <section class="journey" id="trajetoria" aria-label="Trajetória">
+          <div class="journey__pin">
+            <div class="journey__track">
+              <article class="journey__panel">
+                <div class="journey__year outline" data-speed="0.55" aria-hidden="true">2003</div>
+                <div class="journey__content" data-reveal-journey>
+                  <p class="eyebrow"><em>Fundação</em></p>
+                  <h2 class="journey__title">Sistemas Delphi e regras críticas</h2>
+                  <p class="journey__text">Comecei no desenvolvimento desktop e construí uma base sólida em arquitetura, dados e operação. Foram anos entendendo sistemas que sustentam rotinas reais e não podem simplesmente parar.</p>
+                </div>
+                <div class="journey__facts">
+                  <p class="eyebrow" data-reveal-journey>// nesta fase</p>
+                  <ul data-reveal-journey data-reveal-children>
+                    <li>Delphi</li>
+                    <li>Object Pascal</li>
+                    <li>SQL</li>
+                    <li>sistemas de negócio maduros</li>
+                  </ul>
+                </div>
+              </article>
+              <article class="journey__panel">
+                <div class="journey__year outline" data-speed="0.7" aria-hidden="true">2022</div>
+                <div class="journey__content" data-reveal-journey>
+                  <p class="eyebrow"><em>Evolução</em></p>
+                  <h2 class="journey__title">Web, APIs e novas experiências</h2>
+                  <p class="journey__text">A partir de 2022, ampliei essa experiência para Node.js, Next.js, NestJS e Golang. A mudança não apagou o legado: trouxe ferramentas novas para evoluí-lo com segurança.</p>
+                </div>
+                <div class="journey__facts">
+                  <p class="eyebrow" data-reveal-journey>// nesta fase</p>
+                  <ul data-reveal-journey data-reveal-children>
+                    <li>Node.js</li>
+                    <li>Next.js</li>
+                    <li>NestJS</li>
+                    <li>Golang</li>
+                  </ul>
+                </div>
+              </article>
+              <article class="journey__panel">
+                <div class="journey__year outline" data-speed="0.6" aria-hidden="true">Hoje</div>
+                <div class="journey__content" data-reveal-journey>
+                  <p class="eyebrow"><em>Hoje</em></p>
+                  <h2 class="journey__title">Engenharia de ponta a ponta</h2>
+                  <p class="journey__text">Atuo da modelagem de dados à interface, passando por integração, infraestrutura, entrega e observabilidade. O trabalho só termina quando o software está utilizável e verificável em produção.</p>
+                </div>
+                <div class="journey__facts">
+                  <p class="eyebrow" data-reveal-journey>// nesta fase</p>
+                  <ul data-reveal-journey data-reveal-children>
+                    <li>modelagem de dados</li>
+                    <li>integração</li>
+                    <li>infraestrutura e entrega</li>
+                    <li>observabilidade</li>
+                  </ul>
+                </div>
+              </article>
+              <article class="journey__panel journey__panel--wide">
+                <div class="journey__year outline" data-speed="0.8" aria-hidden="true">Setores</div>
+                <div class="journey__content" data-reveal-journey>
+                  <p class="eyebrow"><em>Setores</em></p>
+                  <ul class="journey__tags">
+                    <li>Varejo</li>
+                    <li>Fiscal e contábil</li>
+                    <li>Bancário</li>
+                    <li>Educacional</li>
+                  </ul>
+                </div>
+              </article>
+            </div>
+            <div class="journey__progress" aria-hidden="true">
+              <span class="journey__progress-bar"></span>
+              <span class="journey__progress-dot"></span>
+            </div>
+          </div>
+        </section>
+
+        <section class="cases" id="cases" aria-labelledby="cases-title">
+          <div class="cases__heading" data-reveal data-reveal-children>
+            <p class="eyebrow">// cases</p>
+            <h2 class="section-title" id="cases-title">Três recortes do mesmo método.</h2>
+          </div>
+
+          <article class="case" data-order="1">
+            <div class="case__card">
+              <div class="case__dim" aria-hidden="true"></div>
+              <div class="case__side">
+                <div class="case__num outline" aria-hidden="true">01</div>
+                <span class="case__tag">Legado → Web</span>
+              </div>
+              <div class="case__main" data-reveal data-reveal-children>
+                <h3 class="case__title">Modernização sem ruptura</h3>
+                <p class="case__desc">Migração de sistemas Delphi e ERPs com regras críticas, evitando uma reescrita de alto risco.</p>
+                <a class="case__cta" href="/cases/modernizacao-sem-ruptura" data-soon>Ver case <span class="arrow" aria-hidden="true">→</span></a>
+              </div>
+              <div class="case__result" data-reveal>
+                <span class="eyebrow">Resultado</span>
+                <p>Regras preservadas e evolução por etapas, com risco operacional controlado.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="case" data-order="2">
+            <div class="case__card">
+              <div class="case__dim" aria-hidden="true"></div>
+              <div class="case__side">
+                <div class="case__num outline" aria-hidden="true">02</div>
+                <span class="case__tag">Fiscal &amp; integrações</span>
+              </div>
+              <div class="case__main" data-reveal data-reveal-children>
+                <h3 class="case__title">Operações fiscais rastreáveis</h3>
+                <p class="case__desc">Emissão e integrações em que schema, certificado, idempotência e disponibilidade formam um único contrato.</p>
+                <a class="case__cta" href="/cases/operacoes-fiscais-rastreaveis" data-soon>Ver case <span class="arrow" aria-hidden="true">→</span></a>
+              </div>
+              <div class="case__result" data-reveal>
+                <span class="eyebrow">Resultado</span>
+                <p>Operações repetíveis e diagnóstico rápido entre sistema, fiscal e infraestrutura.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="case" data-order="3">
+            <div class="case__card">
+              <div class="case__dim" aria-hidden="true"></div>
+              <div class="case__side">
+                <div class="case__num outline" aria-hidden="true">03</div>
+                <span class="case__tag">CI/CD &amp; plataforma</span>
+              </div>
+              <div class="case__main" data-reveal data-reveal-children>
+                <h3 class="case__title">Entrega que chega à produção</h3>
+                <p class="case__desc">Frontend, APIs, bancos e serviços que precisam continuar previsíveis depois que chegam à produção.</p>
+                <a class="case__cta" href="/cases/entrega-que-chega-a-producao" data-soon>Ver case <span class="arrow" aria-hidden="true">→</span></a>
+              </div>
+              <div class="case__result" data-reveal>
+                <span class="eyebrow">Resultado</span>
+                <p>Releases reproduzíveis e diagnóstico baseado em evidência, não em tentativa e erro.</p>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <section class="insight section" id="insights" aria-labelledby="insight-title">
+          <div class="insight__inner">
+            <p class="eyebrow" data-reveal>insight · Modernização de sistemas · 8 min</p>
+            <h2 class="insight__title" id="insight-title">Modernizar legado é preservar conhecimento, não copiar telas</h2>
+            <p class="insight__desc" data-reveal>Um método para transformar comportamento acumulado em contratos explícitos e evoluir sistemas críticos sem apostar tudo em uma reescrita.</p>
+            <div class="insight__links" data-reveal>
+              <a class="link-draw" href="/insights/modernizar-legado-e-preservar-conhecimento" data-soon>Ler insight</a>
+              <a class="link-quiet" href="/insights" data-soon>todos os textos →</a>
+            </div>
+          </div>
+        </section>
+
+        <section class="stack section" id="stack" aria-labelledby="stack-title">
+          <div class="stack__inner">
+            <div data-reveal data-reveal-children>
+              <p class="eyebrow">// stack</p>
+              <h2 class="section-title" id="stack-title">Ferramentas.</h2>
+            </div>
+            <div class="stack__grid">
+              <div class="stack__col">
+                <span class="eyebrow">Fundação</span>
+                <ul>
+                  <li class="stack__item" data-since="· desde 2003">Delphi</li>
+                  <li class="stack__item" data-since="· desde 2003">Object Pascal</li>
+                  <li class="stack__item" data-since="· desde 2003">PostgreSQL</li>
+                  <li class="stack__item" data-since="· desde 2003">SQL</li>
+                </ul>
+              </div>
+              <div class="stack__col">
+                <span class="eyebrow">Backend</span>
+                <ul>
+                  <li class="stack__item" data-since="· desde 2022">TypeScript</li>
+                  <li class="stack__item" data-since="· desde 2022">Node.js</li>
+                  <li class="stack__item" data-since="· desde 2022">NestJS</li>
+                  <li class="stack__item" data-since="· desde 2022">Golang</li>
+                  <li class="stack__item" data-since="· desde 2022">Python</li>
+                  <li class="stack__item" data-since="· desde 2022">REST</li>
+                  <li class="stack__item" data-since="· desde 2022">RabbitMQ</li>
+                  <li class="stack__item" data-since="· desde 2022">Redis</li>
+                </ul>
+              </div>
+              <div class="stack__col">
+                <span class="eyebrow">Web</span>
+                <ul>
+                  <li class="stack__item" data-since="· desde 2022">Next.js</li>
+                  <li class="stack__item" data-since="· desde 2022">React</li>
+                  <li class="stack__item" data-since="· desde 2022">Tailwind</li>
+                </ul>
+              </div>
+              <div class="stack__col">
+                <span class="eyebrow">Plataforma</span>
+                <ul>
+                  <li class="stack__item" data-since="· desde 2022">Docker</li>
+                  <li class="stack__item" data-since="· desde 2022">Traefik</li>
+                  <li class="stack__item" data-since="· desde 2022">CI/CD</li>
+                  <li class="stack__item" data-since="· desde 2022">GitLab</li>
+                  <li class="stack__item" data-since="· desde 2022">Terraform</li>
+                  <li class="stack__item" data-since="· desde 2022">AWS</li>
+                  <li class="stack__item" data-since="· desde 2022">Linux</li>
+                </ul>
+              </div>
+              <div class="stack__col">
+                <span class="eyebrow">Qualidade</span>
+                <ul>
+                  <li class="stack__item" data-since="· desde 2022">Jest</li>
+                  <li class="stack__item" data-since="· desde 2022">Swagger</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="secret section" id="sem-filtro" aria-labelledby="secret-title" hidden>
+          <div class="secret__inner">
+            <div class="secret__head">
+              <h2 id="secret-title">O que NÃO está no LinkedIn</h2>
+              <span class="secret__badge">root</span>
+            </div>
+            <ul class="secret__list">
+              <li class="secret__item"><b>&gt;</b><span>Duas décadas de Delphi. Não, não é typo. Duas. Décadas. Enquanto o mundo descobria JavaScript, eu estava no Object Pascal resolvendo pepino de cliente que achava que ERP era mágica.</span></li>
+              <li class="secret__item"><b>&gt;</b><span>Em 2022 cansei de ser dinossauro e migrei pra stack moderna. Node, Next, Go. Não foi transição suave - foi cirurgia de peito aberto sem anestesia.</span></li>
+              <li class="secret__item"><b>&gt;</b><span>Sou o cara que reclama de tudo. Do código porco que herdei, da arquitetura que "foi assim que deu", do prazo que alguém inventou sem me perguntar. Mas no fim do dia, a merda funciona. Sempre funciona.</span></li>
+              <li class="secret__item"><b>&gt;</b><span>Reunião que poderia ser email me dá urticária. Jira com 47 campos obrigatórios também.</span></li>
+              <li class="secret__item"><b>&gt;</b><span>Games são meu detox. Carros são o hobby que o salário de dev não paga.</span></li>
+              <li class="secret__item"><b>&gt;</b><span>Minha filosofia de código: se não roda, não existe. "Deveria funcionar" não paga boleto.</span></li>
+              <li class="secret__item"><b>&gt;</b><span>Zero paciência pra politicagem de escritório. Paciência infinita pra debugar às 3 da manhã aquele bug filho da puta que ninguém consegue reproduzir.</span></li>
+              <li class="secret__item"><b>&gt;</b><span>Se você chegou até aqui, provavelmente a gente se daria bem. Ou você me odiaria. Não tem meio termo.</span></li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="contact section" id="contato" aria-labelledby="contact-title">
+          <div class="contact__inner">
+            <p class="eyebrow" data-reveal>// contato</p>
+            <h2 class="contact__title" id="contact-title" data-reveal>Vamos conversar?</h2>
+            <button class="contact__email" type="button" data-email="eu@andersondapper.com.br" aria-label="Copiar email eu@andersondapper.com.br" data-reveal>
+              <span class="contact__email-size" aria-hidden="true">eu@andersondapper.com.br</span>
+              <span class="contact__email-text">eu@andersondapper.com.br</span>
+            </button>
+            <span class="contact__hint eyebrow" data-reveal>clique para copiar</span>
+            <div class="contact__links" data-reveal data-reveal-children>
+              <a class="mono" href="https://linkedin.com/in/andersondapper" target="_blank" rel="noopener noreferrer">LinkedIn<span class="arrow" aria-hidden="true">↗</span></a>
+              <a class="mono" href="https://github.com/toppermitz" target="_blank" rel="noopener noreferrer">GitHub<span class="arrow" aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+        </section>
+
+      </main>
+
+      <footer class="footer mono">
+        <span>© 2026 Anderson Dapper</span>
+        <span class="footer__cursor" aria-hidden="true">$ </span>
+      </footer>
+    </div>
+  </div>
+
+  <div class="toast" role="status" aria-live="polite"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollSmoother.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrambleTextPlugin.min.js"></script>
+  <script>
+  (() => {
+    if (typeof gsap === 'undefined') {
+      document.documentElement.classList.replace('js', 'no-js');
+      return;
+    }
+    gsap.registerPlugin(ScrollTrigger, ScrollSmoother, SplitText, ScrambleTextPlugin);
+
+    const $ = (sel, root = document) => root.querySelector(sel);
+    const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+    const root = document.documentElement;
+    const nav = $('.nav');
+    const SCRAMBLE_CHARS = '01<>/_';
+
+    const rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    let smoother = null;
+    let navReady = false;
+    let navHidden = false;
+    let marqueeTween = null;
+
+    /* ---------- Tema ---------- */
+    const themeToggle = $('.nav__theme');
+    const setTheme = (theme) => {
+      root.dataset.theme = theme;
+      themeToggle.setAttribute('aria-label', theme === 'dark' ? 'Ativar tema claro' : 'Ativar tema escuro');
+      try { localStorage.setItem('theme', theme); } catch (e) {}
+    };
+    const withTransition = (run) => {
+      if (document.startViewTransition) {
+        document.startViewTransition(run).finished.then(() => ScrollTrigger.refresh());
+        return;
+      }
+      root.classList.add('theme-fading');
+      run();
+      setTimeout(() => root.classList.remove('theme-fading'), 300);
+      ScrollTrigger.refresh();
+    };
+    const applyTheme = (theme) => withTransition(() => setTheme(theme));
+    setTheme(root.dataset.theme);
+    themeToggle.addEventListener('click', () => applyTheme(root.dataset.theme === 'dark' ? 'light' : 'dark'));
+
+    // Só troca data-palette; os overrides inline do easter egg (--accent) continuam valendo por cima.
+    const swatches = $$('.nav__swatch');
+    const setPalette = (palette) => {
+      root.dataset.palette = palette;
+      swatches.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.palette === palette)));
+      try { localStorage.setItem('palette', palette); } catch (e) {}
+    };
+    const applyPalette = (palette) => withTransition(() => setPalette(palette));
+    setPalette(root.dataset.palette || 'grafite');
+    swatches.forEach((b) => b.addEventListener('click', () => applyPalette(b.dataset.palette)));
+
+    /* ---------- Toast ---------- */
+    const toastEl = $('.toast');
+    let toastTimer;
+    const toast = (msg) => {
+      toastEl.textContent = msg;
+      if (gsap.getProperty(toastEl, 'opacity') < .05) gsap.set(toastEl, { y: rm ? 0 : 12 });
+      gsap.to(toastEl, { autoAlpha: 1, y: 0, duration: .3, ease: 'power3.out', overwrite: true });
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => gsap.to(toastEl, { autoAlpha: 0, y: rm ? 0 : 8, duration: .22, ease: 'power3.out' }), 3200);
+    };
+
+    $$('[data-soon]').forEach((link) => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        toast('$ rota fora do escopo do esboço: ' + link.getAttribute('href'));
+      });
+    });
+
+    /* ---------- Navegação por âncora ---------- */
+    const scrollToTarget = (target, offset = 'top 0px') => {
+      if (smoother) smoother.scrollTo(target, true, offset);
+      else target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+    $$('a[href^="#"]').forEach((link) => {
+      link.addEventListener('click', (e) => {
+        const target = $(link.getAttribute('href'));
+        if (!target) return;
+        e.preventDefault();
+        scrollToTarget(target);
+      });
+    });
+
+    const showNav = (duration = .4, delay = 0) => {
+      gsap.to(nav, { autoAlpha: 1, yPercent: 0, duration, delay, ease: 'power3.out', onStart: () => { navReady = true; } });
+    };
+
+    /* ---------- Hero ---------- */
+    const hero = $('.hero');
+    const heroEyebrow = $('.hero__eyebrow');
+    const heroName = $('.hero__name');
+    const heroTagline = $('.hero__tagline');
+    const heroRest = $$('.hero__sub, .hero__actions, .hero__scroll');
+
+    const heroIntro = () => {
+      heroEyebrow.textContent = '';
+      gsap.to(heroEyebrow, {
+        duration: 1.2, delay: .1,
+        scrambleText: { text: heroEyebrow.dataset.text, chars: SCRAMBLE_CHARS, speed: .5 },
+      });
+
+      SplitText.create(heroName, {
+        type: 'chars', mask: 'chars', autoSplit: true,
+        onSplit(self) {
+          gsap.set(heroName, { autoAlpha: 1 });
+          return gsap.from(self.chars, { yPercent: 110, duration: .9, ease: 'power4.out', stagger: .022, delay: .3 });
+        },
+      });
+
+      SplitText.create(heroTagline, {
+        type: 'words', mask: 'words', autoSplit: true,
+        onSplit(self) {
+          gsap.set(heroTagline, { autoAlpha: 1 });
+          return gsap.from(self.words, { yPercent: 110, duration: .8, ease: 'power4.out', stagger: .05, delay: 1.05 });
+        },
+      });
+
+      gsap.from(heroRest, { autoAlpha: 0, y: 16, duration: .7, ease: 'power4.out', stagger: .08, delay: 1.0 });
+      showNav(.4, 1.1);
+
+      gsap.timeline({ repeat: -1, defaults: { duration: .8, ease: 'power2.inOut' } })
+        .fromTo('.hero__scroll-line', { scaleY: 0, transformOrigin: '50% 0%' }, { scaleY: 1 })
+        .to('.hero__scroll-line', { scaleY: 0, transformOrigin: '50% 100%' });
+    };
+
+    const heroYearScrub = () => {
+      const yearEl = $('.hero__year');
+      const state = { value: 2003 };
+      gsap.to(state, {
+        value: 2026, ease: 'none', snap: { value: 1 },
+        scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: true },
+        onUpdate: () => {
+          const next = String(state.value);
+          if (yearEl.textContent !== next) yearEl.textContent = next;
+        },
+      });
+    };
+
+    /* ---------- Entradas de seção ---------- */
+    const revealGroup = (group, { duration, y }, triggerVars) => {
+      const items = group.hasAttribute('data-reveal-children') ? Array.from(group.children) : [group];
+      gsap.from(items, {
+        autoAlpha: 0, y, duration, ease: 'power4.out', stagger: .06,
+        scrollTrigger: { trigger: group, once: true, ...triggerVars },
+      });
+    };
+    const revealSections = (vars, { journeyVertical }) => {
+      $$('[data-reveal]').forEach((group) => revealGroup(group, vars, { start: 'top 80%' }));
+      if (journeyVertical) $$('[data-reveal-journey]').forEach((group) => revealGroup(group, vars, { start: 'top 80%' }));
+    };
+
+    /* ---------- Marquee ---------- */
+    let marqueeSpeedTo = null;
+    let marqueeReset = null;
+    const marqueeStart = () => {
+      marqueeTween = gsap.to('.marquee__track', { xPercent: -50, repeat: -1, ease: 'none', duration: 22 });
+      marqueeSpeedTo = gsap.quickTo(marqueeTween, 'timeScale', { duration: .2, ease: 'power2.out' });
+    };
+    const marqueeBoost = (velocity) => {
+      if (!marqueeSpeedTo) return;
+      marqueeSpeedTo(Math.min(1 + Math.abs(velocity) / 1500, 3.5));
+      if (marqueeReset) marqueeReset.kill();
+      marqueeReset = gsap.delayedCall(.15, () => marqueeSpeedTo(1));
+    };
+
+    const globalScrollWatcher = ({ hideNav }) => {
+      ScrollTrigger.create({
+        start: 0, end: 'max',
+        onUpdate(self) {
+          marqueeBoost(self.getVelocity());
+          const edge = self.scroll() > 40 ? '.6' : '0';
+          if (nav.style.getPropertyValue('--nav-edge') !== edge) nav.style.setProperty('--nav-edge', edge);
+          if (!hideNav || !navReady) return;
+          const hide = self.direction === 1 && self.scroll() > 120;
+          if (hide === navHidden) return;
+          navHidden = hide;
+          gsap.to(nav, { yPercent: hide ? -100 : 0, duration: .25, ease: 'power3.out', overwrite: true });
+        },
+      });
+    };
+
+    /* ---------- Transformação ---------- */
+    const transformSection = $('.transform');
+    const wordFrom = $('.transform__word--from');
+    const wordTo = $('.transform__word--to');
+    const PIN_DISTANCE = '+=250%';
+
+    const buildSeamTimeline = () => {
+      const tl = gsap.timeline({ paused: true, defaults: { ease: 'none' } });
+      tl.fromTo('.code__layer--ts', { clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0% 0 0)', duration: 1 }, 0)
+        .fromTo('.code__seam', { x: 0 }, { x: () => $('.code__layers').clientWidth, duration: 1 }, 0)
+        .to('.code__file--from', { autoAlpha: 0, duration: .08 }, .46)
+        .to('.code__file--to', { autoAlpha: 1, duration: .08 }, .5)
+        .to('.transform__check', { opacity: 1, duration: .1, stagger: .28 }, .22);
+      return tl;
+    };
+
+    // Cada palavra ganha seu próprio SplitText; a animação nasce em onSplit e recebe o mesmo trigger do pin.
+    const swapWords = (triggerVars, timeOffset) => {
+      // Sem mask por char: o clip é do .transform__swap. Saída e entrada compartilham offset, duração e stagger
+      // para nunca existir um instante sem palavra visível.
+      const motion = { duration: triggerVars.scrub ? .16 : .3, stagger: { each: .01 }, ease: triggerVars.scrub ? 'none' : 'power4.out' };
+      const build = (el, from, to, at) => SplitText.create(el, {
+        type: 'chars', autoSplit: true,
+        onSplit(self) {
+          const tl = gsap.timeline({ scrollTrigger: { trigger: transformSection, ...triggerVars } });
+          tl.to({}, { duration: 1 }, 0)
+            .fromTo(self.chars, from, { ...to, ...motion }, at);
+          return tl;
+        },
+      });
+      build(wordFrom, { yPercent: 0, autoAlpha: 1, filter: 'blur(0px)' }, { yPercent: -60, autoAlpha: 0, filter: 'blur(2px)' }, timeOffset);
+      build(wordTo, { yPercent: 60, autoAlpha: 0, filter: 'blur(2px)' }, { yPercent: 0, autoAlpha: 1, filter: 'blur(0px)' }, timeOffset + .03);
+    };
+
+    const transformPinned = () => {
+      const seam = buildSeamTimeline();
+      ScrollTrigger.create({
+        trigger: transformSection, start: 'top top', end: PIN_DISTANCE,
+        pin: true, scrub: true, animation: seam, invalidateOnRefresh: true,
+      });
+      swapWords({ start: 'top top', end: PIN_DISTANCE, scrub: true }, .42);
+    };
+
+    const transformTimed = () => {
+      const seam = buildSeamTimeline().duration(2.4);
+      ScrollTrigger.create({ trigger: transformSection, start: 'top 60%', once: true, onEnter: () => seam.play() });
+      swapWords({ start: 'top 60%', once: true }, 1.1);
+    };
+
+    /* ---------- Trajetória ---------- */
+    const journey = $('.journey');
+    const journeyTrack = $('.journey__track');
+
+    const journeyHorizontal = () => {
+      const distance = () => journeyTrack.scrollWidth - window.innerWidth;
+      const tl = gsap.timeline({
+        defaults: { ease: 'none' },
+        scrollTrigger: {
+          trigger: journey, start: 'top top', end: () => '+=' + distance(),
+          pin: true, scrub: true, invalidateOnRefresh: true,
+        },
+      });
+      tl.to(journeyTrack, { x: () => -distance() }, 0)
+        .to('.journey__progress-bar', { scaleX: 1 }, 0)
+        .to('.journey__progress-dot', { x: () => $('.journey__progress').clientWidth - 10 }, 0);
+
+      // O primeiro painel já está em cena quando o pin começa; com containerAnimation seu start cairia antes do
+      // início do container e nunca disparava. Ele usa trigger vertical comum; os demais seguem o eixo horizontal.
+      const firstPanel = $('.journey__panel');
+      $$('[data-reveal-journey]').forEach((group) => {
+        const inFirstPanel = group.closest('.journey__panel') === firstPanel;
+        revealGroup(group, { duration: .7, y: 24 }, inFirstPanel
+          ? { start: 'top 80%' }
+          : { containerAnimation: tl, start: 'left 80%' });
+      });
+
+      $$('.journey__year').forEach((year) => {
+        const speed = parseFloat(year.dataset.speed) || 1;
+        const shift = (1 - speed) * 60;
+        gsap.fromTo(year, { xPercent: shift }, {
+          xPercent: -shift, ease: 'none',
+          scrollTrigger: {
+            trigger: year.closest('.journey__panel'), containerAnimation: tl,
+            start: 'left right', end: 'right left', scrub: true,
+          },
+        });
+      });
+    };
+
+    /* ---------- Cases ---------- */
+    // ScrollSmoother transforma o conteúdo, o que anula position: sticky; pin com pinSpacing: false reproduz o mesmo empilhamento.
+    const casesStacked = () => {
+      const section = $('.cases');
+      const panels = $$('.case');
+      panels.forEach((panel, i) => {
+        if (i === panels.length - 1) return;
+        ScrollTrigger.create({ trigger: panel, start: 'top top', endTrigger: section, end: 'bottom bottom', pin: true, pinSpacing: false });
+        // O escurecimento é um overlay cuja força vem do CSS (--card-dim-opacity por tema); o scrub só anima opacity 0 → 1.
+        gsap.timeline({ scrollTrigger: { trigger: panels[i + 1], start: 'top bottom', end: 'top top', scrub: true } })
+          .to($('.case__card', panel), { scale: .94, ease: 'none' }, 0)
+          .to($('.case__dim', panel), { opacity: 1, ease: 'none' }, 0);
+      });
+    };
+
+    /* ---------- Insight ---------- */
+    const insightTitle = $('.insight__title');
+    const insightReveal = () => {
+      SplitText.create(insightTitle, {
+        type: 'lines', mask: 'lines', linesClass: 'line', autoSplit: true,
+        onSplit(self) {
+          return gsap.from(self.lines, {
+            yPercent: 110, duration: .9, ease: 'power4.out', stagger: .08,
+            scrollTrigger: { trigger: insightTitle, start: 'top 80%', once: true },
+          });
+        },
+      });
+    };
+
+    /* ---------- Stack ---------- */
+    const stackReveal = () => {
+      gsap.from('.stack__item', {
+        autoAlpha: 0, y: 12, duration: .7, ease: 'power4.out',
+        stagger: { grid: 'auto', from: 'center', amount: .8 },
+        scrollTrigger: { trigger: '.stack__grid', start: 'top 75%', once: true },
+      });
+    };
+
+    /* ---------- Contato ---------- */
+    const emailBtn = $('.contact__email');
+    const emailText = $('.contact__email-text');
+    const email = emailBtn.dataset.email;
+    let copyTl = null;
+
+    emailBtn.addEventListener('click', () => {
+      if (navigator.clipboard) navigator.clipboard.writeText(email).catch(() => {});
+      if (rm) {
+        if (copyTl) copyTl.kill();
+        emailText.textContent = 'copiado ✓';
+        copyTl = gsap.delayedCall(1.2, () => { emailText.textContent = email; });
+        return;
+      }
+      if (copyTl && copyTl.isActive()) { copyTl.seek(.5).play(); return; }
+      copyTl = gsap.timeline()
+        .to(emailText, { duration: .5, scrambleText: { text: 'copiado ✓', chars: SCRAMBLE_CHARS, speed: .6 } })
+        .to(emailText, { duration: .6, scrambleText: { text: email, chars: SCRAMBLE_CHARS, speed: .6 } }, '+=.7');
+    });
+
+    /* ---------- Easter egg: sudo su ---------- */
+    const SECRET = 'sudo su';
+    const secretSection = $('#sem-filtro');
+    let typed = '';
+    let unlocked = false;
+    let glitching = false;
+
+    const finishUnlock = () => {
+      glitching = false;
+      unlocked = true;
+      root.style.setProperty('--accent', '#39ff8a');
+      root.style.setProperty('--accent-ink', '#06110a');
+      secretSection.hidden = false;
+      ScrollTrigger.refresh();
+      scrollToTarget(secretSection, 'top 80px');
+      gsap.from('.secret__item', { autoAlpha: 0, x: rm ? 0 : -14, duration: rm ? .2 : .6, ease: 'power4.out', stagger: .05, delay: .35 });
+      toast('$ sudo su — acesso liberado');
+    };
+
+    const glitch = () => {
+      glitching = true;
+      const content = $('#smooth-content');
+      const bands = [
+        'polygon(0 0,100% 0,100% 18%,0 18%,0 24%,100% 24%,100% 61%,0 61%,0 69%,100% 69%,100% 100%,0 100%)',
+        'polygon(0 0,100% 0,100% 8%,0 8%,0 15%,100% 15%,100% 44%,0 44%,0 52%,100% 52%,100% 100%,0 100%)',
+        'polygon(0 0,100% 0,100% 30%,0 30%,0 37%,100% 37%,100% 78%,0 78%,0 86%,100% 86%,100% 100%,0 100%)',
+      ];
+      const tl = gsap.timeline({ onComplete: finishUnlock });
+      bands.forEach((band, i) => {
+        tl.set(content, { clipPath: band, x: i % 2 ? -6 : 6 })
+          .to({}, { duration: .09 })
+          .set(content, { clipPath: 'none', x: 0 })
+          .to({}, { duration: .06 });
+      });
+    };
+
+    window.addEventListener('keydown', (e) => {
+      if (unlocked || glitching) return;
+      if (e.metaKey || e.ctrlKey || e.altKey || e.repeat) return;
+      const t = e.target;
+      if (t instanceof HTMLInputElement || t instanceof HTMLTextAreaElement || t instanceof HTMLSelectElement) return;
+      if (t instanceof HTMLElement && (t.isContentEditable || t.closest('[contenteditable="true"]'))) return;
+      const key = e.key.toLowerCase();
+      if (key.length !== 1) return;
+      if (key === ' ' && typed.endsWith('sudo')) e.preventDefault();
+      typed = (typed + key).slice(-SECRET.length);
+      if (typed !== SECRET) return;
+      typed = '';
+      if (rm) finishUnlock();
+      else glitch();
+    });
+
+    /* ---------- Contextos ---------- */
+    const mm = gsap.matchMedia();
+
+    mm.add('(prefers-reduced-motion: no-preference) and (min-width: 901px)', () => {
+      smoother = ScrollSmoother.create({ smooth: .8, effects: true, effectsPrefix: 'smooth-', normalizeScroll: true });
+      gsap.set(nav, { yPercent: -100 });
+      heroIntro();
+      heroYearScrub();
+      marqueeStart();
+      globalScrollWatcher({ hideNav: true });
+      transformPinned();
+      journeyHorizontal();
+      casesStacked();
+      insightReveal();
+      stackReveal();
+      revealSections({ duration: .7, y: 24 }, { journeyVertical: false });
+      return () => { smoother = null; };
+    });
+
+    mm.add('(prefers-reduced-motion: no-preference) and (max-width: 900px)', () => {
+      smoother = ScrollSmoother.create({ smooth: .8, effects: true, effectsPrefix: 'smooth-', normalizeScroll: true });
+      gsap.set(nav, { yPercent: -100 });
+      heroIntro();
+      heroYearScrub();
+      marqueeStart();
+      globalScrollWatcher({ hideNav: true });
+      transformTimed();
+      insightReveal();
+      stackReveal();
+      revealSections({ duration: .7, y: 24 }, { journeyVertical: true });
+      return () => { smoother = null; };
+    });
+
+    mm.add('(prefers-reduced-motion: reduce)', () => {
+      gsap.set([heroName, heroTagline, ...heroRest], { autoAlpha: 1 });
+      gsap.from([heroEyebrow, heroName, heroTagline, ...heroRest], { autoAlpha: 0, duration: .2, stagger: .05 });
+      $('.hero__year').textContent = '2026';
+      showNav(.2);
+      revealSections({ duration: .2, y: 0 }, { journeyVertical: true });
+    });
+
+    // Mola amortecida integrada no ticker. response = período natural (s); damping 1 = crítico, sem overshoot.
+    // response .4 → k ≈ 247, c ≈ 31.4. Só o alvo muda por evento; o ticker escreve a propriedade.
+    const createSpring = (el, prop, { response = .4, damping = 1 } = {}) => {
+      const k = (2 * Math.PI / response) ** 2;
+      const c = 2 * damping * Math.sqrt(k);
+      const set = gsap.quickSetter(el, prop, 'px');
+      const state = { value: 0, velocity: 0, target: 0, running: false };
+      const tick = (time, deltaMs) => {
+        const dt = Math.min(deltaMs / 1000, 1 / 30);
+        const accel = -k * (state.value - state.target) - c * state.velocity;
+        state.velocity += accel * dt;
+        state.value += state.velocity * dt;
+        if (Math.abs(state.value - state.target) < .05 && Math.abs(state.velocity) < .05) {
+          state.value = state.target;
+          state.velocity = 0;
+          state.running = false;
+          gsap.ticker.remove(tick);
+        }
+        set(state.value);
+      };
+      return {
+        to(target) {
+          state.target = target;
+          if (!state.running) { state.running = true; gsap.ticker.add(tick); }
+        },
+        kill() { gsap.ticker.remove(tick); state.running = false; },
+      };
+    };
+
+    mm.add('(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)', () => {
+      const sun = $('.hero__sun');
+      gsap.set(sun, { xPercent: -50, yPercent: -50 });
+      const sunSpring = { x: createSpring(sun, 'x', { response: .4 }), y: createSpring(sun, 'y', { response: .4 }) };
+
+      const magnets = $$('.magnetic').map((el) => ({
+        el,
+        x: createSpring(el, 'x', { response: .3 }),
+        y: createSpring(el, 'y', { response: .3 }),
+        rect: null,
+        inside: false,
+      }));
+
+      let heroRect = null;
+      const pointer = { x: 0, y: 0, dirty: false };
+      const cacheRects = () => {
+        heroRect = hero.getBoundingClientRect();
+        magnets.forEach((m) => { m.rect = m.el.getBoundingClientRect(); });
+      };
+
+      const onMove = (e) => { pointer.x = e.clientX; pointer.y = e.clientY; pointer.dirty = true; };
+
+      const magnetTick = () => {
+        if (!pointer.dirty || !heroRect) return;
+        pointer.dirty = false;
+        if (pointer.y >= heroRect.top && pointer.y <= heroRect.bottom) {
+          sunSpring.x.to(pointer.x - (heroRect.left + heroRect.width / 2));
+          sunSpring.y.to(pointer.y - (heroRect.top + heroRect.height / 2));
+        }
+        magnets.forEach((m) => {
+          const r = m.rect;
+          const dx = pointer.x - (r.left + r.width / 2);
+          const dy = pointer.y - (r.top + r.height / 2);
+          const gapX = Math.max(Math.abs(dx) - r.width / 2, 0);
+          const gapY = Math.max(Math.abs(dy) - r.height / 2, 0);
+          const dist = Math.hypot(gapX, gapY);
+          if (dist < 80) {
+            m.inside = true;
+            const strength = 1 - dist / 80;
+            const len = Math.hypot(dx, dy) || 1;
+            m.x.to((dx / len) * 12 * strength);
+            m.y.to((dy / len) * 12 * strength);
+          } else if (m.inside) {
+            m.inside = false;
+            m.x.to(0);
+            m.y.to(0);
+          }
+        });
+      };
+
+      cacheRects();
+      hero.addEventListener('pointerenter', cacheRects);
+      window.addEventListener('resize', cacheRects);
+      ScrollTrigger.addEventListener('scrollEnd', cacheRects);
+      window.addEventListener('pointermove', onMove, { passive: true });
+      gsap.ticker.add(magnetTick);
+      return () => {
+        hero.removeEventListener('pointerenter', cacheRects);
+        window.removeEventListener('resize', cacheRects);
+        ScrollTrigger.removeEventListener('scrollEnd', cacheRects);
+        window.removeEventListener('pointermove', onMove);
+        gsap.ticker.remove(magnetTick);
+        [sunSpring.x, sunSpring.y, ...magnets.flatMap((m) => [m.x, m.y])].forEach((sp) => sp.kill());
+      };
+    });
+
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => ScrollTrigger.refresh());
+    }
+  })();
+  </script>
+</body>
+</html>
