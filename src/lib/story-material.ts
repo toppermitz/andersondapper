@@ -108,11 +108,37 @@ function createLettering(font: string) {
 
 export type StoryMaterial = { render: (time: number) => void; destroy: () => void }
 
+function waitForImage(image: HTMLImageElement) {
+  if (image.complete) {
+    if (image.naturalWidth > 0) return Promise.resolve()
+    return Promise.reject(new Error('Story image unavailable'))
+  }
+  return new Promise<void>((resolve, reject) => {
+    image.addEventListener('load', () => resolve(), { once: true })
+    image.addEventListener('error', () => reject(new Error('Story image unavailable')), { once: true })
+  })
+}
+
 export async function createStoryMaterial(host: HTMLElement): Promise<StoryMaterial> {
   const app = new Application()
-  const image = host.querySelector('img')
-  if (!(image instanceof HTMLImageElement)) throw new Error('Story image unavailable')
-  await Promise.all([image.decode(), document.fonts.ready])
+  const storyImage = host.querySelector('img')
+  let image: HTMLImageElement
+  if (storyImage instanceof HTMLImageElement) {
+    try {
+      await Promise.all([storyImage.decode(), document.fonts.ready])
+      image = storyImage
+    } catch {
+      image = new Image()
+      image.src = storyImage.currentSrc || storyImage.src || '/images/software-bridge.png'
+      await Promise.all([waitForImage(image), document.fonts.ready])
+      await image.decode()
+    }
+  } else {
+    image = new Image()
+    image.src = '/images/software-bridge.png'
+    await Promise.all([waitForImage(image), document.fonts.ready])
+    await image.decode()
+  }
   const font = getComputedStyle(host).getPropertyValue('--font-display').trim() || 'sans-serif'
   const picture = Texture.from(image, true)
   const lettering = Texture.from(createLettering(font), true)
