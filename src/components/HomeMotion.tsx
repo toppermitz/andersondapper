@@ -256,6 +256,7 @@ export default function HomeMotion({ children, className }: { children: ReactNod
     window.addEventListener('touchstart', cancelScroll, { passive: true })
     window.addEventListener('keydown', onKey)
     window.addEventListener('hashchange', restoreHash)
+    window.addEventListener('popstate', restoreHash)
     reduce.addEventListener('change', cancelScroll)
 
     return () => {
@@ -269,6 +270,7 @@ export default function HomeMotion({ children, className }: { children: ReactNod
       window.removeEventListener('touchstart', cancelScroll)
       window.removeEventListener('keydown', onKey)
       window.removeEventListener('hashchange', restoreHash)
+      window.removeEventListener('popstate', restoreHash)
       reduce.removeEventListener('change', cancelScroll)
       document.documentElement.style.scrollBehavior = previousBehavior
       links.forEach(link => link.removeAttribute('aria-current'))

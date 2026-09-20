@@ -110,8 +110,8 @@ export type StoryMaterial = { render: (time: number) => void; destroy: () => voi
 
 export async function createStoryMaterial(host: HTMLElement): Promise<StoryMaterial> {
   const app = new Application()
-  const image = new Image()
-  image.src = '/images/software-bridge.png'
+  const image = host.querySelector('img')
+  if (!(image instanceof HTMLImageElement)) throw new Error('Story image unavailable')
   await Promise.all([image.decode(), document.fonts.ready])
   const font = getComputedStyle(host).getPropertyValue('--font-display').trim() || 'sans-serif'
   const picture = Texture.from(image, true)
@@ -143,7 +143,11 @@ export async function createStoryMaterial(host: HTMLElement): Promise<StoryMater
     filter.resources.sceneUniforms.uniforms.uSceneTime = time
     app.render()
   }
-  const contextLost = () => { contextAvailable = false; delete host.dataset.material }
+  const contextLost = (event: Event) => {
+    event.preventDefault()
+    contextAvailable = false
+    delete host.dataset.material
+  }
   const contextRestored = () => {
     contextAvailable = true
     render(lastTime)
