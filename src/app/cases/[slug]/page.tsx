@@ -3,7 +3,6 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { FaArrowLeft, FaArrowRight, FaCheckCircle } from 'react-icons/fa'
 import SectionHeading from '../../../components/SectionHeading'
-import ThemeToggle from '../../../components/ThemeToggle'
 import { getPublishedCaseStudy, publishedCaseStudies } from '../../../data/case-studies'
 import CaseStudyHero, { caseStudyVisuals } from './CaseStudyHero'
 
@@ -127,7 +126,6 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
           />
           Voltar aos cases
         </Link>
-        <ThemeToggle />
       </nav>
 
       <CaseStudyHero caseStudy={caseStudy} />

@@ -8,7 +8,6 @@ import {
   FaGamepad,
 } from 'react-icons/fa'
 import SectionHeading from '../../components/SectionHeading'
-import ThemeToggle from '../../components/ThemeToggle'
 import { journey, pageDescription, sectors, workingPrinciples } from './content'
 
 export const metadata: Metadata = {
@@ -56,7 +55,6 @@ export default function AboutPage() {
           />
           Voltar para a página inicial
         </Link>
-        <ThemeToggle />
       </nav>
 
       <header className="relative mb-16 overflow-hidden rounded-3xl border border-slate-200/70 bg-white/55 px-5 py-10 dark:border-slate-700/70 dark:bg-slate-900/45 sm:px-8 sm:py-14 lg:px-12">

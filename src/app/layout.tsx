@@ -1,13 +1,14 @@
 import './globals.css'
-import { Providers } from '../context/ThemeContext'
 import SiteAnalytics from '../components/SiteAnalytics'
-import { Inter } from 'next/font/google'
+import { Manrope, Sora } from 'next/font/google'
 
-const inter = Inter({ 
+const manrope = Manrope({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-inter'
+  variable: '--font-body'
 })
+
+const sora = Sora({ subsets: ['latin'], display: 'swap', variable: '--font-display' })
 
 import type { Metadata } from 'next'
 
@@ -109,17 +110,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="pt-br"
-      className={inter.variable}
+      className={`${manrope.variable} ${sora.variable} dark`}
       data-scroll-behavior="smooth"
       suppressHydrationWarning
     >
-      <body className="font-sans bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 min-h-screen overflow-x-hidden" suppressHydrationWarning>
+      <body className="bg-[#101c2d] text-slate-100 min-h-screen overflow-x-hidden">
         <script
           id="site-structured-data"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: serializedSiteStructuredData }}
         />
-        <Providers>
           <a
             href="#conteudo-principal"
             className="pressable fixed left-4 top-4 z-[100] -translate-y-20 rounded-xl bg-slate-950 px-4 py-3 text-sm font-semibold text-white shadow-xl focus:translate-y-0 focus:outline-none focus:ring-2 focus:ring-cyan-400 dark:bg-white dark:text-slate-950"
@@ -139,12 +139,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               tabIndex={-1}
               className="relative z-10 focus:outline-none"
             >
-              <div className="mx-auto max-w-5xl px-4 pb-8 pt-4 sm:px-6 sm:pb-16 sm:pt-8 lg:px-8">
+              <div className="site-shell mx-auto max-w-5xl px-4 pb-8 pt-4 sm:px-6 sm:pb-16 sm:pt-8 lg:px-8">
                 {children}
               </div>
             </main>
           </div>
-        </Providers>
         <SiteAnalytics />
       </body>
     </html>

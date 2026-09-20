@@ -6,6 +6,11 @@
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
 }
 
+.site-shell:has(> .portfolio-home) {
+  max-width: none;
+  padding: 0;
+}
+
 /* ========================================
    GLOBAL FOUNDATION
    ======================================== */
@@ -23,11 +28,16 @@ html.dark {
 }
 
 body {
+  font-family: var(--font-body), sans-serif;
   font-feature-settings: 'cv11', 'ss01';
   font-optical-sizing: auto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   transition: background-color 180ms ease, color 180ms ease;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display), sans-serif;
 }
 
 /* ========================================

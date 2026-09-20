@@ -3,7 +3,6 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { FaArrowLeft, FaArrowRight, FaCheckCircle, FaClock } from 'react-icons/fa'
 import SectionHeading from '../../../components/SectionHeading'
-import ThemeToggle from '../../../components/ThemeToggle'
 import { getPublishedInsight, publishedInsights } from '../../../data/insights'
 
 interface InsightPageProps {
@@ -127,7 +126,6 @@ export default async function InsightPage({ params }: InsightPageProps) {
           />
           Voltar aos insights
         </Link>
-        <ThemeToggle />
       </nav>
 
       <article>
