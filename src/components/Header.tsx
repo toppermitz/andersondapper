@@ -1,7 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { FaArrowRight } from 'react-icons/fa'
-import ThemeToggle from './ThemeToggle'
 
 export default function Header() {
   return (
@@ -16,7 +15,6 @@ export default function Header() {
           priority
           className="h-12 w-auto justify-self-center dark:brightness-0 dark:invert sm:h-14"
         />
-        <ThemeToggle />
       </div>
 
       <div className="relative z-10 flex flex-col items-center px-1 pb-4 text-center sm:px-8 sm:pb-8">

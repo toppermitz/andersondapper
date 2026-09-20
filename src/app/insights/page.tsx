@@ -2,7 +2,6 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { FaArrowLeft, FaArrowRight, FaBookOpen, FaClock } from 'react-icons/fa'
 import SectionHeading from '../../components/SectionHeading'
-import ThemeToggle from '../../components/ThemeToggle'
 import { publishedInsights } from '../../data/insights'
 
 const pageDescription =
@@ -59,7 +58,6 @@ export default function InsightsPage() {
           />
           Voltar para a página inicial
         </Link>
-        <ThemeToggle />
       </nav>
 
       <header className="relative mb-16 overflow-hidden rounded-3xl border border-slate-200/70 bg-white/55 px-5 py-10 dark:border-slate-700/70 dark:bg-slate-900/45 sm:px-8 sm:py-14 lg:px-12">
