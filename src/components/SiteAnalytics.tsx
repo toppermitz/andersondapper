@@ -26,18 +26,6 @@ function classifyLink(link: HTMLAnchorElement) {
     return 'github'
   }
 
-  if (destination.pathname === '/cases') {
-    return 'cases_hub'
-  }
-
-  if (destination.pathname.startsWith('/cases/')) {
-    return 'case_detail'
-  }
-
-  if (destination.hash === '#contato') {
-    return 'contact_section'
-  }
-
   return null
 }
 
@@ -64,7 +52,7 @@ export default function SiteAnalytics() {
 
       const label = link.textContent?.trim().replace(/\s+/g, ' ').slice(0, 80) || 'link'
 
-      track('CTA Click', {
+      track('Link Click', {
         target,
         source: pathname,
         label,

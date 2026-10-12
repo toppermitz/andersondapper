@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "packageManager": "pnpm@10.34.5",
-  "description": "A Next.js project with Tailwind CSS and TypeScript",
+  "description": "Site pessoal de Ânderson Dapper.",
   "engines": {
     "node": ">=22.0.0"
   },

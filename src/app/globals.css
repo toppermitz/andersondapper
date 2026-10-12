@@ -2,151 +2,65 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-:root {
-  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-/* ========================================
-   GLOBAL FOUNDATION
-   ======================================== */
-
 html {
   scroll-behavior: smooth;
+  color-scheme: light;
 }
 
 html.dark {
   color-scheme: dark;
 }
 
-* {
-  box-sizing: border-box;
-}
-
 body {
-  font-feature-settings: 'cv11', 'ss01';
+  font-feature-settings: 'kern';
   font-optical-sizing: auto;
+  text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   transition: background-color 180ms ease, color 180ms ease;
 }
 
-/* ========================================
-   INTERACTION FOUNDATION
-   ======================================== */
-
-.pressable {
-  touch-action: manipulation;
-  -webkit-tap-highlight-color: transparent;
-  transition:
-    transform 160ms var(--ease-out),
-    box-shadow 200ms ease,
-    background-color 160ms ease,
-    border-color 160ms ease,
-    color 160ms ease,
-    opacity 160ms ease;
+.site-link {
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+  text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
 }
 
-.theme-icon {
-  transition:
-    transform 180ms var(--ease-out),
-    opacity 160ms ease,
-    filter 180ms ease;
+.site-link:hover {
+  text-decoration-color: currentColor;
 }
 
-.hover-reveal {
-  opacity: 0;
-  transition: opacity 160ms ease;
+.skip-link {
+  position: fixed;
+  left: 1rem;
+  top: 1rem;
+  z-index: 100;
+  transform: translateY(-150%);
+  border-radius: 0.25rem;
+  background: #1c1917;
+  padding: 0.6rem 0.9rem;
+  font-size: 0.875rem;
+  color: #fafaf9;
 }
 
-.interactive-arrow {
-  transition: transform 160ms var(--ease-out);
+.skip-link:focus {
+  transform: translateY(0);
 }
 
-@media (hover: hover) and (pointer: fine) {
-  .pressable-lift:hover {
-    transform: translateY(-2px);
-  }
-
-  .group:hover .hover-reveal {
-    opacity: 1;
-  }
-
-  .group:hover .interactive-arrow {
-    transform: translateX(2px);
-  }
+html.dark .skip-link {
+  background: #fafaf9;
+  color: #1c1917;
 }
-
-.pressable:active {
-  transform: scale(0.97);
-  transition-duration: 100ms;
-}
-
-/* ========================================
-   BRAND GRADIENT
-   ======================================== */
-
-.gradient-text-animated {
-  background: linear-gradient(-45deg, #06b6d4, #3b82f6, #8b5cf6, #3b82f6, #06b6d4);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* ========================================
-   ENTRANCE ANIMATIONS
-   ======================================== */
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes scaleIn {
-  from {
-    opacity: 0;
-    transform: scale(0.96);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-.animate-fade-in-up {
-  animation: fadeInUp 280ms var(--ease-out) forwards;
-}
-
-.animate-fade-in {
-  animation: fadeIn 220ms var(--ease-out) forwards;
-}
-
-.animate-scale-in {
-  animation: scaleIn 220ms var(--ease-out) forwards;
-}
-
-/* ========================================
-   SELECTION STYLES
-   ======================================== */
 
 ::selection {
-  background: rgba(139, 92, 246, 0.3);
+  background: #e7e5e4;
   color: inherit;
 }
 
-/* ========================================
-   SCROLLBAR STYLES
-   ======================================== */
+html.dark ::selection {
+  background: #44403c;
+}
 
 ::-webkit-scrollbar {
   width: 8px;
@@ -158,26 +72,22 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #3b82f6, #8b5cf6);
+  background: #d6d3d1;
   border-radius: 4px;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #2563eb, #7c3aed);
+html.dark ::-webkit-scrollbar-thumb {
+  background: #44403c;
 }
-
-/* ========================================
-   FOCUS STATES
-   ======================================== */
 
 *:focus-visible {
-  outline: 2px solid #8b5cf6;
-  outline-offset: 2px;
+  outline: 2px solid #44403c;
+  outline-offset: 3px;
 }
 
-/* ========================================
-   RESPONSIVE UTILITIES
-   ======================================== */
+html.dark *:focus-visible {
+  outline-color: #d6d3d1;
+}
 
 @media (prefers-reduced-motion: reduce) {
   html {
@@ -192,28 +102,6 @@ body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
-  }
-
-  .animate-fade-in-up,
-  .animate-fade-in,
-  .animate-scale-in {
-    animation-name: fadeIn !important;
-    animation-duration: 160ms !important;
-    transform: none !important;
-  }
-
-  .pressable:active,
-  .pressable-lift:hover,
-  .group:hover .interactive-arrow,
-  .theme-icon {
-    transform: none !important;
-  }
-}
-
-@media (prefers-reduced-transparency: reduce) {
-  .backdrop-blur-sm {
-    -webkit-backdrop-filter: none !important;
-    backdrop-filter: none !important;
   }
 }
 
