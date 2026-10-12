@@ -1,32 +1,136 @@
 import Link from 'next/link'
+import HomeMotion from '@/components/HomeMotion'
+import Logo from '@/components/Logo'
+import Photo from '@/components/Photo'
 import ProfileLinks from '@/components/ProfileLinks'
+import SplitText from '@/components/SplitText'
+import { photoAvailable, photos } from '@/lib/images'
+
+const origem =
+  'Programo desde 1999, quando comecei com Clipper aos 14 anos. De lá pra cá trabalhei com varejo, sistemas escolares, contabilidade, fiscal, banco e indústria, quase sempre em Delphi e, nos últimos anos, cada vez mais na web.'
+
+const hoje =
+  'Hoje sou tech lead numa empresa de software. Lidero a reescrita de um sistema legado grande, de Delphi para NestJS, Next.js e PostgreSQL, e acabo cuidando de boa parte da infraestrutura também.'
+
+const vagos =
+  'Nas horas vagas estudo IA e segurança e uso o que aprendo pra resolver problemas meus.'
+
+const marks = [
+  { at: 1999, label: 'Clipper', caption: '1999' },
+  { at: 2001, label: 'VB6', caption: '2001' },
+  { at: 2002, label: 'Delphi', caption: '2002' },
+  { at: 2004, label: 'PHP', caption: '2004' },
+  { at: 2016, label: 'web', caption: 'NestJS · Next.js' },
+]
 
 export default function HomePage() {
+  const mesa = photoAvailable(photos.mesa.src)
+  const anos = photoAvailable(photos.anos.src)
+  const serra = photoAvailable(photos.serra.src)
+
   return (
-    <article className="text-[1.125rem] leading-[1.75] text-stone-800 dark:text-stone-200">
-      <h1 className="text-pretty text-[1.65rem] font-medium leading-snug tracking-[-0.02em] text-stone-950 dark:text-stone-50 sm:text-[1.85rem]">
-        Sou Ânderson Dapper, desenvolvedor de software em Novo Hamburgo, RS.
-      </h1>
+    <HomeMotion>
+      <section
+        data-hero
+        className="grid min-h-dvh items-center gap-10 px-6 pb-16 pt-24 md:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] md:px-16 md:pt-28"
+      >
+        <div>
+          <Logo className="mb-8 h-16 sm:mb-10 sm:h-24" />
+          <h1>
+            <span className="sr-only">
+              Sou Ânderson Dapper, desenvolvedor de software em Novo Hamburgo, RS.
+            </span>
+            <span aria-hidden="true">
+              <span className="hero-kicker">Sou</span>
+              <span className="hero-name">
+                <span className="block">Ânderson</span>
+                <span className="block">Dapper,</span>
+              </span>
+              <span className="hero-line">
+                desenvolvedor de software em Novo Hamburgo, RS.
+              </span>
+            </span>
+          </h1>
+        </div>
+        {mesa ? (
+          <div className="photo-frame relative aspect-[4/3] md:aspect-[5/4]">
+            <div className="absolute inset-[-6%]" data-hero-media>
+              <Photo
+                src={photos.mesa.src}
+                alt={photos.mesa.alt}
+                sizes="(max-width: 800px) 100vw, 46vw"
+                priority
+                className="object-cover"
+              />
+            </div>
+          </div>
+        ) : null}
+      </section>
 
-      <p className="mt-8 text-pretty">
-        Programo desde 1999, quando comecei com Clipper aos 14 anos. De lá pra cá trabalhei com varejo, sistemas escolares, contabilidade, fiscal, banco e indústria, quase sempre em Delphi e, nos últimos anos, cada vez mais na web.
-      </p>
+      <section data-pin className="flex h-dvh items-center px-6 pt-16 md:px-16">
+        <p className="chapter-copy">
+          <SplitText text={origem} />
+        </p>
+      </section>
 
-      <p className="mt-6 text-pretty">
-        Hoje sou tech lead numa empresa de software. Lidero a reescrita de um sistema legado grande, de Delphi para NestJS, Next.js e PostgreSQL, e acabo cuidando de boa parte da infraestrutura também.
-      </p>
+      <section data-pin className="flex h-dvh flex-col justify-between px-6 pb-10 pt-24 md:px-16 md:pb-14">
+        <p data-counter className="year-display" aria-hidden="true">
+          1999
+        </p>
+        {anos ? (
+          <div className="photo-dissolve relative mx-auto aspect-[16/7] w-full max-w-5xl" data-parallax>
+            <Photo
+              src={photos.anos.src}
+              alt={photos.anos.alt}
+              sizes="(max-width: 800px) 100vw, 80vw"
+              className="object-contain"
+            />
+          </div>
+        ) : null}
+        <ol className="grid grid-cols-2 gap-x-6 gap-y-8 md:grid-cols-5" aria-label="Trajetória">
+          {marks.map((mark) => (
+            <li key={mark.label} data-mark data-at={mark.at} className="spec">
+              <p className="text-[clamp(1.45rem,2.6vw,2.35rem)] font-semibold tracking-[-0.04em]">
+                {mark.label}
+              </p>
+              <p className="mt-1 text-sm text-[var(--muted)]">{mark.caption}</p>
+            </li>
+          ))}
+        </ol>
+      </section>
 
-      <p className="mt-6 text-pretty">
-        Nas horas vagas estudo IA e segurança e uso o que aprendo pra resolver problemas meus.
-      </p>
+      <section data-pin className="flex h-dvh items-center bg-[var(--elevated)] px-6 pt-16 md:px-16">
+        <p className="chapter-copy">
+          <SplitText text={hoje} />
+        </p>
+      </section>
 
-      <ProfileLinks className="mt-10" />
+      <section data-pin className="flex h-dvh items-center px-6 pt-16 md:px-16">
+        <p className="chapter-copy">
+          <SplitText text={vagos} />
+        </p>
+      </section>
 
-      <p className="mt-8 text-sm text-stone-500 dark:text-stone-400">
-        <Link href="/sobre" className="site-link">
-          Sobre
-        </Link>
-      </p>
-    </article>
+      <section className="px-6 pb-8 pt-24 md:px-16">
+        <ProfileLinks className="close-links" />
+        <p className="mt-8 text-sm text-[var(--muted)]">
+          <Link href="/sobre" className="site-link">
+            Sobre
+          </Link>
+        </p>
+        {serra ? (
+          <div className="ambient-photo relative mt-16 aspect-[16/8] w-full">
+            <div className="absolute inset-0" data-ambient>
+              <Photo
+                src={photos.serra.src}
+                alt={photos.serra.alt}
+                sizes="100vw"
+                className="object-cover"
+              />
+            </div>
+          </div>
+        ) : null}
+      </section>
+    </HomeMotion>
   )
 }

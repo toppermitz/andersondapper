@@ -2,7 +2,7 @@
 
 Site pessoal em [andersondapper.com.br](https://andersondapper.com.br).
 
-Next.js, Tailwind CSS e TypeScript. O deploy é na Vercel. O domínio `andersondapper.dev` redireciona para `andersondapper.com.br`.
+Next.js, Tailwind CSS, GSAP e TypeScript. O deploy é na Vercel. O domínio `andersondapper.dev` redireciona para `andersondapper.com.br`.
 
 ## Desenvolvimento
 

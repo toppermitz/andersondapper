@@ -1,16 +1,16 @@
 import './globals.css'
 import type { Metadata } from 'next'
-import { Source_Serif_4 } from 'next/font/google'
+import { Inter_Tight } from 'next/font/google'
 import { Providers } from '../context/ThemeContext'
 import SiteAnalytics from '../components/SiteAnalytics'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import { email, githubUrl, linkedInUrl, siteDescription, siteName, siteTitle, siteUrl } from '@/lib/site'
 
-const sourceSerif = Source_Serif_4({
+const interTight = Inter_Tight({
   subsets: ['latin'],
   display: 'swap',
-  weight: ['400', '500', '600'],
+  weight: ['400', '500', '600', '700'],
 })
 
 const siteStructuredData = {
@@ -115,8 +115,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-BR" className={sourceSerif.className} suppressHydrationWarning>
-      <body className="bg-stone-50 text-stone-900 antialiased dark:bg-stone-950 dark:text-stone-100" suppressHydrationWarning>
+    <html lang="pt-BR" className={interTight.className} suppressHydrationWarning>
+      <body className="antialiased" suppressHydrationWarning>
         <script
           id="site-structured-data"
           type="application/ld+json"
@@ -126,13 +126,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <a href="#conteudo-principal" className="skip-link">
             Ir para o conteúdo
           </a>
-          <div className="mx-auto w-full max-w-[40rem] px-6 py-8 sm:py-16">
-            <Header />
-            <main id="conteudo-principal" tabIndex={-1} className="focus:outline-none">
-              {children}
-            </main>
-            <Footer />
-          </div>
+          <Header />
+          <main id="conteudo-principal" tabIndex={-1} className="focus:outline-none">
+            {children}
+          </main>
+          <Footer />
         </Providers>
         <SiteAnalytics />
       </body>
