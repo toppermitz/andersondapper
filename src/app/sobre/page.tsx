@@ -106,6 +106,7 @@ export default function SobrePage() {
                   src={photos.croche.src}
                   alt={photos.croche.alt}
                   sizes="224px"
+                  blurDataURL={photos.croche.blurDataURL}
                   className="object-cover"
                 />
               </div>

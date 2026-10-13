@@ -191,6 +191,10 @@ html.dark .photo-frame {
   object-fit: cover;
 }
 
+.theme-photo.object-contain {
+  object-fit: contain;
+}
+
 html.dark .theme-photo {
   filter: brightness(0.9) contrast(1.05) saturate(0.94);
 }

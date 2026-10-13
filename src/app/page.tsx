@@ -60,6 +60,7 @@ export default function HomePage() {
                 alt={photos.mesa.alt}
                 sizes="(max-width: 800px) 100vw, 46vw"
                 priority
+                blurDataURL={photos.mesa.blurDataURL}
                 className="object-cover"
               />
             </div>
@@ -78,11 +79,12 @@ export default function HomePage() {
           1999
         </p>
         {anos ? (
-          <div className="photo-dissolve relative mx-auto aspect-[16/7] w-full max-w-5xl" data-parallax>
+          <div className="photo-dissolve relative mx-auto min-h-[18vh] w-full max-w-5xl flex-1" data-parallax>
             <Photo
               src={photos.anos.src}
               alt={photos.anos.alt}
               sizes="(max-width: 800px) 100vw, 80vw"
+              blurDataURL={photos.anos.blurDataURL}
               className="object-contain"
             />
           </div>
@@ -125,6 +127,7 @@ export default function HomePage() {
                 src={photos.serra.src}
                 alt={photos.serra.alt}
                 sizes="100vw"
+                blurDataURL={photos.serra.blurDataURL}
                 className="object-cover"
               />
             </div>
