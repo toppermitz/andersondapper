@@ -107,47 +107,6 @@ a {
   min-height: 10rem;
 }
 
-.history {
-  display: grid;
-  grid-template-columns: 6.75rem minmax(0, 1fr);
-  column-gap: 0.75rem;
-  align-items: stretch;
-}
-
-@media (min-width: 800px) {
-  .history {
-    grid-template-columns: minmax(9rem, 14rem) minmax(0, 1fr);
-    column-gap: 1.5rem;
-  }
-}
-
-.year-col {
-  min-height: 100%;
-}
-
-.year-sticky {
-  position: sticky;
-  top: 4.25rem;
-  display: grid;
-  gap: 0.75rem;
-  background: var(--bg);
-}
-
-.year {
-  margin: 0;
-  font-size: 3.25rem;
-  font-weight: 600;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: -0.04em;
-  line-height: 1;
-}
-
-.chapters {
-  display: grid;
-  gap: 2.5rem;
-}
-
-.chapters h2,
 .block h2 {
   margin: 0 0 0.5rem;
   font-size: 1.25rem;
@@ -156,25 +115,27 @@ a {
   line-height: 1.25;
 }
 
-.chapters p,
 .block p {
   max-width: 65ch;
   margin: 0;
 }
 
-.chapters .ph {
-  margin-top: 0.75rem;
-}
-
 .era {
   position: relative;
   display: grid;
+  align-items: end;
+  min-height: 100dvh;
+  overflow: hidden;
 }
 
 .era-media {
-  position: relative;
-  aspect-ratio: 4 / 5;
-  overflow: hidden;
+  position: absolute;
+  top: -25%;
+  left: 0;
+  z-index: 0;
+  width: 100%;
+  height: 150%;
+  will-change: transform;
 }
 
 .era-photo {
@@ -182,52 +143,97 @@ a {
   object-position: 65% center;
 }
 
+.era-year {
+  position: absolute;
+  z-index: 1;
+  top: 12%;
+  left: -1vw;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.34);
+  font-size: 22vw;
+  font-weight: 700;
+  letter-spacing: -0.07em;
+  line-height: 0.8;
+  pointer-events: none;
+  -webkit-text-stroke: 1px rgba(0, 0, 0, 0.28);
+  paint-order: stroke fill;
+  white-space: nowrap;
+  will-change: transform;
+}
+
 .era-scrim {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, var(--bg) 0%, transparent 42%);
+  z-index: 2;
   pointer-events: none;
+  background: linear-gradient(
+    to top,
+    color-mix(in srgb, var(--bg) 94%, transparent) 0%,
+    color-mix(in srgb, var(--bg) 82%, transparent) 28%,
+    color-mix(in srgb, var(--bg) 28%, transparent) 52%,
+    transparent 70%
+  );
 }
 
 .era-copy {
   position: relative;
-  z-index: 1;
-  padding-top: 1rem;
+  z-index: 3;
+  width: min(100% - 2.5rem, 40rem);
+  margin: 0 1.25rem 1.5rem;
+  will-change: transform, opacity;
+}
+
+.era-copy h2 {
+  margin: 0 0 0.6rem;
+  font-size: clamp(1.55rem, 4vw, 2rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
 }
 
 .era-copy p {
-  max-width: 65ch;
+  max-width: 38rem;
+  margin: 0;
+  font-size: 1.02rem;
+  line-height: 1.55;
 }
 
 @media (min-width: 800px) {
   .era {
-    min-height: 26rem;
     align-items: center;
   }
 
-  .era-media {
-    position: absolute;
-    inset: 0;
-    aspect-ratio: auto;
+  .era-photo {
+    object-position: 72% center;
   }
 
-  .era-photo {
-    object-position: center center;
+  .era-year {
+    top: 18%;
+    left: 2vw;
+    font-size: clamp(8rem, 30vw, 22rem);
   }
 
   .era-scrim {
     background: linear-gradient(
       90deg,
-      color-mix(in srgb, var(--bg) 92%, transparent) 0%,
-      color-mix(in srgb, var(--bg) 78%, transparent) 30%,
-      color-mix(in srgb, var(--bg) 28%, transparent) 52%,
-      transparent 70%
+      color-mix(in srgb, var(--bg) 90%, transparent) 0%,
+      color-mix(in srgb, var(--bg) 74%, transparent) 26%,
+      color-mix(in srgb, var(--bg) 22%, transparent) 46%,
+      transparent 64%
     );
   }
 
   .era-copy {
-    width: min(38rem, 48%);
-    padding: 2rem 1.5rem;
+    width: min(36rem, 42vw);
+    margin: 0;
+    padding: 6.5rem 0 4rem 6vw;
+  }
+}
+
+@media (max-width: 799px) {
+  .era-year {
+    top: 8%;
+    font-size: 28vw;
   }
 }
 
@@ -304,12 +310,6 @@ a {
 @keyframes ticker {
   to {
     transform: translateX(-50%);
-  }
-}
-
-@media (max-width: 700px) {
-  .year {
-    font-size: 2rem;
   }
 }
 

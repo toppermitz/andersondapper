@@ -20,11 +20,12 @@ export default function HomePage() {
 
       <History chapters={chapters} />
 
-      <section className="block" aria-labelledby="fora-title">
+      <section aria-labelledby="fora-title">
         <EraFrame src={foraPhoto.src} alt={foraPhoto.alt}>
           <h2 id="fora-title">{foraTitle}</h2>
           <p>{foraBody}</p>
         </EraFrame>
+        <div className="block">
         <ul className="cards">
           {foraCards.map((card) => (
             <li key={card.label} className="card">
@@ -37,6 +38,7 @@ export default function HomePage() {
             </li>
           ))}
         </ul>
+        </div>
       </section>
 
       <TechCarousel />
