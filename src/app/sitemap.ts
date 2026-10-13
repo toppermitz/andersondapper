@@ -10,11 +10,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 1,
     },
-    {
-      url: 'https://andersondapper.com.br/sobre',
-      lastModified,
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
   ]
 }

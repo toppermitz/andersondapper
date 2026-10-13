@@ -12,7 +12,17 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/about",
-        destination: "/sobre",
+        destination: "/",
+        statusCode: 301,
+      },
+      {
+        source: "/sobre",
+        destination: "/",
+        statusCode: 301,
+      },
+      {
+        source: "/sobre/:path*",
+        destination: "/",
         statusCode: 301,
       },
       {

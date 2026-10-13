@@ -1,126 +1,47 @@
-import Link from 'next/link'
-import HomeMotion from '@/components/HomeMotion'
-import Photo from '@/components/Photo'
+import History from '@/components/History'
+import Logo from '@/components/Logo'
 import ProfileLinks from '@/components/ProfileLinks'
-import { heroLines, hojeLines, origemLines, vagosLines } from '@/lib/approved'
-import { photos } from '@/lib/images'
-
-const stops = [
-  { at: 1999, label: 'Clipper' },
-  { at: 2001, label: 'VB6' },
-  { at: 2002, label: 'Delphi' },
-  { at: 2004, label: 'PHP' },
-  { at: 2016, label: 'NestJS · Next.js · PostgreSQL' },
-]
+import TechCarousel from '@/components/TechCarousel'
+import { chapters, contactLine, foraBody, foraCards, foraTitle, heroPhrase } from '@/lib/copy'
 
 export default function HomePage() {
   return (
-    <HomeMotion>
-      <section data-scene="hero" className="scene scene-photo">
-        <div className="scene-media" data-zoom>
-          <Photo
-            src={photos.mesa.src}
-            alt={photos.mesa.alt}
-            sizes="100vw"
-            priority
-            blurDataURL={photos.mesa.blurDataURL}
-            className="object-cover"
-          />
-        </div>
-        <div className="scene-scrim" aria-hidden="true" />
-        <div className="scene-copy scene-copy-end">
-          <p className="hero-kicker reveal" data-line>
-            {heroLines[0]}
-          </p>
-          <h1 className="hero-lockup">
-            <span className="hero-name reveal" data-line>
-              {heroLines[1]}
-            </span>
-            <span className="hero-name reveal" data-line>
-              {heroLines[2]}
-            </span>
-          </h1>
-          <p className="hero-sub reveal" data-line>
-            {heroLines[3]}
-          </p>
-        </div>
+    <>
+      <section className="block hero" aria-labelledby="hero-title">
+        <div className="ph ph-hero">placeholder: foto mesa.jpg, tela cheia ao fundo</div>
+        <Logo className="hero-logo" priority />
+        <h1 id="hero-title">Anderson Dapper</h1>
+        <p className="lede">{heroPhrase}</p>
+        <a className="scroll-hint" href="#historia">
+          Rolar
+        </a>
       </section>
 
-      <section data-scene="stage" className="scene scene-paper">
-        <div className="stage" data-stage>
-          {origemLines.map((line) => (
-            <p key={line} className="reveal-line" data-line>
-              {line}
-            </p>
+      <History chapters={chapters} />
+
+      <section className="block" aria-labelledby="fora-title">
+        <h2 id="fora-title">{foraTitle}</h2>
+        <p>{foraBody}</p>
+        <ul className="cards">
+          {foraCards.map((card) => (
+            <li key={card.label} className="card">
+              {'href' in card && card.href ? (
+                <a href={card.href}>{card.label}</a>
+              ) : (
+                <span>{card.label}</span>
+              )}
+              {'photo' in card && card.photo ? <div className="ph">foto: {card.photo}</div> : null}
+            </li>
           ))}
-        </div>
+        </ul>
       </section>
 
-      <section data-scene="anos" className="scene scene-photo">
-        <div className="scene-media" data-zoom>
-          <Photo
-            src={photos.anos.src}
-            alt={photos.anos.alt}
-            sizes="100vw"
-            blurDataURL={photos.anos.blurDataURL}
-            className="object-cover"
-          />
-        </div>
-        <div className="scene-scrim scene-scrim-strong" aria-hidden="true" />
-        <div className="anos-copy">
-          <p data-counter className="year-display" aria-hidden="true">
-            1999
-          </p>
-          <ol className="stops" aria-label="Trajetória">
-            {stops.map((stop) => (
-              <li key={stop.label} data-mark data-at={stop.at}>
-                {stop.label}
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
+      <TechCarousel />
 
-      <section data-scene="stage" className="scene scene-ink">
-        <div className="stage" data-stage>
-          {hojeLines.map((line) => (
-            <p key={line} className="reveal-line" data-line>
-              {line}
-            </p>
-          ))}
-        </div>
+      <section className="block contact" aria-labelledby="contato-title">
+        <h2 id="contato-title">{contactLine}</h2>
+        <ProfileLinks className="contact-links" />
       </section>
-
-      <section data-scene="stage" className="scene scene-paper">
-        <div className="stage" data-stage>
-          {vagosLines.map((line) => (
-            <p key={line} className="reveal-line" data-line>
-              {line}
-            </p>
-          ))}
-        </div>
-      </section>
-
-      <section data-scene="close" className="scene scene-photo">
-        <div className="scene-media" data-ambient>
-          <Photo
-            src={photos.serra.src}
-            alt={photos.serra.alt}
-            sizes="100vw"
-            blurDataURL={photos.serra.blurDataURL}
-            className="object-cover"
-          />
-        </div>
-        <div className="scene-scrim" aria-hidden="true" />
-        <div className="scene-copy scene-copy-end">
-          <ProfileLinks className="close-links" />
-          <p className="close-more">
-            <Link href="/sobre" className="site-link">
-              Sobre
-            </Link>
-          </p>
-        </div>
-      </section>
-    </HomeMotion>
+    </>
   )
 }

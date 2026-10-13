@@ -1,18 +1,10 @@
 import './globals.css'
 import type { Metadata } from 'next'
-import { Inter_Tight } from 'next/font/google'
 import { Providers } from '../context/ThemeContext'
 import SiteAnalytics from '../components/SiteAnalytics'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
-import SmoothScroll from '../components/SmoothScroll'
-import { email, githubUrl, linkedInUrl, siteDescription, siteName, siteTitle, siteUrl } from '@/lib/site'
-
-const interTight = Inter_Tight({
-  subsets: ['latin'],
-  display: 'swap',
-  weight: ['400', '500', '600', '700'],
-})
+import { email, githubUrl, linkedInUrl, siteDescription, siteName, siteTitle, siteUrl, xUrl } from '@/lib/site'
 
 const siteStructuredData = {
   '@context': 'https://schema.org',
@@ -24,7 +16,7 @@ const siteStructuredData = {
       url: siteUrl,
       email,
       jobTitle: 'Desenvolvedor Full Stack',
-      sameAs: [linkedInUrl, githubUrl],
+      sameAs: [xUrl, linkedInUrl, githubUrl],
       knowsAbout: ['Delphi', 'NestJS', 'Next.js', 'PostgreSQL'],
     },
     {
@@ -98,7 +90,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-BR" className={interTight.className} suppressHydrationWarning>
+    <html lang="pt-BR" suppressHydrationWarning>
       <body className="antialiased" suppressHydrationWarning>
         <script
           id="site-structured-data"
@@ -109,7 +101,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <a href="#conteudo-principal" className="skip-link">
             Ir para o conteúdo
           </a>
-          <SmoothScroll />
           <Header />
           <main id="conteudo-principal" tabIndex={-1} className="focus:outline-none">
             {children}
