@@ -1,8 +1,9 @@
+import EraFrame from '@/components/EraFrame'
 import History from '@/components/History'
 import Logo from '@/components/Logo'
 import ProfileLinks from '@/components/ProfileLinks'
 import TechCarousel from '@/components/TechCarousel'
-import { chapters, contactLine, foraBody, foraCards, foraTitle, heroPhrase } from '@/lib/copy'
+import { chapters, contactLine, foraBody, foraCards, foraPhoto, foraTitle, heroPhrase } from '@/lib/copy'
 
 export default function HomePage() {
   return (
@@ -20,8 +21,10 @@ export default function HomePage() {
       <History chapters={chapters} />
 
       <section className="block" aria-labelledby="fora-title">
-        <h2 id="fora-title">{foraTitle}</h2>
-        <p>{foraBody}</p>
+        <EraFrame src={foraPhoto.src} alt={foraPhoto.alt}>
+          <h2 id="fora-title">{foraTitle}</h2>
+          <p>{foraBody}</p>
+        </EraFrame>
         <ul className="cards">
           {foraCards.map((card) => (
             <li key={card.label} className="card">

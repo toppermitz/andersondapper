@@ -164,7 +164,71 @@ a {
 
 .chapters .ph {
   margin-top: 0.75rem;
+}
+
+.era {
+  position: relative;
+  display: grid;
+}
+
+.era-media {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+}
+
+.era-photo {
+  object-fit: cover;
+  object-position: 65% center;
+}
+
+.era-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, var(--bg) 0%, transparent 42%);
+  pointer-events: none;
+}
+
+.era-copy {
+  position: relative;
+  z-index: 1;
+  padding-top: 1rem;
+}
+
+.era-copy p {
   max-width: 65ch;
+}
+
+@media (min-width: 800px) {
+  .era {
+    min-height: 26rem;
+    align-items: center;
+  }
+
+  .era-media {
+    position: absolute;
+    inset: 0;
+    aspect-ratio: auto;
+  }
+
+  .era-photo {
+    object-position: center center;
+  }
+
+  .era-scrim {
+    background: linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--bg) 92%, transparent) 0%,
+      color-mix(in srgb, var(--bg) 78%, transparent) 30%,
+      color-mix(in srgb, var(--bg) 28%, transparent) 52%,
+      transparent 70%
+    );
+  }
+
+  .era-copy {
+    width: min(38rem, 48%);
+    padding: 2rem 1.5rem;
+  }
 }
 
 .cards {
