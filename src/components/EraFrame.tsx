@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, type ReactNode } from 'react'
+import { useEffect, useRef, useState, type ReactNode } from 'react'
 import Image from 'next/image'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
@@ -22,6 +22,23 @@ export default function EraFrame({
   children: ReactNode
 }) {
   const root = useRef<HTMLElement>(null)
+  const [near, setNear] = useState(priority)
+
+  useEffect(() => {
+    const section = root.current
+    if (!section || priority) return
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          setNear(true)
+          observer.disconnect()
+        }
+      },
+      { rootMargin: '250% 0px' },
+    )
+    observer.observe(section)
+    return () => observer.disconnect()
+  }, [priority])
 
   useGSAP(() => {
     const section = root.current
@@ -118,6 +135,7 @@ export default function EraFrame({
           fill
           sizes="100vw"
           priority={priority}
+          loading={priority ? undefined : near ? 'eager' : 'lazy'}
           className="era-photo"
         />
       </div>
