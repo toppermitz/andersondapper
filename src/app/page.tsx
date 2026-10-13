@@ -43,9 +43,6 @@ export default function HomePage() {
           <p className="hero-sub reveal" data-line>
             {heroLines[3]}
           </p>
-          <p className="hero-sub reveal" data-line>
-            {heroLines[4]}
-          </p>
         </div>
       </section>
 

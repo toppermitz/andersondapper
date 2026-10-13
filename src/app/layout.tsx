@@ -24,16 +24,6 @@ const siteStructuredData = {
       url: siteUrl,
       email,
       jobTitle: 'Desenvolvedor Full Stack',
-      homeLocation: {
-        '@type': 'Place',
-        name: 'Novo Hamburgo, RS',
-        address: {
-          '@type': 'PostalAddress',
-          addressLocality: 'Novo Hamburgo',
-          addressRegion: 'RS',
-          addressCountry: 'BR',
-        },
-      },
       sameAs: [linkedInUrl, githubUrl],
       knowsAbout: ['Delphi', 'NestJS', 'Next.js', 'PostgreSQL'],
     },

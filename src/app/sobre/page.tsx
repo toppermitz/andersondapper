@@ -70,7 +70,7 @@ export default function SobrePage() {
                 2019
               </p>
               <p className="soltas-copy">
-                Em 2019 falei na trilha Delphi do TDC em Porto Alegre, sobre{' '}
+                Em 2019 falei na trilha Delphi do TDC, sobre{' '}
                 <a href="https://github.com/toppermitz/Linux-TDC2019" className="site-link">
                   rodar Delphi como daemon no Linux
                 </a>

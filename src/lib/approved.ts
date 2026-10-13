@@ -9,8 +9,7 @@ export const heroLines = [
   'Sou',
   'Anderson',
   'Dapper,',
-  'desenvolvedor de software',
-  'em Novo Hamburgo, RS.',
+  'desenvolvedor de software.',
 ] as const
 
 export const origemLines = [
@@ -41,7 +40,7 @@ export const vagosLines = [
 
 assertLines(
   heroLines,
-  'Sou Anderson Dapper, desenvolvedor de software em Novo Hamburgo, RS.',
+  'Sou Anderson Dapper, desenvolvedor de software.',
   'hero',
 )
 assertLines(
