@@ -1,6 +1,5 @@
 import EraFrame from '@/components/EraFrame'
 import History from '@/components/History'
-import Logo from '@/components/Logo'
 import ProfileLinks from '@/components/ProfileLinks'
 import TechCarousel from '@/components/TechCarousel'
 import { chapters, contactLine, foraBody, foraCards, foraPhoto, foraTitle, heroPhrase } from '@/lib/copy'
@@ -8,15 +7,20 @@ import { chapters, contactLine, foraBody, foraCards, foraPhoto, foraTitle, heroP
 export default function HomePage() {
   return (
     <>
-      <section className="block hero" aria-labelledby="hero-title">
-        <div className="ph ph-hero">placeholder: foto mesa.jpg, tela cheia ao fundo</div>
-        <Logo className="hero-logo" priority />
+      <EraFrame
+        src="/img/eras/header.webp"
+        alt="Mãos digitando num notebook, com um monitor ao lado e a mesa clara desfocada em primeiro plano."
+        marker="header"
+        priority
+        intro={false}
+        photoClassName="era-photo-hero"
+      >
         <h1 id="hero-title">Anderson Dapper</h1>
         <p className="lede">{heroPhrase}</p>
         <a className="scroll-hint" href="#historia">
           Rolar
         </a>
-      </section>
+      </EraFrame>
 
       <History chapters={chapters} />
 

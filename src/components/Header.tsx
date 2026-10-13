@@ -6,7 +6,7 @@ export default function Header() {
   return (
     <header className="site-header">
       <Link href="/" aria-label="Anderson Dapper, início" className="site-header-logo">
-        <Logo className="h-8" priority />
+        <Logo className="h-8" />
       </Link>
       <ThemeToggle />
     </header>

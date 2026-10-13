@@ -122,19 +122,22 @@ a {
 
 .era {
   position: relative;
-  display: grid;
-  align-items: end;
-  min-height: 100dvh;
+  background: var(--bg);
+}
+
+.era-band {
+  position: relative;
+  height: 58vh;
   overflow: hidden;
 }
 
 .era-media {
   position: absolute;
-  top: -25%;
+  top: -18%;
   left: 0;
   z-index: 0;
   width: 100%;
-  height: 150%;
+  height: 140%;
   will-change: transform;
 }
 
@@ -143,19 +146,25 @@ a {
   object-position: 65% center;
 }
 
+.era-photo-hero {
+  object-position: 70% center;
+}
+
 .era-year {
   position: absolute;
-  z-index: 1;
-  top: 12%;
-  left: -1vw;
+  z-index: 2;
+  right: auto;
+  bottom: 4.25rem;
+  left: 1rem;
   margin: 0;
-  color: rgba(255, 255, 255, 0.34);
-  font-size: 22vw;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: clamp(4.5rem, 22vw, 7.5rem);
   font-weight: 700;
   letter-spacing: -0.07em;
   line-height: 0.8;
   pointer-events: none;
-  -webkit-text-stroke: 1px rgba(0, 0, 0, 0.28);
+  text-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  -webkit-text-stroke: 1px rgba(0, 0, 0, 0.35);
   paint-order: stroke fill;
   white-space: nowrap;
   will-change: transform;
@@ -163,22 +172,20 @@ a {
 
 .era-scrim {
   position: absolute;
-  inset: 0;
-  z-index: 2;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  height: 4.5rem;
   pointer-events: none;
-  background: linear-gradient(
-    to top,
-    color-mix(in srgb, var(--bg) 88%, transparent) 0%,
-    color-mix(in srgb, var(--bg) 70%, transparent) 22%,
-    transparent 50%
-  );
+  background: linear-gradient(to top, var(--bg) 0%, transparent 100%);
 }
 
 .era-copy {
   position: relative;
-  z-index: 3;
-  width: min(100% - 2.5rem, 40rem);
-  margin: 0 1.25rem 1.5rem;
+  z-index: 1;
+  background: var(--bg);
+  padding: 1.35rem 1.25rem 2.25rem;
   will-change: transform, opacity;
 }
 
@@ -190,6 +197,14 @@ a {
   line-height: 1.15;
 }
 
+.era-copy h1 {
+  margin: 0 0 0.45rem;
+  font-size: clamp(2.7rem, 6vw, 4.8rem);
+  font-weight: 700;
+  letter-spacing: -0.045em;
+  line-height: 0.95;
+}
+
 .era-copy p {
   max-width: 38rem;
   margin: 0;
@@ -197,40 +212,64 @@ a {
   line-height: 1.55;
 }
 
-@media (min-width: 800px) {
+.era-copy .lede {
+  max-width: 22rem;
+  font-size: clamp(1.15rem, 2vw, 1.45rem);
+  line-height: 1.35;
+}
+
+@media (min-width: 768px) {
   .era {
+    display: grid;
     align-items: center;
+    min-height: 100dvh;
+    overflow: hidden;
   }
 
-  .era-photo {
+  .era-band {
+    position: absolute;
+    inset: 0;
+    height: auto;
+  }
+
+  .era-media {
+    top: -25%;
+    height: 150%;
+  }
+
+  .era-photo,
+  .era-photo-hero {
     object-position: 72% center;
   }
 
   .era-year {
     top: 18%;
+    bottom: auto;
     left: 2vw;
+    color: rgba(255, 255, 255, 0.34);
     font-size: clamp(8rem, 30vw, 22rem);
+    text-shadow: none;
+    -webkit-text-stroke: 1px rgba(0, 0, 0, 0.28);
   }
 
   .era-scrim {
+    inset: 0;
+    height: auto;
     background: linear-gradient(
       90deg,
-      color-mix(in srgb, var(--bg) 85%, transparent) 0%,
+      color-mix(in srgb, var(--bg) 92%, transparent) 0%,
       transparent 55%
     );
   }
 
   .era-copy {
-    width: min(36rem, 42vw);
-    margin: 0;
-    padding: 6.5rem 0 4rem 6vw;
-  }
-}
-
-@media (max-width: 799px) {
-  .era-year {
-    top: 8%;
-    font-size: 28vw;
+    z-index: 3;
+    width: min(34rem, 40vw);
+    margin-left: 5vw;
+    padding: 1.75rem 1.5rem;
+    background: color-mix(in srgb, var(--bg) 80%, transparent);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
   }
 }
 
