@@ -95,25 +95,40 @@ export const foraBody =
 
 export const foraCards = [
   {
-    label: 'TDC 2019 POA',
+    title: 'TDC 2019 POA',
+    text: 'Falei sobre rodar Delphi como daemon no Linux. E sim, funciona.',
     href: 'https://github.com/toppermitz/Linux-TDC2019',
+    logo: true,
   },
   {
-    label: 'Fio a fio',
+    title: 'Fio a fio',
+    text: 'Um editor de receitas de crochê, para minha esposa.',
     href: 'https://croche-taupe.vercel.app/',
-    photo: 'croche.jpg',
+    src: '/img/hobbies/croche.webp',
+    alt: 'Peça de crochê em listras verde e cru, com agulha, ao lado de um tablet com um diagrama.',
   },
   {
-    label: 'projeto de pentest (contribuição)',
+    title: 'Pentest com agentes',
+    text: 'Contribuo com um projeto open source de pentest com agentes de IA.',
+    src: '/img/hobbies/pentest.webp',
+    alt: 'Um terminal escuro com código e linhas de comando, ao lado de um notebook sobre a mesa.',
   },
   {
-    label: 'carros/arrancada',
+    title: 'Arrancada',
+    text: 'Gosto muito de carros, de arrancada e de corrida.',
+    src: '/img/hobbies/carros.webp',
+    alt: 'Um carro de corrida branco e azul, de lado, com o número 17 na porta.',
   },
   {
-    label: 'PS5/GTA 6',
+    title: 'PS5',
+    text: 'Esperando o GTA 6, como metade do planeta.',
+    src: '/img/hobbies/games.webp',
+    alt: 'Um controle de PlayStation sobre uma mesa de madeira, com um jogo na tela ao fundo.',
   },
   {
-    label: 'chácara',
-    photo: 'serra.jpg',
+    title: 'A chácara',
+    text: 'Ar puro, e os braços em vez da cabeça.',
+    src: '/img/hobbies/chacara.webp',
+    alt: 'Colinas com araucárias e neblina ao amanhecer.',
   },
 ] as const

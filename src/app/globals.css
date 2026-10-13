@@ -94,19 +94,6 @@ a {
   text-decoration: none;
 }
 
-.ph {
-  border: 1px dashed var(--muted);
-  background: var(--box);
-  color: var(--muted);
-  padding: 0.75rem;
-  font-size: 0.8125rem;
-  line-height: 1.35;
-}
-
-.ph-hero {
-  min-height: 10rem;
-}
-
 .block h2 {
   margin: 0 0 0.5rem;
   font-size: 1.25rem;
@@ -301,29 +288,100 @@ a {
   }
 }
 
-.cards {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  margin: 1rem 0 0;
+.hobbies {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.75rem 1rem;
+  margin: 0.25rem 0 0;
   padding: 0;
   list-style: none;
 }
 
-.card {
+.hobby {
   display: flex;
-  width: min(100%, 14rem);
-  min-height: 7rem;
   flex-direction: column;
-  justify-content: space-between;
-  gap: 0.75rem;
-  border: 1px solid var(--line);
-  background: var(--box);
-  padding: 0.75rem;
+  gap: 0.7rem;
 }
 
-.card a {
+.hobby a {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  color: inherit;
+  text-decoration: none;
+}
+
+.hobby a:focus-visible {
+  outline: 2px solid var(--fg);
+  outline-offset: 4px;
+}
+
+.hobby-media {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #111;
+}
+
+.hobby-photo {
+  object-fit: cover;
+  transform-origin: center;
+}
+
+.hobby-stage {
+  display: grid;
+  place-items: center;
+  padding: 12% 9%;
+  background: #161616;
+}
+
+.hobby-logo {
+  width: min(82%, 16rem);
+  height: auto;
+  object-fit: contain;
+}
+
+.hobby-logo-on-light {
+  display: none;
+}
+
+html.dark .hobby-stage {
+  background: #f2f2f2;
+}
+
+html.dark .hobby-logo-on-dark {
+  display: none;
+}
+
+html.dark .hobby-logo-on-light {
+  display: block;
+}
+
+.hobby-copy h3 {
+  margin: 0;
+  font-size: 1.15rem;
   font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.hobby-copy p {
+  margin: 0.3rem 0 0;
+  max-width: 36rem;
+  color: var(--muted);
+  font-size: 0.98rem;
+  line-height: 1.45;
+}
+
+@media (min-width: 720px) {
+  .hobbies {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 1100px) {
+  .hobbies {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 }
 
 .carousel {
@@ -385,6 +443,23 @@ a {
   .carousel {
     overflow-x: auto;
   }
+
+  .hobby-photo {
+    transform: none;
+  }
+}
+
+.not-found h1 {
+  margin: 0 0 0.5rem;
+  font-size: clamp(2rem, 5vw, 3rem);
+  letter-spacing: -0.03em;
+}
+
+.not-found a {
+  display: inline-block;
+  margin-top: 1rem;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
 }
 
 .skip-link {
