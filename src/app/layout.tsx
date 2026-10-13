@@ -3,7 +3,6 @@ import type { Metadata } from 'next'
 import { Providers } from '../context/ThemeContext'
 import SiteAnalytics from '../components/SiteAnalytics'
 import Header from '../components/Header'
-import Footer from '../components/Footer'
 import { email, githubUrl, linkedInUrl, siteDescription, siteName, siteTitle, siteUrl, xUrl } from '@/lib/site'
 
 const siteStructuredData = {
@@ -105,7 +104,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <main id="conteudo-principal" tabIndex={-1} className="focus:outline-none">
             {children}
           </main>
-          <Footer />
         </Providers>
         <SiteAnalytics />
       </body>
