@@ -5,6 +5,7 @@ import { Providers } from '../context/ThemeContext'
 import SiteAnalytics from '../components/SiteAnalytics'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
+import SmoothScroll from '../components/SmoothScroll'
 import { email, githubUrl, linkedInUrl, siteDescription, siteName, siteTitle, siteUrl } from '@/lib/site'
 
 const interTight = Inter_Tight({
@@ -22,7 +23,7 @@ const siteStructuredData = {
       name: siteName,
       url: siteUrl,
       email,
-      jobTitle: 'Tech lead',
+      jobTitle: 'Desenvolvedor Full Stack',
       homeLocation: {
         '@type': 'Place',
         name: 'Novo Hamburgo, RS',
@@ -62,15 +63,7 @@ export const metadata: Metadata = {
     template: `%s | ${siteName}`,
   },
   description: siteDescription,
-  keywords: [
-    'Ânderson Dapper',
-    'desenvolvedor de software',
-    'Novo Hamburgo',
-    'Delphi',
-    'NestJS',
-    'Next.js',
-    'PostgreSQL',
-  ],
+  keywords: ['Anderson Dapper', 'Desenvolvedor Full Stack', 'Delphi', 'NestJS', 'Next.js', 'PostgreSQL'],
   authors: [{ name: siteName, url: siteUrl }],
   creator: siteName,
   publisher: siteName,
@@ -97,7 +90,7 @@ export const metadata: Metadata = {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'Sou Ânderson Dapper, desenvolvedor de software em Novo Hamburgo, RS.',
+        alt: 'Anderson Dapper. Desenvolvedor Full Stack.',
       },
     ],
   },
@@ -126,6 +119,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <a href="#conteudo-principal" className="skip-link">
             Ir para o conteúdo
           </a>
+          <SmoothScroll />
           <Header />
           <main id="conteudo-principal" tabIndex={-1} className="focus:outline-none">
             {children}

@@ -1,4 +1,4 @@
-# Ânderson Dapper
+# Anderson Dapper
 
 Site pessoal em [andersondapper.com.br](https://andersondapper.com.br).
 

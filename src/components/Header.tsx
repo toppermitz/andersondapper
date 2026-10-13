@@ -10,7 +10,7 @@ export default function Header() {
 
   return (
     <header className="site-header">
-      <Link href="/" aria-label="Ânderson Dapper, início" className="site-header-logo">
+      <Link href="/" aria-label="Anderson Dapper, início" className="site-header-logo">
         <Logo className="h-8 sm:h-9" priority />
       </Link>
       <div className="flex items-center gap-1 sm:gap-3">

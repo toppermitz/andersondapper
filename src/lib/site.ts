@@ -1,8 +1,7 @@
 export const siteUrl = 'https://andersondapper.com.br'
-export const siteName = 'Ânderson Dapper'
-export const siteTitle = 'Ânderson Dapper, desenvolvedor de software'
-export const siteDescription =
-  'Sou Ânderson Dapper, desenvolvedor de software em Novo Hamburgo, RS. Programo desde 1999, quando comecei com Clipper aos 14 anos.'
+export const siteName = 'Anderson Dapper'
+export const siteTitle = 'Anderson Dapper'
+export const siteDescription = 'Desenvolvedor Full Stack'
 
 export const email = 'eu@andersondapper.com.br'
 export const githubUrl = 'https://github.com/toppermitz'
