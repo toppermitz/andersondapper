@@ -95,7 +95,7 @@ export default function HobbyCards() {
         return (
           <li className="hobby" key={card.title}>
             {'href' in card && card.href ? (
-              <a href={card.href} target="_blank" rel="noreferrer">
+              <a href={card.href} target="_blank" rel="noopener noreferrer">
                 {body}
               </a>
             ) : (

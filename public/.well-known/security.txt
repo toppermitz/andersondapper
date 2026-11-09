@@ -1,0 +1,5 @@
+# Contato público já publicado no site. Confirmar se esta caixa deve receber relatos.
+Contact: mailto:eu@andersondapper.com.br
+Expires: 2027-11-01T23:59:59.000Z
+Preferred-Languages: pt-BR, en
+Canonical: https://andersondapper.com.br/.well-known/security.txt

@@ -6,7 +6,13 @@ export default function ProfileLinks({ className = '' }: { className?: string })
       {profileLinks.map((link, index) => (
         <span key={link.label}>
           {index > 0 ? <span aria-hidden="true"> · </span> : null}
-          <a href={link.href} className="site-link">
+          <a
+            href={link.href}
+            className="site-link"
+            {...(link.href.startsWith('http://') || link.href.startsWith('https://')
+              ? { rel: 'noopener noreferrer' }
+              : {})}
+          >
             {link.label}
           </a>
         </span>
