@@ -17,11 +17,13 @@ export default function History({ chapters }: { chapters: Chapter[] }) {
             alt={chapter.photo.alt}
             story
           >
-            <p className="era-kicker" aria-hidden="true">
-              <span>Capítulo {pad(index + 1)}</span>
-              <span className="era-kicker-total">/ {pad(chapters.length)}</span>
+            <p className="era-kicker">
+              <span className="era-year">{chapter.year}</span>
+              <span className="era-kicker-rule" aria-hidden="true" />
+              <span aria-hidden="true">
+                Capítulo {pad(index + 1)} <span className="era-kicker-total">/ {pad(chapters.length)}</span>
+              </span>
             </p>
-            <p className="era-year">{chapter.year}</p>
             <h2>{chapter.title}</h2>
             <div className="era-body">
               {chapter.body.map((paragraph) => (
