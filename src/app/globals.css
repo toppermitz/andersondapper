@@ -619,37 +619,16 @@ p {
     text-align: center;
   }
 
-  /* Capítulos: foto em moldura, ano sobre a foto, texto embaixo. */
-  .era-story {
-    padding-top: 2.25rem;
-  }
-
-  .era-story .era-band {
-    height: auto;
-    aspect-ratio: 4 / 3;
-    margin: 0 var(--gutter);
-    border-radius: 1rem;
-    box-shadow:
-      0 0 0 1px color-mix(in srgb, var(--line) 70%, transparent),
-      0 24px 40px -28px rgb(0 0 0 / 0.4);
-  }
-
-  .era-story .era-scrim {
-    inset: 0;
-    height: auto;
-    background: linear-gradient(to top, rgb(6 12 21 / 0.62), transparent 58%);
-  }
-
+  /* Capítulos: foto de ponta a ponta, ano sobre a foto, texto embaixo. */
   .era-story .era-copy {
-    margin-top: 1.5rem;
-    padding-bottom: 2rem;
+    margin-top: -1.75rem;
   }
 
   .era-ghost {
-    top: calc(-2.5rem - 0.8em);
-    left: calc(var(--gutter) + 1rem);
-    color: rgb(255 255 255 / 0.88);
-    font-size: clamp(4rem, 20vw, 6.5rem);
+    top: -11.5rem;
+    left: var(--gutter);
+    color: rgb(255 255 255 / 0.7);
+    font-size: clamp(4.5rem, 22vw, 7rem);
   }
 }
 
