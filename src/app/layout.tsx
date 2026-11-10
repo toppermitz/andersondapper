@@ -1,9 +1,14 @@
 import './globals.css'
 import type { Metadata } from 'next'
+import { Fraunces, Geist, Geist_Mono } from 'next/font/google'
 import { Providers } from '../context/ThemeContext'
 import SiteAnalytics from '../components/SiteAnalytics'
 import Header from '../components/Header'
 import { email, githubUrl, linkedInUrl, siteDescription, siteName, siteTitle, siteUrl, xUrl } from '@/lib/site'
+
+const display = Fraunces({ subsets: ['latin'], variable: '--font-display', display: 'swap' })
+const sans = Geist({ subsets: ['latin'], variable: '--font-sans', display: 'swap' })
+const mono = Geist_Mono({ subsets: ['latin'], variable: '--font-mono', display: 'swap' })
 
 const siteStructuredData = {
   '@context': 'https://schema.org',
@@ -89,7 +94,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-BR" suppressHydrationWarning>
+    <html
+      lang="pt-BR"
+      className={`${display.variable} ${sans.variable} ${mono.variable}`}
+      suppressHydrationWarning
+    >
       <body className="antialiased" suppressHydrationWarning>
         <script
           id="site-structured-data"
@@ -104,6 +113,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <main id="conteudo-principal" tabIndex={-1} className="focus:outline-none">
             {children}
           </main>
+          <footer className="site-footer">
+            <p>
+              © {new Date().getFullYear()} {siteName}
+            </p>
+            <a href="#conteudo-principal">Voltar ao topo</a>
+          </footer>
         </Providers>
         <SiteAnalytics />
       </body>

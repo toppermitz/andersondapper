@@ -1,22 +1,35 @@
+import type { IconType } from 'react-icons'
+import { FaGithub, FaLinkedinIn, FaXTwitter } from 'react-icons/fa6'
+import { FiMail } from 'react-icons/fi'
 import { profileLinks } from '@/lib/site'
+
+const icons: Record<(typeof profileLinks)[number]['label'], IconType> = {
+  X: FaXTwitter,
+  LinkedIn: FaLinkedinIn,
+  GitHub: FaGithub,
+  'e-mail': FiMail,
+}
 
 export default function ProfileLinks({ className = '' }: { className?: string }) {
   return (
-    <p className={className}>
-      {profileLinks.map((link, index) => (
-        <span key={link.label}>
-          {index > 0 ? <span aria-hidden="true"> · </span> : null}
-          <a
-            href={link.href}
-            className="site-link"
-            {...(link.href.startsWith('http://') || link.href.startsWith('https://')
-              ? { rel: 'noopener noreferrer' }
-              : {})}
-          >
-            {link.label}
-          </a>
-        </span>
-      ))}
-    </p>
+    <ul className={`profile-links ${className}`.trim()}>
+      {profileLinks.map((link) => {
+        const Icon = icons[link.label]
+        return (
+          <li key={link.label}>
+            <a
+              href={link.href}
+              className="profile-link"
+              {...(link.href.startsWith('http://') || link.href.startsWith('https://')
+                ? { rel: 'noopener noreferrer' }
+                : {})}
+            >
+              <Icon aria-hidden="true" />
+              {link.label}
+            </a>
+          </li>
+        )
+      })}
+    </ul>
   )
 }

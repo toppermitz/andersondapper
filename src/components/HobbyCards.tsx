@@ -87,7 +87,14 @@ export default function HobbyCards() {
               </div>
             ) : null}
             <div className="hobby-copy">
-              <h3>{card.title}</h3>
+              <h3>
+                {card.title}
+                {'href' in card && card.href ? (
+                  <span className="hobby-arrow" aria-hidden="true">
+                    ↗
+                  </span>
+                ) : null}
+              </h3>
               <p>{card.text}</p>
             </div>
           </>

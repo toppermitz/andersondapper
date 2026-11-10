@@ -69,10 +69,15 @@ function Group({ hidden = false }: { hidden?: boolean }) {
 
 export default function TechCarousel() {
   return (
-    <section className="carousel" aria-label="Tecnologias">
-      <div className="carousel-track">
-        <Group />
-        <Group hidden />
+    <section className="carousel" aria-labelledby="tecnologias-title">
+      <h2 id="tecnologias-title" className="carousel-title">
+        Tecnologias
+      </h2>
+      <div className="carousel-window">
+        <div className="carousel-track">
+          <Group />
+          <Group hidden />
+        </div>
       </div>
     </section>
   )
