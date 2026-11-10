@@ -13,16 +13,13 @@ export default function History({ chapters }: { chapters: Chapter[] }) {
             key={chapter.year}
             id={`ano-${chapter.year}`}
             marker={chapter.year}
+            year={chapter.year}
             src={chapter.photo.src}
             alt={chapter.photo.alt}
             story
           >
-            <p className="era-kicker">
-              <span className="era-year">{chapter.year}</span>
-              <span className="era-kicker-rule" aria-hidden="true" />
-              <span aria-hidden="true">
-                Capítulo {pad(index + 1)} <span className="era-kicker-total">/ {pad(chapters.length)}</span>
-              </span>
+            <p className="era-kicker" aria-hidden="true">
+              Capítulo {pad(index + 1)} <span className="era-kicker-total">/ {pad(chapters.length)}</span>
             </p>
             <h2>{chapter.title}</h2>
             <div className="era-body">

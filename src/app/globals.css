@@ -258,9 +258,6 @@ p {
 }
 
 .era-kicker {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
   margin-bottom: 1.1rem;
   color: var(--brand);
 }
@@ -269,16 +266,22 @@ p {
   color: var(--muted);
 }
 
-.era-kicker-rule {
-  width: 1.75rem;
-  height: 1px;
-  background: var(--line);
-}
-
-/* O ano só localiza o capítulo na cronologia; o foco é o título. */
-.era-year {
-  color: var(--accent);
-  font-weight: 600;
+/* O ano é pano de fundo: localiza o capítulo sem disputar com o título. */
+.era-ghost {
+  position: absolute;
+  top: -11.5rem;
+  left: var(--gutter);
+  z-index: -1;
+  margin: 0 0 0 -0.04em;
+  color: rgb(255 255 255 / 0.7);
+  font-size: clamp(4.5rem, 22vw, 7rem);
+  font-weight: 700;
+  letter-spacing: -0.07em;
+  line-height: 0.8;
+  pointer-events: none;
+  text-shadow: 0 8px 24px rgb(0 0 0 / 0.35);
+  white-space: nowrap;
+  will-change: transform;
 }
 
 .era-story .era-copy {
@@ -498,11 +501,19 @@ p {
   }
 
   .era-story {
-    overflow: visible;
+    overflow: hidden;
   }
 
   .era-story .era-band {
     display: none;
+  }
+
+  .era-ghost {
+    top: 1.25rem;
+    left: calc(var(--gutter) - 0.75rem);
+    color: color-mix(in srgb, var(--fg) 6%, transparent);
+    font-size: clamp(8rem, 15.5vw, 15rem);
+    text-shadow: none;
   }
 
   .era-story .era-copy {
