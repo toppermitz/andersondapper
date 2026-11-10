@@ -1,12 +1,11 @@
 import './globals.css'
 import type { Metadata } from 'next'
-import { Fraunces, Geist, Geist_Mono } from 'next/font/google'
+import { Geist, Geist_Mono } from 'next/font/google'
 import { Providers } from '../context/ThemeContext'
 import SiteAnalytics from '../components/SiteAnalytics'
 import Header from '../components/Header'
 import { email, githubUrl, linkedInUrl, siteDescription, siteName, siteTitle, siteUrl, xUrl } from '@/lib/site'
 
-const display = Fraunces({ subsets: ['latin'], variable: '--font-display', display: 'swap' })
 const sans = Geist({ subsets: ['latin'], variable: '--font-sans', display: 'swap' })
 const mono = Geist_Mono({ subsets: ['latin'], variable: '--font-mono', display: 'swap' })
 
@@ -96,7 +95,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="pt-BR"
-      className={`${display.variable} ${sans.variable} ${mono.variable}`}
+      className={`${sans.variable} ${mono.variable}`}
       suppressHydrationWarning
     >
       <body className="antialiased" suppressHydrationWarning>
