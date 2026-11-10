@@ -81,7 +81,7 @@ export default function HobbyCards() {
                   src={card.src}
                   alt={card.alt}
                   fill
-                  sizes="(min-width: 1100px) 33vw, (min-width: 720px) 50vw, 100vw"
+                  sizes="(min-width: 720px) 50vw, 100vw"
                   className="hobby-photo"
                 />
               </div>

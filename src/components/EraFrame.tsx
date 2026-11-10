@@ -14,6 +14,7 @@ export default function EraFrame({
   id,
   marker,
   hero = false,
+  story = false,
   photoClassName = '',
   children,
 }: {
@@ -22,6 +23,7 @@ export default function EraFrame({
   id?: string
   marker: string
   hero?: boolean
+  story?: boolean
   photoClassName?: string
   children: ReactNode
 }) {
@@ -30,7 +32,7 @@ export default function EraFrame({
 
   useEffect(() => {
     const section = root.current
-    if (!section || hero) return
+    if (!section || hero || story) return
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries.some((entry) => entry.isIntersecting)) {
@@ -42,7 +44,7 @@ export default function EraFrame({
     )
     observer.observe(section)
     return () => observer.disconnect()
-  }, [hero])
+  }, [hero, story])
 
   useGSAP(() => {
     const section = root.current
@@ -102,14 +104,15 @@ export default function EraFrame({
   }, { scope: root })
 
   return (
-    <section ref={root} id={id} className={hero ? 'era era-hero' : 'era'} data-era={marker}>
+    <section ref={root} id={id} className={hero ? 'era era-hero' : story ? 'era era-story' : 'era'} data-era={marker}>
       <div className="era-band">
         <div className="era-media" data-photo>
           <Image
             src={src}
             alt={alt}
             fill
-            sizes="100vw"
+            // No desktop a foto dos capítulos vem do palco fixo; esta fica oculta.
+            sizes={story ? '(min-width: 900px) 1px, 100vw' : '100vw'}
             priority={hero}
             loading={hero ? undefined : near ? 'eager' : 'lazy'}
             className={`era-photo ${photoClassName}`.trim()}
