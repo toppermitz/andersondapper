@@ -3,12 +3,14 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --bg: #f6f6f4;
-  --fg: #111110;
-  --muted: #5f5f5b;
-  --line: #dcdcd7;
-  --box: #ebebe7;
+  --bg: #f4f6f9;
+  --fg: #0b1a2b;
+  --muted: #55637a;
+  --line: #d5dbe4;
+  --box: #e8ecf2;
   --accent: #c2410c;
+  --brand: #023c6e;
+  --on-brand: #ffffff;
   --header-h: 3.75rem;
   --gutter: 1.25rem;
   --sans: var(--font-sans), system-ui, sans-serif;
@@ -17,12 +19,14 @@
 }
 
 html.dark {
-  --bg: #0b0b0c;
-  --fg: #f2f2f0;
-  --muted: #a3a3a0;
-  --line: #262627;
-  --box: #161617;
+  --bg: #070d16;
+  --fg: #eef2f7;
+  --muted: #9aa7b8;
+  --line: #1c2736;
+  --box: #0f1826;
   --accent: #ff7a3d;
+  --brand: #7ab8ff;
+  --on-brand: #070d16;
   color-scheme: dark;
 }
 
@@ -119,7 +123,7 @@ p {
   bottom: 0;
   left: 0;
   height: 1px;
-  background: var(--accent);
+  background: var(--brand);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.3s ease;
@@ -256,7 +260,7 @@ p {
 .era-kicker {
   display: flex;
   gap: 0.5rem;
-  color: var(--fg);
+  color: var(--brand);
 }
 
 .era-kicker-total {
@@ -394,11 +398,12 @@ p {
 @media (min-width: 900px) {
   /* Hero e Fora do trabalho ficam em estilo cinema nos dois temas. */
   .era:not(.era-story) {
-    --bg: #0b0b0c;
-    --fg: #f2f2f0;
-    --muted: #b4b4b0;
-    --line: #3a3a3b;
+    --bg: #060c15;
+    --fg: #eef2f7;
+    --muted: #b3bdcb;
+    --line: #33405a;
     --accent: #ff7a3d;
+    --brand: #7ab8ff;
     color: var(--fg);
   }
 
@@ -542,9 +547,9 @@ p {
     left: 1rem;
     margin: 0;
     border-radius: 999px;
-    background: rgb(11 11 12 / 0.55);
+    background: rgb(6 12 21 / 0.6);
     padding: 0.35rem 0.75rem;
-    color: #f2f2f0;
+    color: #eef2f7;
     font-family: var(--mono);
     font-size: 0.6875rem;
     letter-spacing: 0.1em;
@@ -577,7 +582,7 @@ p {
     right: 0;
     left: 0;
     height: 1px;
-    background: var(--accent);
+    background: var(--brand);
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.5s ease;
@@ -655,7 +660,7 @@ p {
 }
 
 .hobby a:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--brand);
   outline-offset: 6px;
 }
 
@@ -678,7 +683,7 @@ p {
   display: grid;
   place-items: center;
   padding: 12% 9%;
-  background: #121212;
+  background: #0b1a2b;
 }
 
 .hobby-logo {
@@ -692,7 +697,7 @@ p {
 }
 
 html.dark .hobby-stage {
-  background: #f2f2f0;
+  background: #eef2f7;
 }
 
 html.dark .hobby-logo-on-dark {
@@ -723,7 +728,7 @@ html.dark .hobby-logo-on-light {
 }
 
 .hobby a:hover .hobby-media {
-  box-shadow: 0 0 0 1px var(--accent);
+  box-shadow: 0 0 0 1px var(--brand);
 }
 
 .hobby a:hover .hobby-arrow {
@@ -829,7 +834,7 @@ html.dark .hobby-logo-on-light {
 .chip svg {
   width: 1rem;
   height: 1rem;
-  color: var(--muted);
+  color: var(--brand);
 }
 
 @keyframes ticker {
@@ -884,9 +889,9 @@ html.dark .hobby-logo-on-light {
 }
 
 .profile-link:hover {
-  border-color: var(--fg);
-  background: var(--fg);
-  color: var(--bg);
+  border-color: var(--brand);
+  background: var(--brand);
+  color: var(--on-brand);
 }
 
 /* ---------- Rodapé ---------- */
@@ -971,10 +976,10 @@ html.dark .hobby-logo-on-light {
 }
 
 ::selection {
-  background: color-mix(in srgb, var(--accent) 28%, transparent);
+  background: color-mix(in srgb, var(--brand) 26%, transparent);
 }
 
 *:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--brand);
   outline-offset: 3px;
 }
