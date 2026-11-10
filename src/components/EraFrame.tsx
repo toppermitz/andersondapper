@@ -138,7 +138,8 @@ export default function EraFrame({
             alt={alt}
             fill
             // No desktop a foto dos capítulos vem do palco fixo; esta fica oculta.
-            sizes={story ? '(min-width: 900px) 1px, 100vw' : '100vw'}
+            // No celular a foto de tela cheia é recortada em retrato, então pede mais largura.
+            sizes={story ? '(min-width: 900px) 1px, 100vw' : '(max-width: 899px) 250vw, 100vw'}
             priority={hero}
             loading={hero ? undefined : near ? 'eager' : 'lazy'}
             className={`era-photo ${photoClassName}`.trim()}
