@@ -11,28 +11,26 @@ gsap.registerPlugin(useGSAP, ScrollTrigger)
 export default function EraFrame({
   src,
   alt,
-  year,
+  id,
   marker,
-  priority = false,
-  intro = true,
+  hero = false,
   photoClassName = '',
   children,
 }: {
   src: string
   alt: string
-  year?: string
-  marker?: string
-  priority?: boolean
-  intro?: boolean
+  id?: string
+  marker: string
+  hero?: boolean
   photoClassName?: string
   children: ReactNode
 }) {
   const root = useRef<HTMLElement>(null)
-  const [near, setNear] = useState(priority)
+  const [near, setNear] = useState(hero)
 
   useEffect(() => {
     const section = root.current
-    if (!section || priority) return
+    if (!section || hero) return
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries.some((entry) => entry.isIntersecting)) {
@@ -44,21 +42,18 @@ export default function EraFrame({
     )
     observer.observe(section)
     return () => observer.disconnect()
-  }, [priority])
+  }, [hero])
 
   useGSAP(() => {
     const section = root.current
     if (!section) return
 
     const photo = section.querySelector<HTMLElement>('[data-photo]')
-    const yearLayer = section.querySelector<HTMLElement>('[data-year-layer]')
     const copy = section.querySelector<HTMLElement>('[data-copy]')
     const mm = gsap.matchMedia()
 
-    const parallax = (mobile: boolean) => {
-      const photoShift = mobile ? 6 : 15
-      const yearShift = mobile ? 0 : 10
-      const yearDrift = mobile ? 4 : 16
+    const motion = (mobile: boolean) => {
+      const photoShift = mobile ? 6 : 12
 
       if (photo) {
         gsap.fromTo(
@@ -79,61 +74,35 @@ export default function EraFrame({
         )
       }
 
-      if (yearLayer) {
-        gsap.fromTo(
-          yearLayer,
-          { yPercent: yearShift, xPercent: -yearDrift },
-          {
-            yPercent: -yearShift,
-            xPercent: yearDrift,
-            ease: 'none',
-            force3D: true,
-            scrollTrigger: {
-              trigger: section,
-              start: 'top bottom',
-              end: 'bottom top',
-              scrub: true,
-              invalidateOnRefresh: true,
-            },
+      // O hero entra por CSS, para não piscar antes da hidratação.
+      if (copy && !hero) {
+        gsap.from(copy.children, {
+          autoAlpha: 0,
+          y: mobile ? 16 : 26,
+          duration: 0.85,
+          ease: 'power3.out',
+          stagger: 0.07,
+          scrollTrigger: {
+            trigger: copy,
+            start: mobile ? 'top 88%' : 'top 76%',
+            once: true,
           },
-        )
-      }
-
-      if (copy && intro) {
-        gsap.fromTo(
-          copy,
-          { autoAlpha: 0, y: mobile ? 18 : 32 },
-          {
-            autoAlpha: 1,
-            y: 0,
-            ease: 'none',
-            scrollTrigger: {
-              trigger: section,
-              start: 'top 82%',
-              end: 'top 48%',
-              scrub: true,
-              invalidateOnRefresh: true,
-            },
-          },
-        )
+        })
       }
     }
 
-    mm.add('(prefers-reduced-motion: reduce)', () => {
-      if (copy) gsap.set(copy, { autoAlpha: 1, y: 0 })
+    mm.add('(prefers-reduced-motion: no-preference) and (max-width: 899px)', () => {
+      motion(true)
     })
-    mm.add('(prefers-reduced-motion: no-preference) and (max-width: 767px)', () => {
-      parallax(true)
-    })
-    mm.add('(prefers-reduced-motion: no-preference) and (min-width: 768px)', () => {
-      parallax(false)
+    mm.add('(prefers-reduced-motion: no-preference) and (min-width: 900px)', () => {
+      motion(false)
     })
 
     return () => mm.revert()
   }, { scope: root })
 
   return (
-    <section ref={root} className="era" data-era={marker ?? year ?? 'fora'}>
+    <section ref={root} id={id} className={hero ? 'era era-hero' : 'era'} data-era={marker}>
       <div className="era-band">
         <div className="era-media" data-photo>
           <Image
@@ -141,16 +110,11 @@ export default function EraFrame({
             alt={alt}
             fill
             sizes="100vw"
-            priority={priority}
-            loading={priority ? undefined : near ? 'eager' : 'lazy'}
+            priority={hero}
+            loading={hero ? undefined : near ? 'eager' : 'lazy'}
             className={`era-photo ${photoClassName}`.trim()}
           />
         </div>
-        {year ? (
-          <p className="era-year" data-year-layer aria-hidden="true">
-            {year}
-          </p>
-        ) : null}
         <div className="era-scrim" aria-hidden="true" />
       </div>
       <div className="era-copy" data-copy>
