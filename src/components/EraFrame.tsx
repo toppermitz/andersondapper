@@ -13,6 +13,7 @@ export default function EraFrame({
   alt,
   id,
   marker,
+  year,
   hero = false,
   story = false,
   photoClassName = '',
@@ -22,6 +23,7 @@ export default function EraFrame({
   alt: string
   id?: string
   marker: string
+  year?: string
   hero?: boolean
   story?: boolean
   photoClassName?: string
@@ -51,6 +53,7 @@ export default function EraFrame({
     if (!section) return
 
     const photo = section.querySelector<HTMLElement>('[data-photo]')
+    const yearLayer = section.querySelector<HTMLElement>('[data-year-layer]')
     const copy = section.querySelector<HTMLElement>('[data-copy]')
     const mm = gsap.matchMedia()
 
@@ -76,9 +79,32 @@ export default function EraFrame({
         )
       }
 
+      // O ano é pano de fundo: desliza devagar atrás do conteúdo.
+      if (yearLayer) {
+        const yearShift = mobile ? 0 : 14
+        const yearDrift = mobile ? 4 : 5
+        gsap.fromTo(
+          yearLayer,
+          { yPercent: yearShift, xPercent: -yearDrift },
+          {
+            yPercent: -yearShift,
+            xPercent: yearDrift,
+            ease: 'none',
+            force3D: true,
+            scrollTrigger: {
+              trigger: section,
+              start: 'top bottom',
+              end: 'bottom top',
+              scrub: true,
+              invalidateOnRefresh: true,
+            },
+          },
+        )
+      }
+
       // O hero entra por CSS, para não piscar antes da hidratação.
       if (copy && !hero) {
-        gsap.from(copy.children, {
+        gsap.from(copy.querySelectorAll(':scope > :not([data-year-layer])'), {
           autoAlpha: 0,
           y: mobile ? 16 : 26,
           duration: 0.85,
@@ -121,6 +147,11 @@ export default function EraFrame({
         <div className="era-scrim" aria-hidden="true" />
       </div>
       <div className="era-copy" data-copy>
+        {year ? (
+          <p className="era-ghost" data-year-layer aria-hidden="true">
+            {year}
+          </p>
+        ) : null}
         {children}
       </div>
     </section>
