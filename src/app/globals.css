@@ -269,12 +269,8 @@ p {
 /* O ano é pano de fundo: localiza o capítulo sem disputar com o título. */
 .era-ghost {
   position: absolute;
-  top: -11.5rem;
-  left: var(--gutter);
   z-index: -1;
   margin: 0 0 0 -0.04em;
-  color: rgb(255 255 255 / 0.7);
-  font-size: clamp(4.5rem, 22vw, 7rem);
   font-weight: 700;
   letter-spacing: -0.07em;
   line-height: 0.8;
@@ -282,10 +278,6 @@ p {
   text-shadow: 0 8px 24px rgb(0 0 0 / 0.35);
   white-space: nowrap;
   will-change: transform;
-}
-
-.era-story .era-copy {
-  margin-top: -1.75rem;
 }
 
 .era-copy h1,
@@ -490,14 +482,187 @@ p {
 
 /* ---------- História: palco fixo no desktop ---------- */
 
-.story-stage {
-  display: none;
+/* A linha do tempo vale para os dois layouts: embaixo da moldura no desktop,
+   faixa fixa sob o cabeçalho no celular. */
+.timeline ol {
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-auto-flow: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
+
+.timeline li {
+  position: relative;
+  border-top: 1px solid var(--line);
+}
+
+.timeline li::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  right: 0;
+  left: 0;
+  height: 1px;
+  background: var(--brand);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s ease;
+}
+
+.timeline li[data-past]::before,
+.timeline li:has([aria-current='true'])::before {
+  transform: scaleX(1);
+}
+
+.timeline a {
+  display: block;
+  padding: 0.7rem 0 0.25rem;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.timeline a:hover,
+.timeline a[aria-current='true'] {
+  color: var(--fg);
+}
+
+.timeline a[aria-current='true'] {
+  font-weight: 600;
+}
+
+@media (max-width: 899px) {
+  html {
+    scroll-padding-top: calc(var(--header-h) + 3.25rem);
+  }
+
+  /* Hero e Fora do trabalho: foto em tela cheia, texto sobre ela. */
+  .era:not(.era-story) {
+    --bg: #060c15;
+    --fg: #eef2f7;
+    --muted: #b3bdcb;
+    --line: #33405a;
+    --accent: #ff7a3d;
+    --brand: #7ab8ff;
+    display: grid;
+    align-items: end;
+    min-height: 100svh;
+    overflow: hidden;
+    color: var(--fg);
+  }
+
+  .era:not(.era-story) .era-band {
+    position: absolute;
+    inset: 0;
+    height: auto;
+  }
+
+  /* Folga só para a paralaxe: ampliar mais que isso borra a foto em retrato. */
+  .era:not(.era-story) .era-media {
+    top: -6%;
+    height: 112%;
+  }
+
+  .era:not(.era-story) .era-scrim {
+    inset: 0;
+    height: auto;
+    background: linear-gradient(
+      to top,
+      color-mix(in srgb, var(--bg) 97%, transparent) 0%,
+      color-mix(in srgb, var(--bg) 90%, transparent) 30%,
+      color-mix(in srgb, var(--bg) 58%, transparent) 55%,
+      color-mix(in srgb, var(--bg) 14%, transparent) 78%,
+      transparent 100%
+    );
+  }
+
+  .era:not(.era-story) .era-copy {
+    margin: 0;
+    padding: calc(var(--header-h) + 8rem) var(--gutter) 2.75rem;
+  }
+
+  /* Faixa da linha do tempo, fixa sob o cabeçalho durante a história. */
+  .story-stage {
+    position: sticky;
+    top: var(--header-h);
+    z-index: 20;
+    padding: 0 var(--gutter);
+    border-bottom: 1px solid color-mix(in srgb, var(--line) 60%, transparent);
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    -webkit-backdrop-filter: saturate(1.4) blur(14px);
+    backdrop-filter: saturate(1.4) blur(14px);
+  }
+
+  .story-frame {
+    display: none;
+  }
+
+  .timeline li {
+    border-top: 0;
+    border-bottom: 2px solid transparent;
+  }
+
+  .timeline li::before {
+    top: auto;
+    bottom: -2px;
+    height: 2px;
+  }
+
+  .timeline a {
+    padding: 0.75rem 0 0.65rem;
+    font-size: 0.6875rem;
+    text-align: center;
+  }
+
+  /* Capítulos: foto em moldura, ano sobre a foto, texto embaixo. */
+  .era-story {
+    padding-top: 2.25rem;
+  }
+
+  .era-story .era-band {
+    height: auto;
+    aspect-ratio: 4 / 3;
+    margin: 0 var(--gutter);
+    border-radius: 1rem;
+    box-shadow:
+      0 0 0 1px color-mix(in srgb, var(--line) 70%, transparent),
+      0 24px 40px -28px rgb(0 0 0 / 0.4);
+  }
+
+  .era-story .era-scrim {
+    inset: 0;
+    height: auto;
+    background: linear-gradient(to top, rgb(6 12 21 / 0.62), transparent 58%);
+  }
+
+  .era-story .era-copy {
+    margin-top: 1.5rem;
+    padding-bottom: 2rem;
+  }
+
+  .era-ghost {
+    top: calc(-2.5rem - 0.8em);
+    left: calc(var(--gutter) + 1rem);
+    color: rgb(255 255 255 / 0.88);
+    font-size: clamp(4rem, 20vw, 6.5rem);
+  }
+}
+
 
 @media (min-width: 900px) {
   .story {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+  }
+
+  .story-chapters {
+    grid-row: 1;
+    grid-column: 1;
   }
 
   .era-story {
@@ -518,7 +683,6 @@ p {
 
   .era-story .era-copy {
     width: auto;
-    margin-top: 0;
     padding: 5rem clamp(2rem, 4vw, 4.5rem) 5rem var(--gutter);
   }
 
@@ -529,6 +693,8 @@ p {
   .story-stage {
     position: sticky;
     top: 0;
+    grid-row: 1;
+    grid-column: 2;
     display: grid;
     grid-template-rows: minmax(0, 1fr) auto;
     gap: 1rem;
@@ -579,58 +745,6 @@ p {
 
   .story-count span {
     opacity: 0.6;
-  }
-
-  .timeline ol {
-    display: grid;
-    grid-auto-columns: 1fr;
-    grid-auto-flow: column;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  .timeline li {
-    position: relative;
-    border-top: 1px solid var(--line);
-  }
-
-  .timeline li::before {
-    content: '';
-    position: absolute;
-    top: -1px;
-    right: 0;
-    left: 0;
-    height: 1px;
-    background: var(--brand);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.5s ease;
-  }
-
-  .timeline li[data-past]::before,
-  .timeline li:has([aria-current='true'])::before {
-    transform: scaleX(1);
-  }
-
-  .timeline a {
-    display: block;
-    padding: 0.7rem 0 0.25rem;
-    color: var(--muted);
-    font-family: var(--mono);
-    font-size: 0.75rem;
-    letter-spacing: 0.06em;
-    text-decoration: none;
-    transition: color 0.2s ease;
-  }
-
-  .timeline a:hover,
-  .timeline a[aria-current='true'] {
-    color: var(--fg);
-  }
-
-  .timeline a[aria-current='true'] {
-    font-weight: 600;
   }
 }
 
@@ -761,6 +875,28 @@ html.dark .hobby-logo-on-light {
   color: var(--muted);
   font-size: 0.98rem;
   line-height: 1.5;
+}
+
+@media (max-width: 719px) {
+  .hobbies {
+    display: flex;
+    gap: 1rem;
+    margin: 0 calc(var(--gutter) * -1);
+    padding: 0 var(--gutter) 0.5rem;
+    overflow-x: auto;
+    scroll-padding-inline: var(--gutter);
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .hobbies::-webkit-scrollbar {
+    display: none;
+  }
+
+  .hobby {
+    flex: 0 0 80%;
+    scroll-snap-align: start;
+  }
 }
 
 @media (min-width: 720px) {
@@ -912,6 +1048,19 @@ html.dark .hobby-logo-on-light {
   border-color: var(--brand);
   background: var(--brand);
   color: var(--on-brand);
+}
+
+@media (max-width: 719px) {
+  .contact .profile-links {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .contact .profile-link {
+    display: flex;
+    justify-content: center;
+    padding: 0.95rem 1rem;
+  }
 }
 
 /* ---------- Rodapé ---------- */

@@ -7,6 +7,7 @@ const pad = (value: number) => String(value).padStart(2, '0')
 export default function History({ chapters }: { chapters: Chapter[] }) {
   return (
     <div id="historia" className="story">
+      <StoryStage chapters={chapters} />
       <div className="story-chapters">
         {chapters.map((chapter, index) => (
           <EraFrame
@@ -30,7 +31,6 @@ export default function History({ chapters }: { chapters: Chapter[] }) {
           </EraFrame>
         ))}
       </div>
-      <StoryStage chapters={chapters} />
     </div>
   )
 }
